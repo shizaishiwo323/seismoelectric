@@ -1,0 +1,14 @@
+,0
+model_script,C:\Users\imgw\Downloads\seismoelectric\se_results_zr20\seismoelectric_offset_liu2018_spectral.py
+input,C:\Users\imgw\Downloads\seismoelectric\se_results_zr20\global_evolution.xlsx
+outdir,C:\Users\imgw\Downloads\seismoelectric\se_results_zr20\liu2018_fig2b_comparison
+snapshot_index,24
+snapshot_Time_s,5769.2
+snapshot_Porosity,0.75115
+offset_D_mm,45.0
+receiver_z_min_mm,-80.0
+receiver_z_max_mm,80.0
+receiver_spacing_mm,2.5
+spectral_n_omega,80
+spectral_n_k,81
+note,Main comparison uses the current full model; without-dipole spectral kernel is saved as a diagnostic.

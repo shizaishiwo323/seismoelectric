@@ -19,11 +19,10 @@ Important scope
   synthesis. In that mode, the receiver waveforms are
   synthesized by summing positive-frequency and horizontal-wavenumber components, each
   weighted by the acoustic source spectrum A(k,omega), the Schakel conversion coefficient
-  R_E(k,omega) or T_TM(k,omega), and the corresponding propagation phase.
-- For the finite-offset receiver-line display, the spectral waveforms are weighted by Liu's
-  electric-dipole radiation geometry u proportional to cos(theta)/r^2. Liu Fig. 2(a) is the
-  frequency-wavenumber modeling result; Fig. 2(b) uses the dipole model to explain and
-  validate the modeled amplitude pattern.
+  converted to Liu's electrical-potential coefficient, and the corresponding propagation phase.
+- Liu Fig. 2(a) is the frequency-wavenumber modeling result. Interpretation
+  models used for separate amplitude-directivity checks are intentionally kept
+  outside this main spectral forward script.
 
 Usage
 -----
@@ -63,10 +62,10 @@ class SEConfig:
 
     # VSEP geometry
     z_s: float = 80.0e-3               # m, source-to-interface distance in fluid, Liu-style default
-    receiver_z_min: float = -80.0e-3   # m, fluid side negative
-    receiver_z_max: float = 80.0e-3    # m, porous side positive
-    receiver_spacing: float = 5.0e-3   # m, classic gather trace interval
-    offset_D: float = 1e-6           # m, receiver-line horizontal offset
+    receiver_z_min: float = -100.0e-3  # m, fluid side negative; Liu Fig. 2 uses -100..100 mm
+    receiver_z_max: float = 100.0e-3   # m, porous side positive
+    receiver_spacing: float = 1.0e-3   # m, Liu Fig. 2 receiver trace interval
+    offset_D: float = 45e-3           # m, receiver-line horizontal offset
 
     # Acoustic source
     f0: float = 500.0e3                # Hz, Liu-style ultrasonic source central frequency
@@ -78,7 +77,7 @@ class SEConfig:
     spectral_f_min_factor: float = 0.25 # f_min = factor * f0 for positive-frequency integration
     spectral_f_max_factor: float = 2.5  # f_max = factor * f0 for positive-frequency integration
     spectral_n_omega: int = 48          # default number of frequency samples for spectral mode
-    spectral_n_k: int = 61              # default number of horizontal-wavenumber samples per frequency
+    spectral_n_k: int = 401             # k integration needs fine sampling for finite-offset cancellation
     spectral_k_limit_factor: float = 0.98 # incident acoustic branch limit |k|<=factor*omega/Vf
     waveform_t_before: float = 15.0e-6 # s, time window before T0
     waveform_t_after: float = 18.0e-6  # s, time window after T0
@@ -111,8 +110,6 @@ class SEConfig:
     outlet_h_unit: str = "mol_cm3"     # "mol_cm3" or "mol_L"
     upper_fluid_conductivity_mode: str = "constant"  # "constant" strictly follows Schakel Table I; "dynamic_pore_fluid" is optional
     M_similarity: float = 1.0          # Schakel Table I uses M=1
-    reduced_ttm_visual_scale: float = 1.0  # legacy reduced-mode display scale; spectral mode ignores it
-
     # Numerical stability / validity
     phi_min: float = 0.05
     phi_max_valid: float = 0.95        # beyond this, poroelastic framework is nearly gone
@@ -257,7 +254,7 @@ def dynamic_coefficients(phi: float, k0: float, alpha_inf: float, cH: float,
     N_vals = np.array([N_each, N_each], dtype=float)
 
     # Appendix A, Eq. A2-A3.
-    omega_t = eta / (alpha_inf * k0 * rho_f)
+    omega_t = phi * eta / (alpha_inf * k0 * rho_f)
     Lambda = math.sqrt(max(8.0 * alpha_inf * k0 / (phi * M), cfg.eps_complex))
 
     # Appendix A, Eq. A1.
@@ -616,68 +613,6 @@ def choose_snapshot(df: pd.DataFrame, target_phi: float = 0.75) -> int:
     return int(np.nanargmin(vals))
 
 
-def synthesize_waveforms_reduced(row: pd.Series, cfg: SEConfig,
-                                 coeff: Dict[str, complex] | None = None) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
-    """Fast VSEP waveform gather using Ricker wavelet + vertical electric dipole scaling.
-    For finite offset D, use u ~ cos(theta)/r^2 = z/(D^2+z^2)^(3/2)."""
-    z = np.arange(cfg.receiver_z_min, cfg.receiver_z_max + 0.5 * cfg.receiver_spacing, cfg.receiver_spacing)
-    Vf = math.sqrt(cfg.K_fl / cfg.rho_fl)
-    T0 = cfg.z_s / Vf
-    t = np.linspace(max(0.0, T0 - cfg.waveform_t_before), T0 + cfg.waveform_t_after, cfg.waveform_nt)
-    wave = ricker(t - T0, cfg.f0)
-
-    phi = float(np.clip(row["Porosity"], cfg.phi_min, cfg.phi_max_valid))
-    k0_m2 = float(row["Permeability_mD"]) * 9.869233e-16
-    tau = float(row["Tortuosity"])
-    cH = float(row["OutletHConc"])
-    omega0 = 2.0 * math.pi * cfg.f0
-    if coeff is None:
-        coeff = se_coefficients(phi, k0_m2, tau, cH, omega0, cfg.coeff_theta_deg, cfg,
-                                C_override_molL=optional_float(row, "ElectrolyteConcentration_molL"),
-                                sigma_f_override=optional_float(row, "FluidConductivity_S_m"))
-
-    # Reduced waveform gather: Liu et al. electric-dipole approximation.
-    # The classic finite-offset VSEP gather is a radiation pattern of one interface electric dipole,
-    # not a direct side-by-side plot of raw Schakel R_E and T_TM.
-    # R_E and T_TM have different potential definitions / numerical scales in Schakel's 6x6 system;
-    # using raw T_TM for z>0 will visually suppress the porous-side traces.
-    # Here we use one interface source strength from |R_E| and apply the dipole geometry
-    # u ∝ cos(theta)/r^2 = z/(D^2+z^2)^(3/2).
-    interface_strength = abs(coeff["R_E"])
-    if not np.isfinite(interface_strength) or interface_strength == 0:
-        interface_strength = 1.0
-
-    z0 = max(0.25 * cfg.receiver_spacing, 10e-6)
-    D = float(cfg.offset_D)
-    if abs(D) < 1e-15:
-        geom_signed = np.sign(z) / (np.abs(z) + z0)**2
-        geom_signed[np.abs(z) < 1e-15] = 0.0
-    else:
-        geom_signed = z / (D**2 + z**2 + z0**2)**1.5
-    gmax = np.nanmax(np.abs(geom_signed))
-    if gmax > 0 and np.isfinite(gmax):
-        geom_signed = geom_signed / gmax
-
-    U = cfg.source_pressure_amp * interface_strength * geom_signed[:, None] * wave[None, :]
-    return z, t, U
-
-
-def ricker_positive_omega_spectrum(omega: np.ndarray | float, f0: float) -> np.ndarray | float:
-    """Positive-frequency amplitude spectrum of the Ricker wavelet used in this script.
-
-    For s(t)=(1-2(pi f0 t)^2) exp[-(pi f0 t)^2], the amplitude spectrum is
-    proportional to (omega/omega0)^2 exp[-(omega/omega0)^2], with peak near f0.
-    The absolute normalization is not important here because the source pressure
-    amplitude is arbitrary; preserving the frequency weighting is what matters.
-    """
-    omega0 = 2.0 * math.pi * f0
-    x = np.asarray(omega, dtype=float) / omega0
-    spec = x**2 * np.exp(-x**2)
-    if np.isscalar(omega):
-        return float(spec)
-    return spec
-
-
 def causal_ricker_source_spectrum(omega: np.ndarray | float, cfg: SEConfig,
                                   n_time: int = 2048) -> np.ndarray | complex:
     """Complex S(omega) for Liu Eq. (1)-(2) from a causal source wavelet.
@@ -720,28 +655,42 @@ def _trapz_weights(n: int, dx: float) -> np.ndarray:
     return w
 
 
-def finite_offset_dipole_geometry(z: np.ndarray, cfg: SEConfig) -> np.ndarray:
-    """Liu Eq. (4) finite-offset vertical electric-dipole radiation geometry.
+def liu_interface_coefficient_kx(kx: float) -> float:
+    """Horizontal wavenumber used to evaluate Liu's interface coefficients.
 
-    The frequency-wavenumber integral supplies the waveform and conversion strength.
-    Liu Fig. 2(b) shows that the finite-offset receiver-line amplitude follows the
-    interface dipole directivity u proportional to cos(theta)/r^2, i.e.
-    z/(D^2+z^2)^(3/2) for a receiver line at horizontal offset D.
+    Liu Eq. (1)-(2) use signed horizontal wavenumber in the spatial phase kx,
+    but the isotropic plane-interface conversion coefficients are functions of
+    incidence-angle magnitude. Keeping the sign inside Schakel's vector-potential
+    convention makes R_E and T_TM odd in k and incorrectly turns the finite-offset
+    scalar-potential response into a sin(kD)-type kernel.
     """
-    z = np.asarray(z, dtype=float)
-    D = abs(float(cfg.offset_D))
-    if D < 1e-15:
-        z0 = max(0.25 * cfg.receiver_spacing, 10e-6)
-        geom = np.sign(z) / (np.abs(z) + z0) ** 2
-        geom[np.abs(z) < 1e-15] = 0.0
-    else:
-        geom = z / (D**2 + z**2) ** 1.5
-    for mask in (z < 0, z > 0):
-        gmax = np.nanmax(np.abs(geom[mask])) if np.any(mask) else np.nan
-        if np.isfinite(gmax) and gmax > 0:
-            geom[mask] /= gmax
-    geom[np.abs(z) < 1e-15] = 0.0
-    return geom
+    return abs(float(kx))
+
+
+def liu_electrical_potential_coefficients(coeff: Dict[str, complex],
+                                          kx: float) -> Tuple[complex, complex]:
+    """Convert Schakel potentials to Liu's reflected/transmitted electrical potentials.
+
+    Schakel Eq. (45) defines R_E as the reflected EM vector-potential coefficient
+    and T_TM as the transmitted solid TM vector-potential coefficient. Schakel
+    Eq. (39) gives the transmitted electric vector potential as alpha_TM*T_TM.
+    For a TM vector potential Psi_E=(0, psi_E, 0), Eq. (23) gives
+    E=curl(Psi_E). Relating its horizontal component to an electrical potential
+    through E_x=-du/dx produces opposite propagation-direction signs:
+
+        R_u = -(k3_E/|kx|) R_E
+        T_u = +(k3_TM/|kx|) alpha_TM T_TM
+
+    At exact normal incidence Schakel's raw coefficients vanish while these
+    ratios have finite limits. The caller must evaluate that limit at a small
+    positive wavenumber rather than pass kx=0.
+    """
+    k_abs = abs(float(kx))
+    if k_abs <= 1e-14:
+        raise ValueError("kx must be nonzero; evaluate the normal-incidence potential limit first")
+    re_potential = -(coeff["k3_E"] / k_abs) * coeff["R_E"]
+    te_potential = (coeff["k3_TM"] / k_abs) * coeff["alpha_TM"] * coeff["T_TM"]
+    return re_potential, te_potential
 
 
 def synthesize_waveforms_spectral(row: pd.Series, cfg: SEConfig,
@@ -751,16 +700,16 @@ def synthesize_waveforms_spectral(row: pd.Series, cfg: SEConfig,
 
     The implementation follows the structure of Liu et al. Eq. (1)--(2):
 
-        u_r(x,z,t) = ∬ A(k,ω) R_E(k,ω)
+        u_r(x,z,t) = ∬ A(k,ω) R_u(k,ω)
                        exp[i(k_z^i z_s - k_z^{Er} z + k x - ωt)] dk dω
 
-        u_t(x,z,t) = ∬ A(k,ω) T_TM(k,ω)
+        u_t(x,z,t) = ∬ A(k,ω) T_u(k,ω)
                        exp[i(k_z^i z_s + k_z^{Et} z + k x - ωt)] dk dω
 
-    where R_E and T_TM are evaluated by the Schakel & Smeulders 6x6 system for
-    each (k,ω).  This is intentionally slower than the reduced waveform, but it
-    preserves frequency dependence, horizontal-wavenumber/incident-angle effects,
-    and propagation phase.
+    where R_u and T_u are Liu electrical-potential coefficients obtained from the
+    Schakel & Smeulders 6x6 solution for each (k,ω). It preserves frequency
+    dependence, horizontal-wavenumber/incident-angle effects, and propagation
+    phase.
 
     Notes
     -----
@@ -809,6 +758,8 @@ def synthesize_waveforms_spectral(row: pd.Series, cfg: SEConfig,
     inv_2pi2 = 1.0 / (2.0 * math.pi)**2
 
     source_spectrum = causal_ricker_source_spectrum(omega_grid, cfg)
+    fluid_mask = z_receivers < 0
+    porous_mask = ~fluid_mask
 
     for iw, omega in enumerate(omega_grid):
         k_ac = omega / Vf
@@ -819,6 +770,7 @@ def synthesize_waveforms_spectral(row: pd.Series, cfg: SEConfig,
         k_weights = _trapz_weights(n_k, dk)
         S_omega = source_spectrum[iw]
         phase_t = np.exp(-1j * omega * t)
+        coeff_cache: Dict[float, Dict[str, complex]] = {}
 
         for ik, kx in enumerate(k_grid):
             # Liu Eq. (1)-(2) finite-width source spectrum:
@@ -826,17 +778,31 @@ def synthesize_waveforms_spectral(row: pd.Series, cfg: SEConfig,
             Akw = cfg.source_pressure_amp * S_omega * np.exp(-((kx - k_center) / kb)**2)
             if not np.isfinite(Akw) or abs(Akw) < 1e-14:
                 continue
+            coeff_kx = liu_interface_coefficient_kx(float(kx))
+            # R_E and T_TM vanish at exact normal incidence, while the Liu
+            # electrical-potential ratios R_E/k and T_TM/k have finite limits.
+            # Evaluate that single quadrature node just off normal incidence;
+            # the source spectrum and Fourier phase still use the true kx=0.
+            potential_kx = coeff_kx if coeff_kx > 0.0 else k_lim * 1e-8
+            cache_key = round(potential_kx, 12)
             try:
-                coeff = se_coefficients(
-                    phi, k0_m2, tau, cH, omega, None, cfg, kx_override=float(kx),
-                    C_override_molL=C_override,
-                    sigma_f_override=sigma_f_override,
-                )
+                if cache_key not in coeff_cache:
+                    coeff_cache[cache_key] = se_coefficients(
+                        phi, k0_m2, tau, cH, omega, None, cfg,
+                        kx_override=potential_kx,
+                        C_override_molL=C_override,
+                        sigma_f_override=sigma_f_override,
+                    )
+                coeff = coeff_cache[cache_key]
             except Exception:
                 continue
-            RE = coeff["R_E"]
-            TTM = coeff["T_TM"]
-            if not (np.isfinite(RE.real) and np.isfinite(RE.imag) and np.isfinite(TTM.real) and np.isfinite(TTM.imag)):
+            RE_potential, TE_potential = liu_electrical_potential_coefficients(coeff, potential_kx)
+            if not (
+                np.isfinite(RE_potential.real)
+                and np.isfinite(RE_potential.imag)
+                and np.isfinite(TE_potential.real)
+                and np.isfinite(TE_potential.imag)
+            ):
                 continue
 
             kzi = coeff["k3_fl"]
@@ -845,16 +811,16 @@ def synthesize_waveforms_spectral(row: pd.Series, cfg: SEConfig,
             weight = 2.0 * Akw * omega_weights[iw] * k_weights[ik] * inv_2pi2
             common_x = np.exp(1j * kx * x)
 
-            for iz, z in enumerate(z_receivers):
-                if z < 0:
-                    amp = RE * np.exp(1j * (kzi * cfg.z_s - kEr * z)) * common_x
-                else:
-                    amp = TTM * np.exp(1j * (kzi * cfg.z_s + kEt * z)) * common_x
-                U[iz, :] += weight * amp * phase_t
+            if np.any(fluid_mask):
+                z_fluid = z_receivers[fluid_mask]
+                amp_fluid = RE_potential * np.exp(1j * (kzi * cfg.z_s - kEr * z_fluid)) * common_x
+                U[fluid_mask, :] += weight * amp_fluid[:, None] * phase_t[None, :]
+            if np.any(porous_mask):
+                z_porous = z_receivers[porous_mask]
+                amp_porous = TE_potential * np.exp(1j * (kzi * cfg.z_s + kEt * z_porous)) * common_x
+                U[porous_mask, :] += weight * amp_porous[:, None] * phase_t[None, :]
 
-    U_real = np.real(U)
-    U_real *= finite_offset_dipole_geometry(z_receivers, cfg)[:, None]
-    return z_receivers, t, U_real
+    return z_receivers, t, np.real(U)
 
 
 # -----------------------------
@@ -899,16 +865,88 @@ def save_waveform_arrays(z: np.ndarray, t: np.ndarray, U: np.ndarray, outdir: Pa
     pd.DataFrame(data).to_csv(outdir / f"{name}.csv", index=False)
 
 
+def waveform_spatial_peak_diagnostics(z: np.ndarray, t: np.ndarray, U: np.ndarray,
+                                      offset_D: float) -> pd.DataFrame:
+    """Return per-receiver peak diagnostics for auditing Liu Fig. 2-style gathers."""
+    z = np.asarray(z, dtype=float)
+    t = np.asarray(t, dtype=float)
+    U = np.asarray(U, dtype=float)
+    if U.shape != (len(z), len(t)):
+        raise ValueError("U must have shape (len(z), len(t)).")
+
+    peak_idx = np.nanargmax(np.abs(U), axis=1)
+    peak_signed = U[np.arange(len(z)), peak_idx]
+    peak_abs = np.abs(peak_signed)
+    interface_mask = np.isclose(z, 0.0, atol=1e-12, rtol=0.0)
+    side = np.where(interface_mask, "interface", np.where(z < 0.0, "R_E", "T_E"))
+    ref_distance = abs(float(offset_D)) / math.sqrt(2.0) if np.isfinite(offset_D) else np.nan
+    return pd.DataFrame({
+        "z_m": z,
+        "z_mm": z * 1e3,
+        "side": side,
+        "distance_from_interface_m": np.abs(z),
+        "distance_from_interface_mm": np.abs(z) * 1e3,
+        "peak_abs": peak_abs,
+        "peak_signed": peak_signed,
+        "peak_time_s": t[peak_idx],
+        "peak_time_us": t[peak_idx] * 1e6,
+        "liu_dipole_peak_distance_m": ref_distance,
+        "liu_dipole_peak_distance_mm": ref_distance * 1e3 if np.isfinite(ref_distance) else np.nan,
+    })
+
+
+def save_waveform_spatial_peak_diagnostics(z: np.ndarray, t: np.ndarray, U: np.ndarray,
+                                           cfg: SEConfig, outdir: Path,
+                                           name: str = "waveform_spatial_peak_diagnostics") -> pd.DataFrame:
+    diag = waveform_spatial_peak_diagnostics(z, t, U, cfg.offset_D)
+    diag.to_csv(outdir / f"{name}.csv", index=False)
+
+    fig, ax = plt.subplots(figsize=(7.6, 4.8))
+    for side, color, label in [("R_E", "tab:blue", r"$R_E$ side"), ("T_E", "tab:red", r"$T_E$ side")]:
+        part = diag[diag["side"] == side]
+        if part.empty:
+            continue
+        vals = part["peak_abs"].to_numpy(float)
+        vmax = np.nanmax(vals)
+        vals_norm = vals / vmax if np.isfinite(vmax) and vmax > 0 else vals
+        ax.plot(part["distance_from_interface_mm"], vals_norm, marker=".", linestyle="-",
+                linewidth=1.0, markersize=3.0, color=color, label=label)
+    ref = abs(cfg.offset_D) / math.sqrt(2.0) * 1e3
+    ax.axvline(ref, color="0.35", linestyle=":", linewidth=1.2, label=r"$D/\sqrt{2}$")
+    ax.set_xlabel("Distance from interface (mm)")
+    ax.set_ylabel("Side-normalized peak amplitude")
+    ax.set_title("Spatial peak audit of spectral waveform gather")
+    ax.grid(True, alpha=0.25)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(outdir / f"{name}.png", dpi=300)
+    plt.close(fig)
+    return diag
+
+
+def waveform_display_indices(z: np.ndarray, cfg: SEConfig) -> np.ndarray:
+    """Return receiver indices drawn in a waveform gather."""
+    z = np.asarray(z, dtype=float)
+    display_stride = max(1, int(round(5.0e-3 / max(float(cfg.receiver_spacing), 1e-12))))
+    display_idx = np.arange(0, len(z), display_stride)
+    if len(z) - 1 not in display_idx:
+        display_idx = np.append(display_idx, len(z) - 1)
+    if abs(float(cfg.offset_D)) > 1e-12:
+        interface_mask = np.isclose(z[display_idx], 0.0, atol=1e-12, rtol=0.0)
+        display_idx = display_idx[~interface_mask]
+    return display_idx
+
+
 def plot_waveform_gather(z: np.ndarray, t: np.ndarray, U: np.ndarray,
                          row: pd.Series, cfg: SEConfig, outdir: Path,
                          name: str = "waveform_snapshot") -> float:
     # Normalize traces for display; keep actual max separately.
-    # The reflected fluid-side R_E potential and transmitted porous-side T_TM
-    # potential have very different numerical scales in Schakel's system, so
+    # The reflected fluid-side R_E and transmitted porous-side T_E electrical
+    # potentials can have different numerical scales, so
     # normalize each side independently for a readable Liu-style gather.
     Amax = float(np.nanmax(np.abs(U)))
     U_plot = np.zeros_like(U, dtype=float)
-    for mask in (z < 0, z >= 0):
+    for mask in (z < 0, z > 0):
         if not np.any(mask):
             continue
         side_max = float(np.nanmax(np.abs(U[mask, :])))
@@ -923,11 +961,14 @@ def plot_waveform_gather(z: np.ndarray, t: np.ndarray, U: np.ndarray,
         z_plot = z * 1e6
         z_unit = "µm"
     t_us = t * 1e6
-    trace_spacing = abs(np.median(np.diff(z_plot))) if len(z_plot) > 1 else 1.0
+    display_idx = waveform_display_indices(z, cfg)
+    z_display = z_plot[display_idx]
+    U_display = U_plot[display_idx, :]
+    trace_spacing = abs(np.median(np.diff(z_display))) if len(z_display) > 1 else 1.0
     scale = 0.42 * trace_spacing
 
     fig, ax = plt.subplots(figsize=(7.8, 6.0))
-    for zi, tr in zip(z_plot, U_plot):
+    for zi, tr in zip(z_display, U_display):
         color = "tab:red" if zi > 0 else ("tab:blue" if abs(zi) < 1e-12 else "0.25")
         ax.plot(t_us, zi + scale * tr, color=color, linewidth=0.9)
     T0_us = cfg.z_s / math.sqrt(cfg.K_fl / cfg.rho_fl) * 1e6
@@ -936,7 +977,7 @@ def plot_waveform_gather(z: np.ndarray, t: np.ndarray, U: np.ndarray,
     ax.text(T0_us, np.nanmax(z_plot), r" $T_0$", color="tab:blue", va="top")
     ax.set_xlabel("Time (µs)")
     ax.set_ylabel(f"Electrode position relative to interface ({z_unit})")
-    ax.set_title(f"Interface EM waveforms at t_d={row['Time_s']:.1f} s, phi={row['Porosity']:.3f} [R_E/T_TM norm]")
+    ax.set_title(f"Interface EM waveforms at t_d={row['Time_s']:.1f} s, phi={row['Porosity']:.3f} [R_E/T_E norm]")
     ax.grid(True, alpha=0.2)
     fig.tight_layout()
     fig.savefig(outdir / f"{name}.png", dpi=300)
@@ -963,9 +1004,6 @@ def compute_peak_amplitude_spectral(ts: pd.DataFrame, df_raw: pd.DataFrame, cfg:
     valid_vals = out.loc[out["valid_poroelastic"] & np.isfinite(out["Amax_waveform_spectral"]), "Amax_waveform_spectral"]
     ref = valid_vals.iloc[0] if len(valid_vals) else np.nan
     out["Amax_waveform_spectral_norm"] = out["Amax_waveform_spectral"] / ref if ref and np.isfinite(ref) and ref != 0 else np.nan
-    # Back-compatible column names used by plotting/output.
-    out["Amax_proxy"] = out["Amax_waveform_spectral"]
-    out["Amax_proxy_norm"] = out["Amax_waveform_spectral_norm"]
     return out
 
 
@@ -973,7 +1011,7 @@ def plot_peak_amplitude(ts: pd.DataFrame, outdir: Path) -> None:
     fig, ax = plt.subplots(figsize=(7.6, 4.8))
     valid = ts["valid_poroelastic"].to_numpy(bool)
     x = ts["Time_min"].to_numpy(float)
-    ax.plot(x[valid], ts.loc[valid, "Amax_proxy_norm"], marker="o", linewidth=1.6)
+    ax.plot(x[valid], ts.loc[valid, "Amax_waveform_spectral_norm"], marker="o", linewidth=1.6)
     ax.set_xlabel("Dissolution time (min)")
     ax.set_ylabel("Normalized maximum waveform peak")
     ax.set_title("Maximum interface EM waveform peak during dissolution")
@@ -1035,11 +1073,10 @@ def main() -> None:
     )
     parser.add_argument("--outdir", type=str, default="se_results_offset", help="Output directory for results and plots")
     parser.add_argument("--snapshot-target-phi", type=float, default=0.75)
-    parser.add_argument("--waveform-mode", type=str, default="spectral", choices=["reduced", "spectral"])
     parser.add_argument("--spectral-n-omega", type=int, default=None, help="Number of positive-frequency samples in spectral mode")
     parser.add_argument("--spectral-n-k", type=int, default=None, help="Number of horizontal-wavenumber samples per frequency in spectral mode")
     parser.add_argument("--peak-spectral-n-omega", type=int, default=24, help="Coarser spectral frequency samples for Amax-vs-dissolution curve")
-    parser.add_argument("--peak-spectral-n-k", type=int, default=41, help="Coarser spectral wavenumber samples for Amax-vs-dissolution curve")
+    parser.add_argument("--peak-spectral-n-k", type=int, default=101, help="Coarser spectral wavenumber samples for Amax-vs-dissolution curve")
     parser.add_argument("--spectral-f-min-factor", type=float, default=None, help="Minimum spectral frequency as a factor of f0")
     parser.add_argument("--spectral-f-max-factor", type=float, default=None, help="Maximum spectral frequency as a factor of f0")
     parser.add_argument("--source-beam-theta-deg", type=float, default=None, help="Central acoustic beam angle used in A(k,omega), degrees")
@@ -1055,8 +1092,6 @@ def main() -> None:
     parser.add_argument("--f0", type=float, default=None, help="Override central frequency in Hz")
     parser.add_argument("--upper-fluid-conductivity-mode", type=str, default=None, choices=["constant", "dynamic_pore_fluid"],
                         help="constant follows Schakel Table I sigma_fl; dynamic_pore_fluid is a model assumption")
-    parser.add_argument("--reduced-ttm-visual-scale", type=float, default=None,
-                        help="Keep 1.0 for formula-consistent reduced waveform; use >1 only for display enhancement")
     args = parser.parse_args()
 
     cfg = SEConfig()
@@ -1092,8 +1127,6 @@ def main() -> None:
         cfg.source_duration_cycles = args.source_duration_cycles
     if args.upper_fluid_conductivity_mode is not None:
         cfg.upper_fluid_conductivity_mode = args.upper_fluid_conductivity_mode
-    if args.reduced_ttm_visual_scale is not None:
-        cfg.reduced_ttm_visual_scale = args.reduced_ttm_visual_scale
 
     outdir = Path(args.outdir)
     outdir.mkdir(parents=True, exist_ok=True)
@@ -1111,20 +1144,15 @@ def main() -> None:
 
     idx = choose_snapshot(df, target_phi=args.snapshot_target_phi)
     row = df.iloc[idx]
-    if args.waveform_mode == "spectral":
-        z, t, U = synthesize_waveforms_spectral(row, cfg, n_omega=cfg.spectral_n_omega, n_k=cfg.spectral_n_k)
-        plot_name = "waveform_snapshot_spectral"
-    else:
-        phi = float(np.clip(row["Porosity"], cfg.phi_min, cfg.phi_max_valid))
-        coeff = se_coefficients(phi, float(row["Permeability_mD"]) * 9.869233e-16,
-                                float(row["Tortuosity"]), float(row["OutletHConc"]),
-                                2.0 * math.pi * cfg.f0, cfg.coeff_theta_deg, cfg,
-                                C_override_molL=optional_float(row, "ElectrolyteConcentration_molL"),
-                                sigma_f_override=optional_float(row, "FluidConductivity_S_m"))
-        z, t, U = synthesize_waveforms_reduced(row, cfg, coeff=coeff)
-        plot_name = "waveform_snapshot"
+    z, t, U = synthesize_waveforms_spectral(row, cfg, n_omega=cfg.spectral_n_omega, n_k=cfg.spectral_n_k)
+    plot_name = "waveform_snapshot_spectral"
     save_waveform_arrays(z, t, U, outdir, plot_name)
+    diag = save_waveform_spatial_peak_diagnostics(z, t, U, cfg, outdir)
     Amax_snapshot = plot_waveform_gather(z, t, U, row, cfg, outdir, plot_name)
+    re_diag = diag[diag["side"] == "R_E"]
+    te_diag = diag[diag["side"] == "T_E"]
+    re_peak_distance_mm = float(re_diag.loc[re_diag["peak_abs"].idxmax(), "distance_from_interface_mm"]) if not re_diag.empty else np.nan
+    te_peak_distance_mm = float(te_diag.loc[te_diag["peak_abs"].idxmax(), "distance_from_interface_mm"]) if not te_diag.empty else np.nan
 
     summary = {
         "input": str(args.input),
@@ -1134,19 +1162,22 @@ def main() -> None:
         "snapshot_Porosity": float(row["Porosity"]),
         "snapshot_Amax": Amax_snapshot,
         "T0_us": cfg.z_s / math.sqrt(cfg.K_fl / cfg.rho_fl) * 1e6,
-        "waveform_mode": args.waveform_mode,
+        "waveform_mode": "spectral",
         "pre_T0_max_abs": float(np.nanmax(np.abs(U[:, t < cfg.z_s / math.sqrt(cfg.K_fl / cfg.rho_fl)]))) if np.any(t < cfg.z_s / math.sqrt(cfg.K_fl / cfg.rho_fl)) else 0.0,
         "post_T0_max_abs": float(np.nanmax(np.abs(U[:, t >= cfg.z_s / math.sqrt(cfg.K_fl / cfg.rho_fl)]))) if np.any(t >= cfg.z_s / math.sqrt(cfg.K_fl / cfg.rho_fl)) else np.nan,
-        "spectral_n_omega": cfg.spectral_n_omega if args.waveform_mode == "spectral" else np.nan,
-        "spectral_n_k": cfg.spectral_n_k if args.waveform_mode == "spectral" else np.nan,
+        "RE_peak_distance_from_interface_mm": re_peak_distance_mm,
+        "TE_peak_distance_from_interface_mm": te_peak_distance_mm,
+        "liu_dipole_reference_peak_distance_mm": abs(cfg.offset_D) / math.sqrt(2.0) * 1e3,
+        "spectral_n_omega": cfg.spectral_n_omega,
+        "spectral_n_k": cfg.spectral_n_k,
         "peak_spectral_n_omega": args.peak_spectral_n_omega,
         "peak_spectral_n_k": args.peak_spectral_n_k,
-        "spectral_f_min_factor": cfg.spectral_f_min_factor if args.waveform_mode == "spectral" else np.nan,
-        "spectral_f_max_factor": cfg.spectral_f_max_factor if args.waveform_mode == "spectral" else np.nan,
-        "source_beam_theta_deg": cfg.source_beam_theta_deg if args.waveform_mode == "spectral" else np.nan,
-        "source_kb_m_inv": cfg.source_kb_m_inv if args.waveform_mode == "spectral" else np.nan,
-        "source_peak_cycles": cfg.source_peak_cycles if args.waveform_mode == "spectral" else np.nan,
-        "source_duration_cycles": cfg.source_duration_cycles if args.waveform_mode == "spectral" else np.nan,
+        "spectral_f_min_factor": cfg.spectral_f_min_factor,
+        "spectral_f_max_factor": cfg.spectral_f_max_factor,
+        "source_beam_theta_deg": cfg.source_beam_theta_deg,
+        "source_kb_m_inv": cfg.source_kb_m_inv,
+        "source_peak_cycles": cfg.source_peak_cycles,
+        "source_duration_cycles": cfg.source_duration_cycles,
     }
     pd.Series(summary).to_csv(outdir / "run_summary.csv")
 

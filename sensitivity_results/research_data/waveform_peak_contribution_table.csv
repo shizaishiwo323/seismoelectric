@@ -1,0 +1,7 @@
+component,metric,delta_log10_metric,sign,baseline_Time_s,target_Time_s,contribution_n_omega,contribution_n_k
+porosity,1.115930401668303e+16,-0.1972572005920366,negative,0.1,11169.2,12,61
+permeability,3994860848873849.0,-0.6433926536298509,negative,0.1,11169.2,12,61
+tortuosity,2.085240239778064e+16,0.07426178713728007,positive,0.1,11169.2,12,61
+fluid_chemistry,7552685041080076.0,-0.3667929356585117,negative,0.1,11169.2,12,61
+nonlinear_interaction_residual,,0.22514077249755637,positive,0.1,11169.2,12,61
+full_observed_change,2171971287233569.0,-0.9080402302455627,negative,0.1,11169.2,12,61

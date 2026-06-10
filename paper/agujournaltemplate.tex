@@ -222,10 +222,11 @@ Permeability growth can strengthen hydraulic communication, whereas conductivity
 
 This study tests how this competition is transferred from reactive transport outputs to dynamic electrokinetic parameters, interface conversion coefficients, and finite-offset waveform amplitudes.
 We distinguish dissolution time, which describes chemical evolution, from waveform time, which describes the microsecond-scale response of one evolved material state.
+Figure~\ref{fig:workflow} defines the finite-offset source-receiver geometry and summarizes the coupled workflow across these two time scales.
 
 \begin{figure}
-\noindent\includegraphics[width=\textwidth]{figures/figure1_conceptual_workflow_timescale_separation.png}
-\caption{Conceptual workflow and time-scale separation. Reactive transport evolves material properties over dissolution time, whereas the seismoelectric waveform is calculated for each fixed dissolution state over waveform time.}
+\noindent\includegraphics[width=\textwidth]{figures/figure1.png}
+\caption{Finite-offset seismoelectric configuration and coupled modeling workflow. (a) Acoustic source, fluid-porous interface, offset distance, and electric receiver line used in the waveform synthesis. (b) Separation between dissolution time and waveform time, and the mapping from reactive transport outputs to dynamic electrokinetic properties, interface coefficients, and the interface electromagnetic response.}
 \label{fig:workflow}
 \end{figure}
 
@@ -268,7 +269,7 @@ At the same time, the higher Pe cases develop much stronger pore-fluid conductiv
 Within the valid window, permeability increases by about 20 times for Pe = 0.1 and by more than 200 times for Pe = 1 and Pe = 10.
 
 \begin{figure}
-\noindent\includegraphics[width=\textwidth]{figures/figure2_reactive_transport_evolution.png}
+\noindent\includegraphics[width=\textwidth]{figures/figure2.png}
 \caption{Reactive transport evolution of porosity, permeability, tortuosity, concentration, conductivity, and related state variables. The figure establishes the hydraulic and electrical pathways that feed the seismoelectric model.}
 \label{fig:rt_evolution}
 \end{figure}
@@ -280,7 +281,7 @@ This result indicates that permeability alone is not a sufficient predictor of t
 In Pe = 1 and Pe = 10, $|\sigma|$ increases by about 114--158 times, while $|L|$ decreases to about 1\% of its initial value.
 
 \begin{figure}
-\noindent\includegraphics[width=\textwidth]{figures/figure3_dynamic_electrokinetic_bridge.png}
+\noindent\includegraphics[width=\textwidth]{figures/figure3.png}
 \caption{Frequency-dependent dynamic electrokinetic properties derived from the reactive transport states. The opposing trends in $L(\omega)$ and $\sigma(\omega)$ define the main source-strength competition.}
 \label{fig:dynamic_bridge}
 \end{figure}
@@ -292,9 +293,9 @@ Frequency-angle heatmaps show that this weakening persists across the sampled in
 This contrast indicates that conductivity growth can outweigh the effect of increased hydraulic connectivity in the interface coefficients.
 
 \begin{figure}
-\noindent\includegraphics[width=\textwidth]{figures/figure4a_conversion_coefficients_time.png}
+\noindent\includegraphics[width=\textwidth]{figures/figure4a.png}
 \vspace{0.5em}
-\noindent\includegraphics[width=\textwidth]{figures/figure4b_conversion_frequency_angle_heatmaps.png}
+\noindent\includegraphics[width=\textwidth]{figures/figure4b.png}
 \caption{Interface conversion coefficients during dissolution. The time series show how dynamic property changes are transferred into conversion strength, and the frequency-angle heatmaps separate wavefield dependence from the dissolution trend.}
 \label{fig:conversion}
 \end{figure}
@@ -306,7 +307,7 @@ The waveform result therefore carries the coefficient-level suppression into the
 Late-stage post-$T_0$ peaks are about $1.6\times10^{15}$ for Pe = 0.1, compared with about $1.8\times10^{12}$ for Pe = 1 and $1.3\times10^{12}$ for Pe = 10.
 
 \begin{figure}
-\noindent\includegraphics[width=\textwidth]{figures/figure5_finite_offset_waveform_panels.png}
+\noindent\includegraphics[width=\textwidth]{figures/figure5.png}
 \caption{Finite-offset waveform panels for selected dissolution states. Dissolution time indexes the material state, while waveform time records the response after acoustic excitation.}
 \label{fig:waveforms}
 \end{figure}
@@ -324,7 +325,7 @@ The Liu-type dipole pattern is used only as a normalized spatial interpretation,
 This subsection functions as a geometry consistency check before the mechanism decomposition.
 
 \begin{figure}
-\noindent\includegraphics[width=\textwidth]{figures/figure6_spatial_peak_dipole_interpretation.png}
+\noindent\includegraphics[width=\textwidth]{figures/figure6.png}
 \caption{Spatial peak distribution, polarity behavior, and normalized dipole interpretation. The figure tests whether the modeled response has the expected finite-offset spatial organization.}
 \label{fig:spatial_peak}
 \end{figure}
@@ -336,7 +337,7 @@ The late-stage amplitude loss is therefore interpreted mainly as conductivity-re
 For Pe = 1 and Pe = 10, the fluid chemistry pathway contributes log$_{10}$ peak changes of about -2.78 and -2.91, respectively.
 
 \begin{figure}
-\noindent\includegraphics[width=\textwidth]{figures/figure7_mechanism_decomposition.png}
+\noindent\includegraphics[width=\textwidth]{figures/figure7.png}
 \caption{Mechanism decomposition using one-at-a-time parameter substitutions. The figure separates the contributions from porosity, permeability, tortuosity, and fluid chemistry pathways.}
 \label{fig:mechanism_decomposition}
 \end{figure}
@@ -348,7 +349,7 @@ These metrics are treated as diagnostic quantities from the simulations, not as 
 The normalized $R_E$ metric decreases to about 0.16 for Pe = 0.1 and to about $10^{-4}$ for Pe = 1 and Pe = 10.
 
 \begin{figure}
-\noindent\includegraphics[width=\textwidth]{figures/figure8_normalized_monitoring_metrics.png}
+\noindent\includegraphics[width=\textwidth]{figures/figure8.png}
 \caption{Normalized response metrics during dissolution. The figure compares coefficient-based and spectral-ratio indicators of response change.}
 \label{fig:monitoring_metrics}
 \end{figure}

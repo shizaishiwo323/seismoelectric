@@ -12,6 +12,8 @@ f0,source central frequency,500000.0,Hz
 source_kb_m_inv,Liu frequency-wavenumber beam-width k_b,80.0,1/m
 source_peak_cycles,Ricker peak time after source onset,2.0,cycles
 source_duration_cycles,finite causal source duration,8.0,cycles
+plot_time_min_us,waveform gather x-axis minimum,0.0,us
+plot_time_max_us,waveform gather x-axis maximum,160.0,us
 K_b,drained framework bulk modulus,5800000000.0,Pa
 G,framework shear modulus,3400000000.0,Pa
 K_s,calcite grain bulk modulus,76800000000.0,Pa

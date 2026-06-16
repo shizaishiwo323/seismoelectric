@@ -1,6 +1,8 @@
 import importlib.util
 import sys
+import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 import numpy as np
@@ -174,6 +176,51 @@ class WaveformDiagnosticsTest(unittest.TestCase):
 
         self.assertNotIn(2, finite_offset_idx)
         self.assertIn(2, zero_offset_idx)
+
+    def test_zero_offset_waveform_display_indices_follow_receiver_spacing(self):
+        z = np.arange(-20.0e-3, 20.0e-3 + 0.5e-3, 1.0e-3)
+        cfg = se.SEConfig()
+        cfg.receiver_spacing = 1.0e-3
+        cfg.offset_D = 0.0
+
+        display_idx = se.waveform_display_indices(z, cfg)
+
+        np.testing.assert_array_equal(display_idx, np.arange(len(z)))
+
+    def test_waveform_gather_uses_configured_time_axis_limits_us(self):
+        cfg = se.SEConfig()
+        cfg.plot_time_min_us = 0.0
+        cfg.plot_time_max_us = 160.0
+        z = np.array([-0.001, 0.001])
+        t = np.linspace(0.0, 200.0e-6, 8)
+        U = np.vstack([np.sin(np.linspace(0.0, np.pi, len(t))), -np.sin(np.linspace(0.0, np.pi, len(t)))])
+        row = pd.Series({"Time_s": 1.0, "Porosity": 0.25})
+
+        with tempfile.TemporaryDirectory() as tmp, patch("matplotlib.axes.Axes.set_xlim") as set_xlim:
+            se.plot_waveform_gather(z, t, U, row, cfg, Path(tmp))
+
+        set_xlim.assert_any_call(0.0, 160.0)
+
+    def test_spectral_waveform_time_axis_extends_to_configured_plot_max_us(self):
+        cfg = se.SEConfig()
+        cfg.receiver_z_min = -0.001
+        cfg.receiver_z_max = 0.001
+        cfg.receiver_spacing = 0.001
+        cfg.waveform_nt = 8
+        cfg.spectral_f_min_factor = 1.0
+        cfg.spectral_f_max_factor = 1.1
+        cfg.source_kb_m_inv = 1.0e9
+        cfg.plot_time_max_us = 160.0
+        row = pd.Series({
+            "Porosity": 0.24,
+            "Permeability_mD": 100.0,
+            "Tortuosity": 2.0,
+            "OutletHConc": 1.0e-10,
+        })
+
+        _, t, _ = se.synthesize_waveforms_spectral(row, cfg, n_omega=2, n_k=3)
+
+        self.assertAlmostEqual(float(t[-1]), 160.0e-6)
 
     def test_waveform_spatial_peak_diagnostics_separate_re_and_ttm_sides(self):
         z = np.array([-0.02, -0.01, 0.0, 0.01, 0.02])

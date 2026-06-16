@@ -99,7 +99,7 @@ class ZeroOffsetSchakelConfig:
     source_duration_cycles: float = 8.0
     spectral_f_min_factor: float = 0.25
     spectral_f_max_factor: float = 2.5
-    spectral_n_omega: int = 48
+    spectral_n_omega: int = 192
     spectral_n_k: int = 401
     spectral_k_limit_factor: float = 0.98
     # Retained for parameter-file compatibility; the Schakel gather now starts
@@ -107,6 +107,8 @@ class ZeroOffsetSchakelConfig:
     waveform_t_before: float = 0.0
     waveform_t_after: float = 18.0e-6
     waveform_nt: int = 1200
+    plot_time_min_us: float | None = 0
+    plot_time_max_us: float | None = 160
 
     # Plane-wave coefficient diagnostic angle.
     coeff_theta_deg: float = 45.0
@@ -512,7 +514,7 @@ def synthesize_waveforms_schakel2011(
     # Keep the output/gather time axis starting at 0 s for visual context; the
     # T0 arrival is still marked by plot_waveform_gather().
     T0 = cfg.z_s / vf
-    t = np.linspace(0.0, T0 + cfg.waveform_t_after, cfg.waveform_nt)
+    t = base.waveform_time_axis(0.0, T0 + cfg.waveform_t_after, cfg)
     frequencies = _frequency_grid(cfg, n_frequencies)
 
     spectrum = np.zeros((len(z_receivers), len(frequencies)), dtype=complex)
@@ -619,11 +621,9 @@ def save_waveform_spatial_peak_diagnostics_schakel2011(
         if part.empty:
             continue
         vals = part["peak_abs"].to_numpy(float)
-        vmax = np.nanmax(vals)
-        vals_norm = vals / vmax if np.isfinite(vmax) and vmax > 0 else vals
         ax.plot(
             part["distance_from_interface_mm"],
-            vals_norm,
+            vals,
             marker=".",
             linestyle="-",
             linewidth=1.0,
@@ -633,7 +633,7 @@ def save_waveform_spatial_peak_diagnostics_schakel2011(
         )
     ax.axvline(0.0, color="0.35", linestyle=":", linewidth=1.0, label="interface (excluded)")
     ax.set_xlabel("Distance from interface (mm)")
-    ax.set_ylabel("Side-normalized peak amplitude")
+    ax.set_ylabel("Peak amplitude")
     ax.set_title("Spatial peak audit of Schakel 2011 waveform gather")
     ax.grid(True, alpha=0.25)
     ax.legend()
@@ -641,6 +641,61 @@ def save_waveform_spatial_peak_diagnostics_schakel2011(
     fig.savefig(outdir / f"{name}.png", dpi=300)
     plt.close(fig)
     return diag
+
+
+def _nearest_receiver_peak_record(
+    z: np.ndarray,
+    t: np.ndarray,
+    u: np.ndarray,
+    mask: np.ndarray,
+) -> Dict[str, float]:
+    """Return peak metrics at the physical receiver closest to the interface."""
+    z_arr = np.asarray(z, dtype=float)
+    t_arr = np.asarray(t, dtype=float)
+    u_arr = np.asarray(u, dtype=float)
+    mask_arr = np.asarray(mask, dtype=bool)
+    idx_candidates = np.where(mask_arr)[0]
+    if len(idx_candidates) == 0:
+        return {
+            "peak_abs": np.nan,
+            "peak_signed": np.nan,
+            "peak_signed_polarity": np.nan,
+            "peak_time_s": np.nan,
+            "peak_time_us": np.nan,
+            "receiver_z_m": np.nan,
+            "receiver_z_mm": np.nan,
+            "receiver_distance_from_interface_m": np.nan,
+            "receiver_distance_from_interface_mm": np.nan,
+        }
+    receiver_idx = int(idx_candidates[np.nanargmin(np.abs(z_arr[idx_candidates]))])
+    trace = u_arr[receiver_idx, :]
+    peak_idx = int(np.nanargmax(np.abs(trace)))
+    peak_signed = float(trace[peak_idx])
+    receiver_z = float(z_arr[receiver_idx])
+    return {
+        "peak_abs": abs(peak_signed),
+        "peak_signed": peak_signed,
+        "peak_signed_polarity": float(np.sign(peak_signed)),
+        "peak_time_s": float(t_arr[peak_idx]),
+        "peak_time_us": float(t_arr[peak_idx] * 1.0e6),
+        "receiver_z_m": receiver_z,
+        "receiver_z_mm": receiver_z * 1.0e3,
+        "receiver_distance_from_interface_m": abs(receiver_z),
+        "receiver_distance_from_interface_mm": abs(receiver_z) * 1.0e3,
+    }
+
+
+def fixed_nearest_receiver_peak_summary_schakel2011(
+    z: np.ndarray,
+    t: np.ndarray,
+    u: np.ndarray,
+) -> Dict[str, Dict[str, float]]:
+    """Return RE/TE peak metrics at the nearest physical receiver on each side."""
+    z_arr = np.asarray(z, dtype=float)
+    return {
+        "R_E": _nearest_receiver_peak_record(z_arr, t, u, z_arr < 0.0),
+        "T_E": _nearest_receiver_peak_record(z_arr, t, u, z_arr > 0.0),
+    }
 
 
 def waveform_convergence_diagnostics(
@@ -710,11 +765,19 @@ def compute_peak_amplitude_schakel2011(
     vals_all = []
     vals_re = []
     vals_te = []
+    re_receiver_z = []
+    te_receiver_z = []
+    re_receiver_distance = []
+    te_receiver_distance = []
     for idx, row in df_raw.reset_index(drop=True).iterrows():
         if idx >= len(out) or not bool(out.loc[idx, "valid_poroelastic"]):
             vals_all.append(np.nan)
             vals_re.append(np.nan)
             vals_te.append(np.nan)
+            re_receiver_z.append(np.nan)
+            te_receiver_z.append(np.nan)
+            re_receiver_distance.append(np.nan)
+            te_receiver_distance.append(np.nan)
             continue
         try:
             z, t_wave, u = synthesize_waveforms_schakel2011(
@@ -725,17 +788,30 @@ def compute_peak_amplitude_schakel2011(
                 integration_method=integration_method,
             )
             summary = waveform_peak_summary_schakel2011(z, t_wave, u)
+            fixed_summary = fixed_nearest_receiver_peak_summary_schakel2011(z, t_wave, u)
             vals_all.append(float(summary["all"]["peak_abs"]))
-            vals_re.append(float(summary["R_E"]["peak_abs"]))
-            vals_te.append(float(summary["T_E"]["peak_abs"]))
+            vals_re.append(float(fixed_summary["R_E"]["peak_abs"]))
+            vals_te.append(float(fixed_summary["T_E"]["peak_abs"]))
+            re_receiver_z.append(float(fixed_summary["R_E"]["receiver_z_m"]))
+            te_receiver_z.append(float(fixed_summary["T_E"]["receiver_z_m"]))
+            re_receiver_distance.append(float(fixed_summary["R_E"]["receiver_distance_from_interface_m"]))
+            te_receiver_distance.append(float(fixed_summary["T_E"]["receiver_distance_from_interface_m"]))
         except Exception:
             vals_all.append(np.nan)
             vals_re.append(np.nan)
             vals_te.append(np.nan)
+            re_receiver_z.append(np.nan)
+            te_receiver_z.append(np.nan)
+            re_receiver_distance.append(np.nan)
+            te_receiver_distance.append(np.nan)
 
     out["Amax_waveform_schakel2011"] = vals_all
     out["Amax_waveform_schakel2011_RE"] = vals_re
     out["Amax_waveform_schakel2011_TE"] = vals_te
+    out["Amax_waveform_schakel2011_RE_fixed_receiver_z_m"] = re_receiver_z
+    out["Amax_waveform_schakel2011_TE_fixed_receiver_z_m"] = te_receiver_z
+    out["Amax_waveform_schakel2011_RE_fixed_receiver_distance_m"] = re_receiver_distance
+    out["Amax_waveform_schakel2011_TE_fixed_receiver_distance_m"] = te_receiver_distance
 
     # Compatibility with the plotting functions from the Liu-style script.
     out["Amax_waveform_spectral"] = out["Amax_waveform_schakel2011"]
@@ -754,6 +830,213 @@ def compute_peak_amplitude_schakel2011(
         ref = valid_vals.iloc[0] if len(valid_vals) else np.nan
         out[f"{col}_norm"] = out[col] / ref if ref and np.isfinite(ref) and ref != 0 else np.nan
     return out
+
+
+def plot_coefficients_absolute_schakel2011(ts: pd.DataFrame, outdir: Path) -> None:
+    """Plot Schakel coefficient and dynamic-parameter magnitudes without normalization."""
+    valid = ts["valid_poroelastic"].to_numpy(bool)
+    x = ts["Time_min"].to_numpy(float)
+
+    fig, ax1 = plt.subplots(figsize=(7.6, 4.8))
+    ax2 = ax1.twinx()
+    l1, = ax1.plot(
+        x[valid],
+        ts.loc[valid, "RE_abs"],
+        marker="o",
+        linewidth=1.6,
+        color="tab:blue",
+        label=r"$|R_E|$",
+    )
+    l2, = ax2.plot(
+        x[valid],
+        ts.loc[valid, "TTM_abs"],
+        marker="s",
+        linewidth=1.6,
+        color="tab:orange",
+        label=r"$|T_{TM}|$",
+    )
+    ax1.set_xlabel("Dissolution time (min)")
+    ax1.set_ylabel(r"$|R_E|$ coefficient magnitude", color="tab:blue")
+    ax2.set_ylabel(r"$|T_{TM}|$ coefficient magnitude", color="tab:orange")
+    ax1.tick_params(axis="y", labelcolor="tab:blue")
+    ax2.tick_params(axis="y", labelcolor="tab:orange")
+    ax1.set_title("Seismoelectric coefficients during calcite dissolution")
+    ax1.grid(True, alpha=0.3)
+    ax1.legend([l1, l2], [l1.get_label(), l2.get_label()], loc="upper left")
+    fig.tight_layout()
+    fig.savefig(outdir / "coefficients_vs_dissolution_time.png", dpi=300)
+    plt.close(fig)
+
+    fig, ax1 = plt.subplots(figsize=(7.6, 4.8))
+    ax2 = ax1.twinx()
+    re_y = ts["RE_abs"]
+    ttm_y = ts["TTM_abs"]
+    re_mask = base.positive_plot_mask(x, re_y, valid)
+    ttm_mask = base.positive_plot_mask(x, ttm_y, valid)
+    l1, = ax1.plot(
+        x[re_mask],
+        re_y.loc[re_mask],
+        marker="o",
+        linewidth=1.6,
+        color="tab:blue",
+        label=r"$|R_E|$",
+    )
+    l2, = ax2.plot(
+        x[ttm_mask],
+        ttm_y.loc[ttm_mask],
+        marker="s",
+        linewidth=1.6,
+        color="tab:orange",
+        label=r"$|T_{TM}|$",
+    )
+    ax1.set_yscale("log")
+    ax2.set_yscale("log")
+    ax1.set_xlabel("Dissolution time (min)")
+    ax1.set_ylabel(r"$|R_E|$ coefficient magnitude (log scale)", color="tab:blue")
+    ax2.set_ylabel(r"$|T_{TM}|$ coefficient magnitude (log scale)", color="tab:orange")
+    ax1.tick_params(axis="y", labelcolor="tab:blue")
+    ax2.tick_params(axis="y", labelcolor="tab:orange")
+    ax1.set_title("Seismoelectric coefficients during calcite dissolution (log scale)")
+    ax1.grid(True, which="both", alpha=0.3)
+    ax1.legend([l1, l2], [l1.get_label(), l2.get_label()], loc="upper left")
+    fig.tight_layout()
+    fig.savefig(outdir / "coefficients_vs_dissolution_time_logy.png", dpi=300)
+    plt.close(fig)
+
+    fig, ax1 = plt.subplots(figsize=(7.6, 4.8))
+    ax2 = ax1.twinx()
+    l1, = ax1.plot(
+        x[valid],
+        ts.loc[valid, "L_abs"],
+        marker="o",
+        linewidth=1.6,
+        color="tab:blue",
+        label=r"$|L(\omega)|$",
+    )
+    l2, = ax2.plot(
+        x[valid],
+        ts.loc[valid, "sigma_abs"],
+        marker="s",
+        linewidth=1.6,
+        color="tab:orange",
+        label=r"$|\sigma(\omega)|$",
+    )
+    ax1.set_xlabel("Dissolution time (min)")
+    ax1.set_ylabel(r"$|L(\omega)|$", color="tab:blue")
+    ax2.set_ylabel(r"$|\sigma(\omega)|$ (S/m)", color="tab:orange")
+    ax1.tick_params(axis="y", labelcolor="tab:blue")
+    ax2.tick_params(axis="y", labelcolor="tab:orange")
+    ax1.set_title("Dynamic electrokinetic coefficients")
+    ax1.grid(True, alpha=0.3)
+    ax1.legend([l1, l2], [l1.get_label(), l2.get_label()], loc="upper left")
+    fig.tight_layout()
+    fig.savefig(outdir / "dynamic_coefficients_vs_dissolution_time.png", dpi=300)
+    plt.close(fig)
+
+    fig, ax1 = plt.subplots(figsize=(7.6, 4.8))
+    ax2 = ax1.twinx()
+    l_y = ts["L_abs"]
+    sig_y = ts["sigma_abs"]
+    l_mask = base.positive_plot_mask(x, l_y, valid)
+    sig_mask = base.positive_plot_mask(x, sig_y, valid)
+    l1, = ax1.plot(
+        x[l_mask],
+        l_y.loc[l_mask],
+        marker="o",
+        linewidth=1.6,
+        color="tab:blue",
+        label=r"$|L(\omega)|$",
+    )
+    l2, = ax2.plot(
+        x[sig_mask],
+        sig_y.loc[sig_mask],
+        marker="s",
+        linewidth=1.6,
+        color="tab:orange",
+        label=r"$|\sigma(\omega)|$",
+    )
+    ax1.set_yscale("log")
+    ax2.set_yscale("log")
+    ax1.set_xlabel("Dissolution time (min)")
+    ax1.set_ylabel(r"$|L(\omega)|$ (log scale)", color="tab:blue")
+    ax2.set_ylabel(r"$|\sigma(\omega)|$ (S/m, log scale)", color="tab:orange")
+    ax1.tick_params(axis="y", labelcolor="tab:blue")
+    ax2.tick_params(axis="y", labelcolor="tab:orange")
+    ax1.set_title("Dynamic electrokinetic coefficients (log scale)")
+    ax1.grid(True, which="both", alpha=0.3)
+    ax1.legend([l1, l2], [l1.get_label(), l2.get_label()], loc="upper left")
+    fig.tight_layout()
+    fig.savefig(outdir / "dynamic_coefficients_vs_dissolution_time_logy.png", dpi=300)
+    plt.close(fig)
+
+
+def plot_fixed_receiver_peak_amplitude_schakel2011(ts: pd.DataFrame, outdir: Path) -> None:
+    """Plot absolute waveform peaks at the closest physical receiver on each side."""
+    valid = ts["valid_poroelastic"].to_numpy(bool)
+    x = ts["Time_min"].to_numpy(float)
+    fig, ax = plt.subplots(figsize=(7.6, 4.8))
+    ax.plot(
+        x[valid],
+        ts.loc[valid, "Amax_waveform_schakel2011_RE"],
+        marker="o",
+        linewidth=1.6,
+        label=r"$R_E$ side nearest electrode",
+    )
+    ax.plot(
+        x[valid],
+        ts.loc[valid, "Amax_waveform_schakel2011_TE"],
+        marker="s",
+        linewidth=1.6,
+        label=r"$T_E$ side nearest electrode",
+    )
+    ax.set_xlabel("Dissolution time (min)")
+    ax.set_ylabel("Waveform peak amplitude")
+    ax.set_title("Nearest-electrode reflected and transmitted interface EM peaks")
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(outdir / "peak_amplitude_RE_TE_vs_dissolution_time.png", dpi=300)
+    plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(7.6, 4.8))
+    re_y = ts["Amax_waveform_schakel2011_RE"]
+    te_y = ts["Amax_waveform_schakel2011_TE"]
+    re_mask = base.positive_plot_mask(x, re_y, valid)
+    te_mask = base.positive_plot_mask(x, te_y, valid)
+    ax.plot(
+        x[re_mask],
+        re_y.loc[re_mask],
+        marker="o",
+        linewidth=1.6,
+        label=r"$R_E$ side nearest electrode",
+    )
+    ax.plot(
+        x[te_mask],
+        te_y.loc[te_mask],
+        marker="s",
+        linewidth=1.6,
+        label=r"$T_E$ side nearest electrode",
+    )
+    ax.set_yscale("log")
+    ax.set_xlabel("Dissolution time (min)")
+    ax.set_ylabel("Waveform peak amplitude (log scale)")
+    ax.set_title("Nearest-electrode reflected and transmitted interface EM peaks (log scale)")
+    ax.grid(True, which="both", alpha=0.3)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(outdir / "peak_amplitude_RE_TE_vs_dissolution_time_logy.png", dpi=300)
+    plt.close(fig)
+
+
+def remove_obsolete_visualizations_schakel2011(outdir: Path) -> None:
+    """Remove no-longer-produced figures from previous runs in the same directory."""
+    for name in [
+        "peak_amplitude_vs_dissolution_time.png",
+        "transmitted_peak_amplitude_vs_dissolution_time.png",
+    ]:
+        path = outdir / name
+        if path.exists():
+            path.unlink()
 
 
 def save_parameter_table(cfg: ZeroOffsetSchakelConfig, outdir: Path) -> None:
@@ -964,6 +1247,7 @@ def run_simulation(
     cfg.offset_D = 0.0
     outdir = Path(outdir)
     outdir.mkdir(parents=True, exist_ok=True)
+    remove_obsolete_visualizations_schakel2011(outdir)
 
     df = base.load_reactive_transport_table(input_path)
     ts = base.compute_time_series(df, cfg)
@@ -977,8 +1261,8 @@ def run_simulation(
     )
     ts.to_csv(outdir / "seismoelectric_timeseries_results.csv", index=False)
     save_parameter_table(cfg, outdir)
-    base.plot_coefficients(ts, outdir)
-    base.plot_peak_amplitude(ts, outdir)
+    plot_coefficients_absolute_schakel2011(ts, outdir)
+    plot_fixed_receiver_peak_amplitude_schakel2011(ts, outdir)
 
     idx = base.choose_snapshot(df, target_phi=snapshot_target_phi)
     row = df.iloc[idx]
@@ -1048,6 +1332,8 @@ def run_simulation(
         "schakel_bandpass_low_hz": float(cfg.schakel_bandpass_low_hz),
         "schakel_bandpass_high_hz": float(cfg.schakel_bandpass_high_hz),
         "schakel_gamma_max": float(cfg.schakel_gamma_max),
+        "plot_time_min_us": cfg.plot_time_min_us,
+        "plot_time_max_us": cfg.plot_time_max_us,
         "source_mode": cfg.schakel_source_mode,
         "include_porous_pf_coseismic": bool(cfg.include_porous_pf_coseismic),
         "convergence_levels_Nomega_Ntheta": ",".join(str(v) for v in convergence_values),
@@ -1073,6 +1359,10 @@ def _apply_common_overrides(args: argparse.Namespace, cfg: ZeroOffsetSchakelConf
         cfg.receiver_z_max = args.receiver_z_max_mm * 1.0e-3
     if args.receiver_spacing_mm is not None:
         cfg.receiver_spacing = args.receiver_spacing_mm * 1.0e-3
+    if getattr(args, "plot_time_min_us", None) is not None:
+        cfg.plot_time_min_us = args.plot_time_min_us
+    if getattr(args, "plot_time_max_us", None) is not None:
+        cfg.plot_time_max_us = args.plot_time_max_us
     if args.f0 is not None:
         cfg.f0 = args.f0
     if args.upper_fluid_conductivity_mode is not None:
@@ -1109,6 +1399,8 @@ def main() -> None:
     parser.add_argument("--receiver-z-max-mm", type=float, default=None)
     parser.add_argument("--receiver-spacing-mm", type=float, default=None)
     parser.add_argument("--offset-D-mm", type=float, default=None, help="Accepted for compatibility; always forced to zero.")
+    parser.add_argument("--plot-time-min-us", type=float, default=None, help="Waveform gather x-axis minimum, in microseconds.")
+    parser.add_argument("--plot-time-max-us", type=float, default=None, help="Waveform gather x-axis maximum, in microseconds.")
     parser.add_argument("--f0", type=float, default=None)
     parser.add_argument("--upper-fluid-conductivity-mode", choices=["constant", "dynamic_pore_fluid"], default=None)
     parser.add_argument("--transducer-radius-mm", type=float, default=None)

@@ -1,0 +1,23 @@
+[04_Schakel_2011_Geophysics_interface_forward_model.pdf](uploaded_files/01_classical_theory_foundational_papers/04_Schakel_2011_Geophysics_interface_forward_model.pdf) 
+现在我要完全复现这篇论文里面的理论模型结果，几何模型参数设置，各种其他参数设置，模型公式配置等等完全依照里面的结果来。
+
+然后主要理论公式应该是来源于这3篇文献：
+
+ [01-Seismoelectric reflection and transmission at a fluid_porous-medium interface.pdf](uploaded_files/01_classical_theory_foundational_papers/01-Seismoelectric reflection and transmission at a fluid_porous-medium interface.pdf) [02_Schakel_2011_JAP_laboratory_theory.pdf](C:/Users/imgw/Documents/Codex/震电模拟/uploaded_files/01_classical_theory_foundational_papers/02_Schakel_2011_JAP_laboratory_theory.pdf) 
+[04_Schakel_2011_Geophysics_interface_forward_model.pdf](uploaded_files/01_classical_theory_foundational_papers/04_Schakel_2011_Geophysics_interface_forward_model.pdf) 
+请你注意完全按照论文里面的理论公式来建立这个理论模型，不要为了表面符合结果而假装硬凑答案。
+
+结果放在：C:\Users\imgw\Documents\Codex\震电模拟\results\Schakel2011
+这个目录下面，
+
+然后你需要对照 [04_Schakel_2011_Geophysics_interface_forward_model.pdf](uploaded_files/01_classical_theory_foundational_papers/04_Schakel_2011_Geophysics_interface_forward_model.pdf) 里面的图2,4,5,6,7,9,11给我输出结果，并且根据你写好的理论模型绘制相同风格的图像。针对绘图所需的实验数据，你根据论文里面的散点图，识别对应的数据点数据。 
+注意一点，目前由于不知道他实验的细节。
+A(omega) 声源用ricker子波，具体参考：
+C:\Users\imgw\Documents\Codex\震电模拟\seismoelectric_offset_liu2018_spectral.py
+"C:\Users\imgw\Documents\Codex\震电模拟\uploaded_files\01_classical_theory_foundational_papers\03_Liu_2018_finite_offset_VSEP.pdf"
+
+
+全部完成以后，调用子智能体进行审核：
+1，是否完全按照论文里面的理论公式来建立这个理论模型，不要为了表面符合结果而假装硬凑答案。
+2，模拟结果是否和 [04_Schakel_2011_Geophysics_interface_forward_model.pdf](uploaded_files/01_classical_theory_foundational_papers/04_Schakel_2011_Geophysics_interface_forward_model.pdf) 结果对应？
+由于声源不同造成的差异可以理解，我只需要宏观趋势吻合即可。

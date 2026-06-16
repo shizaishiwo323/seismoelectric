@@ -16,8 +16,8 @@ base_model = importlib.util.module_from_spec(base_spec)
 sys.modules[base_spec.name] = base_model
 base_spec.loader.exec_module(base_model)
 
-MODULE_PATH = ROOT / "seismoelectric_zerooffset_schakel2011_sommerfeld.py"
-spec = importlib.util.spec_from_file_location("seismoelectric_zerooffset_schakel2011_sommerfeld", MODULE_PATH)
+MODULE_PATH = ROOT / "schakel2011_sommerfeld.py"
+spec = importlib.util.spec_from_file_location("schakel2011_sommerfeld", MODULE_PATH)
 model = importlib.util.module_from_spec(spec)
 sys.modules[spec.name] = model
 spec.loader.exec_module(model)
@@ -26,13 +26,11 @@ spec.loader.exec_module(model)
 class ZeroOffsetSchakel2011RTTest(unittest.TestCase):
     def test_default_config_forces_zero_offset_and_preserves_receiver_geometry(self):
         cfg = model.ZeroOffsetSchakelConfig()
-        base = base_model.SEConfig()
 
         self.assertEqual(cfg.offset_D, 0.0)
-        self.assertEqual(cfg.z_s, base.z_s)
-        self.assertEqual(cfg.receiver_z_min, base.receiver_z_min)
-        self.assertEqual(cfg.receiver_z_max, base.receiver_z_max)
-        self.assertEqual(cfg.receiver_spacing, base.receiver_spacing)
+        self.assertEqual(cfg.receiver_z_min, -0.02)
+        self.assertEqual(cfg.receiver_z_max, 0.02)
+        self.assertEqual(cfg.receiver_spacing, 0.001)
 
     def test_sommerfeld_pressure_coefficient_uses_schakel_pressure_normalization(self):
         coeff = {"R_E": 6.0 + 8.0j}
@@ -155,6 +153,26 @@ class ZeroOffsetSchakel2011RTTest(unittest.TestCase):
         else:
             self.assertGreaterEqual(float(t[0]), T0)
 
+    def test_fixed_receiver_peak_uses_nearest_noninterface_electrodes(self):
+        z = np.array([-0.004, -0.002, 0.0, 0.002, 0.004])
+        t = np.array([0.0, 1.0])
+        u = np.array(
+            [
+                [9.0, 1.0],
+                [2.0, -3.0],
+                [0.0, 0.0],
+                [4.0, -5.0],
+                [8.0, 1.0],
+            ]
+        )
+
+        summary = model.fixed_nearest_receiver_peak_summary_schakel2011(z, t, u)
+
+        self.assertEqual(summary["R_E"]["peak_abs"], 3.0)
+        self.assertEqual(summary["R_E"]["receiver_z_m"], -0.002)
+        self.assertEqual(summary["T_E"]["peak_abs"], 5.0)
+        self.assertEqual(summary["T_E"]["receiver_z_m"], 0.002)
+
     def test_pipeline_writes_same_named_result_types(self):
         with tempfile.TemporaryDirectory() as tmp:
             tmpdir = Path(tmp)
@@ -186,10 +204,8 @@ class ZeroOffsetSchakel2011RTTest(unittest.TestCase):
                 "coefficients_vs_dissolution_time_logy.png",
                 "dynamic_coefficients_vs_dissolution_time.png",
                 "dynamic_coefficients_vs_dissolution_time_logy.png",
-                "peak_amplitude_vs_dissolution_time.png",
                 "peak_amplitude_RE_TE_vs_dissolution_time.png",
                 "peak_amplitude_RE_TE_vs_dissolution_time_logy.png",
-                "transmitted_peak_amplitude_vs_dissolution_time.png",
                 "waveform_snapshot_schakel2011.csv",
                 "waveform_snapshot_schakel2011.npz",
                 "waveform_snapshot_schakel2011.png",
@@ -202,9 +218,20 @@ class ZeroOffsetSchakel2011RTTest(unittest.TestCase):
             for name in expected:
                 self.assertTrue((outdir / name).exists(), name)
 
+            removed = [
+                "peak_amplitude_vs_dissolution_time.png",
+                "transmitted_peak_amplitude_vs_dissolution_time.png",
+            ]
+            for name in removed:
+                self.assertFalse((outdir / name).exists(), name)
+
             summary = pd.read_csv(outdir / "run_summary.csv", index_col=0).iloc[:, 0]
             self.assertEqual(summary["waveform_mode"], "schakel2011_sommerfeld_zerooffset")
             self.assertAlmostEqual(float(summary["offset_D_m"]), 0.0)
+
+            ts = pd.read_csv(outdir / "seismoelectric_timeseries_results.csv")
+            self.assertIn("Amax_waveform_schakel2011_RE_fixed_receiver_z_m", ts.columns)
+            self.assertIn("Amax_waveform_schakel2011_TE_fixed_receiver_z_m", ts.columns)
 
 
 if __name__ == "__main__":

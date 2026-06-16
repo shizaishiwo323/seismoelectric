@@ -82,6 +82,8 @@ class SEConfig:
     waveform_t_before: float = 15.0e-6 # s, time window before T0
     waveform_t_after: float = 18.0e-6  # s, time window after T0
     waveform_nt: int = 1200            # number of time samples
+    plot_time_min_us: float | None = None # optional waveform gather x-axis minimum, in microseconds
+    plot_time_max_us: float | None = None # optional waveform gather x-axis maximum, in microseconds
 
     # Coefficient evaluation setting
     coeff_theta_deg: float = 45.0      # deg, because plane-wave R_E is zero at theta=0
@@ -613,6 +615,21 @@ def choose_snapshot(df: pd.DataFrame, target_phi: float = 0.75) -> int:
     return int(np.nanargmin(vals))
 
 
+def waveform_time_axis(default_start_s: float, default_end_s: float, cfg: SEConfig) -> np.ndarray:
+    """Return waveform synthesis times, extending to configured plot limits if needed."""
+    t_start = float(default_start_s)
+    t_end = float(default_end_s)
+    plot_min_us = getattr(cfg, "plot_time_min_us", None)
+    plot_max_us = getattr(cfg, "plot_time_max_us", None)
+    if plot_min_us is not None:
+        t_start = min(t_start, float(plot_min_us) * 1.0e-6)
+    if plot_max_us is not None:
+        t_end = max(t_end, float(plot_max_us) * 1.0e-6)
+    if t_end <= t_start:
+        raise ValueError("waveform time axis end must be greater than start")
+    return np.linspace(t_start, t_end, int(cfg.waveform_nt))
+
+
 def causal_ricker_source_spectrum(omega: np.ndarray | float, cfg: SEConfig,
                                   n_time: int = 2048) -> np.ndarray | complex:
     """Complex S(omega) for Liu Eq. (1)-(2) from a causal source wavelet.
@@ -743,7 +760,7 @@ def synthesize_waveforms_spectral(row: pd.Series, cfg: SEConfig,
     z_receivers = np.arange(cfg.receiver_z_min, cfg.receiver_z_max + 0.5 * cfg.receiver_spacing, cfg.receiver_spacing)
     Vf = math.sqrt(cfg.K_fl / cfg.rho_fl)
     T0 = cfg.z_s / Vf
-    t = np.linspace(max(0.0, T0 - cfg.waveform_t_before), T0 + cfg.waveform_t_after, cfg.waveform_nt)
+    t = waveform_time_axis(max(0.0, T0 - cfg.waveform_t_before), T0 + cfg.waveform_t_after, cfg)
     x = float(cfg.offset_D)
 
     phi = float(np.clip(row["Porosity"], cfg.phi_min, cfg.phi_max_valid))
@@ -990,10 +1007,7 @@ def save_waveform_spatial_peak_diagnostics(z: np.ndarray, t: np.ndarray, U: np.n
 def waveform_display_indices(z: np.ndarray, cfg: SEConfig) -> np.ndarray:
     """Return receiver indices drawn in a waveform gather."""
     z = np.asarray(z, dtype=float)
-    display_stride = max(1, int(round(5.0e-3 / max(float(cfg.receiver_spacing), 1e-12))))
-    display_idx = np.arange(0, len(z), display_stride)
-    if len(z) - 1 not in display_idx:
-        display_idx = np.append(display_idx, len(z) - 1)
+    display_idx = np.arange(len(z))
     if abs(float(cfg.offset_D)) > 1e-12:
         interface_mask = np.isclose(z[display_idx], 0.0, atol=1e-12, rtol=0.0)
         display_idx = display_idx[~interface_mask]
@@ -1041,6 +1055,10 @@ def plot_waveform_gather(z: np.ndarray, t: np.ndarray, U: np.ndarray,
     ax.set_xlabel("Time (µs)")
     ax.set_ylabel(f"Electrode position relative to interface ({z_unit})")
     ax.set_title(f"Interface EM waveforms at t_d={row['Time_s']:.1f} s, phi={row['Porosity']:.3f} [R_E/T_E norm]")
+    x_min = getattr(cfg, "plot_time_min_us", None)
+    x_max = getattr(cfg, "plot_time_max_us", None)
+    if x_min is not None or x_max is not None:
+        ax.set_xlim(x_min, x_max)
     ax.grid(True, alpha=0.2)
     fig.tight_layout()
     fig.savefig(outdir / f"{name}.png", dpi=300)
@@ -1150,6 +1168,8 @@ def save_parameter_table(cfg: SEConfig, outdir: Path) -> None:
         "source_kb_m_inv": "Liu frequency-wavenumber beam-width k_b",
         "source_peak_cycles": "Ricker peak time after source onset",
         "source_duration_cycles": "finite causal source duration",
+        "plot_time_min_us": "waveform gather x-axis minimum",
+        "plot_time_max_us": "waveform gather x-axis maximum",
         "K_s": "calcite grain bulk modulus",
         "K_b": "drained framework bulk modulus", "G": "framework shear modulus",
         "K_f": "pore fluid bulk modulus", "K_fl": "upper fluid bulk modulus",
@@ -1165,6 +1185,7 @@ def save_parameter_table(cfg: SEConfig, outdir: Path) -> None:
         "offset_D": "m", "f0": "Hz", "source_beam_theta_deg": "deg",
         "source_kb_m_inv": "1/m", "source_peak_cycles": "cycles",
         "source_duration_cycles": "cycles",
+        "plot_time_min_us": "us", "plot_time_max_us": "us",
         "spectral_f_min_factor": "-", "spectral_f_max_factor": "-", "spectral_n_omega": "-",
         "spectral_n_k": "-", "spectral_k_limit_factor": "-", "K_s": "Pa", "K_b": "Pa", "G": "Pa", "K_f": "Pa", "K_fl": "Pa",
         "eta": "Pa s", "rho_f": "kg/m3", "rho_fl": "kg/m3", "rho_s": "kg/m3", "eps_f": "-",
@@ -1207,6 +1228,8 @@ def main() -> None:
     parser.add_argument("--receiver-z-max-mm", type=float, default=None, help="Maximum receiver/electrode position relative to interface, in mm")
     parser.add_argument("--receiver-spacing-mm", type=float, default=None, help="Receiver/electrode trace interval, in mm")
     parser.add_argument("--offset-D-mm", type=float, default=None, help="Horizontal offset between source line and receiver line, in mm")
+    parser.add_argument("--plot-time-min-us", type=float, default=None, help="Waveform gather x-axis minimum, in microseconds")
+    parser.add_argument("--plot-time-max-us", type=float, default=None, help="Waveform gather x-axis maximum, in microseconds")
     parser.add_argument("--f0", type=float, default=None, help="Override central frequency in Hz")
     parser.add_argument("--upper-fluid-conductivity-mode", type=str, default=None, choices=["constant", "dynamic_pore_fluid"],
                         help="constant follows Schakel Table I sigma_fl; dynamic_pore_fluid is a model assumption")
@@ -1225,6 +1248,10 @@ def main() -> None:
         cfg.receiver_spacing = args.receiver_spacing_mm * 1e-3
     if args.offset_D_mm is not None:
         cfg.offset_D = args.offset_D_mm * 1e-3
+    if args.plot_time_min_us is not None:
+        cfg.plot_time_min_us = args.plot_time_min_us
+    if args.plot_time_max_us is not None:
+        cfg.plot_time_max_us = args.plot_time_max_us
     if args.f0 is not None:
         cfg.f0 = args.f0
     if args.spectral_n_omega is not None:
@@ -1296,6 +1323,8 @@ def main() -> None:
         "source_kb_m_inv": cfg.source_kb_m_inv,
         "source_peak_cycles": cfg.source_peak_cycles,
         "source_duration_cycles": cfg.source_duration_cycles,
+        "plot_time_min_us": cfg.plot_time_min_us,
+        "plot_time_max_us": cfg.plot_time_max_us,
     }
     pd.Series(summary).to_csv(outdir / "run_summary.csv")
 

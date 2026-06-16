@@ -5,6 +5,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
 import pandas as pd
@@ -26,9 +27,42 @@ class Schakel2011SommerfeldSourceTest(unittest.TestCase):
 
         self.assertFalse(issubclass(model.ZeroOffsetSchakelConfig, model.base.SEConfig))
         self.assertNotIn("base.SEConfig", source)
-        for name in ("z_s", "receiver_z_min", "receiver_z_max", "receiver_spacing", "waveform_nt"):
+        for name in (
+            "z_s",
+            "receiver_z_min",
+            "receiver_z_max",
+            "receiver_spacing",
+            "waveform_nt",
+            "plot_time_min_us",
+            "plot_time_max_us",
+        ):
             self.assertIn(f"{name}:", source)
             self.assertEqual(getattr(cfg, name), model.ZeroOffsetSchakelConfig.__dataclass_fields__[name].default)
+
+    def test_plot_time_axis_cli_overrides_are_applied_to_config(self):
+        cfg = model.ZeroOffsetSchakelConfig()
+        args = SimpleNamespace(
+            z_s=None,
+            z_s_mm=None,
+            receiver_z_min_mm=None,
+            receiver_z_max_mm=None,
+            receiver_spacing_mm=None,
+            plot_time_min_us=0.0,
+            plot_time_max_us=160.0,
+            f0=None,
+            upper_fluid_conductivity_mode=None,
+            transducer_radius_mm=None,
+            schakel_bandpass_low_hz=None,
+            schakel_bandpass_high_hz=None,
+            schakel_gamma_max=None,
+            source_mode=None,
+            convergence_levels=None,
+        )
+
+        model._apply_common_overrides(args, cfg)
+
+        self.assertEqual(cfg.plot_time_min_us, 0.0)
+        self.assertEqual(cfg.plot_time_max_us, 160.0)
 
     def test_default_source_is_documented_as_causal_ricker(self):
         cfg = model.ZeroOffsetSchakelConfig()
@@ -85,6 +119,27 @@ class Schakel2011SommerfeldSourceTest(unittest.TestCase):
         self.assertAlmostEqual(float(t[0]), 0.0)
         self.assertLess(float(t[0]), T0)
         self.assertGreater(float(t[-1]), T0)
+
+    def test_waveform_time_axis_extends_to_configured_plot_max_us(self):
+        cfg = model.ZeroOffsetSchakelConfig()
+        cfg.receiver_z_min = -0.001
+        cfg.receiver_z_max = 0.001
+        cfg.receiver_spacing = 0.001
+        cfg.waveform_nt = 40
+        cfg.schakel_gamma_max = 1.0
+        cfg.plot_time_max_us = 160.0
+        row = pd.Series(
+            {
+                "Porosity": 0.24,
+                "Permeability_mD": 100.0,
+                "Tortuosity": 2.0,
+                "OutletHConc": 1.0e-10,
+            }
+        )
+
+        _, t, _ = model.synthesize_waveforms_schakel2011(row, cfg, n_frequencies=3, n_theta=6)
+
+        self.assertAlmostEqual(float(t[-1]), 160.0e-6)
 
     def test_interpolated_interface_receiver_is_excluded_from_peak_metrics(self):
         cfg = model.ZeroOffsetSchakelConfig()

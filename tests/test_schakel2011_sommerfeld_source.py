@@ -72,18 +72,61 @@ class Schakel2011SommerfeldSourceTest(unittest.TestCase):
         self.assertIn("causal Ricker", doc)
         self.assertNotIn("visual Fig. 4 pressure-pulse approximation", doc)
 
-    def test_default_source_spectrum_matches_base_causal_ricker(self):
+    def test_default_snapshot_theta_quadrature_is_192(self):
+        run_sig = inspect.signature(model.run_simulation)
+        main_source = inspect.getsource(model.main)
+
+        self.assertEqual(run_sig.parameters["n_theta"].default, 192)
+        self.assertIn('parser.add_argument("--n-theta", type=int, default=192)', main_source)
+
+    def test_causal_ricker_pressure_spectrum_is_unscaled_pressure_time_integral(self):
         cfg = model.ZeroOffsetSchakelConfig()
+        frequencies = np.array([0.5, 1.0, 1.5], dtype=float) * cfg.f0
+        omega = 2.0 * np.pi * frequencies
+        n_time = 1024
+
+        actual = model.causal_ricker_pressure_spectrum(frequencies, cfg, pressure_peak_pa=1.0, n_time=n_time)
+
+        duration = max(cfg.source_duration_cycles, cfg.source_peak_cycles + 2.0) / cfg.f0
+        tau = np.linspace(0.0, duration, n_time)
+        src = model.base.ricker(tau - cfg.source_peak_cycles / cfg.f0, cfg.f0)
+        ramp_len = max(4, min(len(tau), int(0.25 / cfg.f0 / max(tau[1] - tau[0], 1e-15))))
+        ramp = np.ones_like(src)
+        ramp[:ramp_len] = 0.5 * (1.0 - np.cos(np.linspace(0.0, np.pi, ramp_len)))
+        src *= ramp
+        integrate = getattr(np, "trapezoid", np.trapz)
+        expected = integrate(src[None, :] * np.exp(-1j * omega[:, None] * tau[None, :]), tau, axis=1)
+
+        np.testing.assert_allclose(actual, expected)
+        self.assertLess(float(np.max(np.abs(actual))), 2.0e-6)
+
+    def test_default_source_A_spectrum_uses_one_pa_ricker_pressure_and_reference_distance(self):
+        cfg = model.ZeroOffsetSchakelConfig()
+        cfg.z_s = 0.1
+        cfg.source_pressure_amp = 1.0
         frequencies = np.array([0.0, cfg.f0, 2.0 * cfg.f0], dtype=float)
 
         actual = model.schakel_source_A_spectrum(frequencies, cfg)
-        expected = cfg.source_pressure_amp * model.base.causal_ricker_source_spectrum(
-            2.0 * np.pi * frequencies,
-            cfg,
+        expected = (
+            model.causal_ricker_pressure_spectrum(frequencies, cfg, pressure_peak_pa=1.0)
+            * abs(cfg.z_s)
+            * model._bandpass_taper(frequencies, cfg)
         )
 
         np.testing.assert_allclose(actual, expected)
-        self.assertAlmostEqual(abs(actual[0]), abs(expected[0]))
+        self.assertLess(float(np.max(np.abs(actual))), 2.0e-7)
+
+    def test_source_pressure_amplitude_scales_linearly_in_pa(self):
+        cfg_1pa = model.ZeroOffsetSchakelConfig()
+        cfg_1pa.source_pressure_amp = 1.0
+        cfg_50kpa = model.ZeroOffsetSchakelConfig()
+        cfg_50kpa.source_pressure_amp = 50_000.0
+        frequencies = np.array([cfg_1pa.f0], dtype=float)
+
+        one_pa = model.schakel_source_A_spectrum(frequencies, cfg_1pa)
+        fifty_kpa = model.schakel_source_A_spectrum(frequencies, cfg_50kpa)
+
+        np.testing.assert_allclose(fifty_kpa, one_pa * 50_000.0)
 
     def test_parameter_table_marks_source_mode_as_causal_ricker_assumption(self):
         cfg = model.ZeroOffsetSchakelConfig()

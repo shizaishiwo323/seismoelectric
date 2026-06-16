@@ -43,6 +43,14 @@ except Exception:  # pragma: no cover - only used if scipy is unavailable.
     scipy_j1 = None
 
 
+ELECTRIC_POTENTIAL_TO_MILLIVOLTS = 1.0e3
+
+
+def electric_potential_to_millivolts(values: np.ndarray | pd.Series | float) -> np.ndarray:
+    """Convert electric-potential amplitudes from V to mV for plots."""
+    return np.asarray(values, dtype=float) * ELECTRIC_POTENTIAL_TO_MILLIVOLTS
+
+
 @dataclass
 class ZeroOffsetSchakelConfig:
     """Configuration for the zero-offset Schakel 2011 RT-SE simulator.
@@ -92,7 +100,8 @@ class ZeroOffsetSchakelConfig:
 
     # Acoustic source and waveform sampling.
     f0: float = 500.0e3
-    source_pressure_amp: float = 1.0
+    source_pressure_amp: float = 50_000.0
+    source_reference_distance_m: float | None = None
     source_kb_m_inv: float = 80.0
     source_beam_theta_deg: float = 0.0
     source_peak_cycles: float = 2.0
@@ -215,18 +224,67 @@ def _source_time_table() -> tuple[np.ndarray, np.ndarray]:
     return t, p - np.mean(p)
 
 
-def schakel_source_A_spectrum(frequency_hz: np.ndarray, cfg: ZeroOffsetSchakelConfig) -> np.ndarray:
-    """Schakel 2011 Eq. (1) source amplitude using the causal Ricker source.
+def schakel_source_reference_distance_m(cfg: ZeroOffsetSchakelConfig) -> float:
+    """Return the pressure-reference distance used in Schakel Eq. (1)."""
+    if cfg.source_reference_distance_m is not None:
+        return abs(float(cfg.source_reference_distance_m))
+    return abs(float(cfg.z_s))
 
-    The default RT-SE workflow inserts the causal Ricker spectrum from
-    ``seismoelectric_offset_liu2018_spectral.py`` directly as ``A(omega)``.
-    The optional ``fig4_digitized`` branch is retained only as an explicit
-    legacy diagnostic for the visual Schakel Fig. 4 pressure approximation.
+
+def causal_ricker_pressure_spectrum(
+    frequency_hz: np.ndarray | float,
+    cfg: ZeroOffsetSchakelConfig,
+    pressure_peak_pa: float | None = None,
+    n_time: int = 2048,
+) -> np.ndarray | complex:
+    """Causal Ricker pressure spectrum P(omega) with units Pa*s.
+
+    This intentionally does not reuse ``base.causal_ricker_source_spectrum``,
+    because that Liu-style helper normalizes by the spectral peak and returns a
+    dimensionless source shape.  Here the time-domain Ricker is interpreted as
+    a pressure pulse p(t)=p0*Ricker(t), integrated with exp(-i omega tau).
+    """
+    scalar_input = np.isscalar(frequency_hz)
+    freq = np.atleast_1d(np.asarray(frequency_hz, dtype=float))
+    omega = 2.0 * math.pi * freq
+    f0 = max(float(cfg.f0), 1.0)
+    duration = max(float(cfg.source_duration_cycles), float(cfg.source_peak_cycles) + 2.0) / f0
+    tau = np.linspace(0.0, duration, int(max(n_time, 64)))
+    peak_t = max(0.0, float(cfg.source_peak_cycles)) / f0
+    pressure_amp = float(cfg.source_pressure_amp if pressure_peak_pa is None else pressure_peak_pa)
+    pressure = pressure_amp * base.ricker(tau - peak_t, f0)
+
+    ramp_len = max(4, min(len(tau), int(0.25 / f0 / max(tau[1] - tau[0], 1.0e-15))))
+    ramp = np.ones_like(pressure)
+    if ramp_len > 1:
+        ramp[:ramp_len] = 0.5 * (1.0 - np.cos(np.linspace(0.0, math.pi, ramp_len)))
+    pressure *= ramp
+
+    spectrum = _trapz(
+        pressure[None, :] * np.exp(-1j * omega[:, None] * tau[None, :]),
+        tau,
+        axis=1,
+    )
+    if scalar_input:
+        return complex(spectrum[0])
+    return spectrum
+
+
+def schakel_source_A_spectrum(frequency_hz: np.ndarray, cfg: ZeroOffsetSchakelConfig) -> np.ndarray:
+    """Schakel 2011 Eq. (1) source amplitude using a physical causal Ricker pressure source.
+
+    The default branch treats the Ricker wavelet as a pressure history
+    p(t)=p0*Ricker(t), computes P(omega)=integral p(t) exp(-i omega t) dt in
+    Pa*s, then uses A(omega)=P(omega)*R_ref for Schakel's pressure-source
+    convention p_hat ~ A(omega)/r.  ``R_ref`` defaults to ``abs(z_s)`` unless
+    ``source_reference_distance_m`` is set.  The optional ``fig4_digitized``
+    branch is retained only as an explicit legacy diagnostic for the visual
+    Schakel Fig. 4 pressure approximation.
     """
     freq = np.asarray(frequency_hz, dtype=float)
     if cfg.schakel_source_mode == "causal_ricker":
-        omega = 2.0 * math.pi * freq
-        return cfg.source_pressure_amp * base.causal_ricker_source_spectrum(omega, cfg)
+        pressure_spectrum = causal_ricker_pressure_spectrum(freq, cfg)
+        return pressure_spectrum * schakel_source_reference_distance_m(cfg) * _bandpass_taper(freq, cfg)
     if cfg.schakel_source_mode != "fig4_digitized":
         raise ValueError("schakel_source_mode must be 'causal_ricker' or 'fig4_digitized'.")
     tau, pressure = _source_time_table()
@@ -620,7 +678,7 @@ def save_waveform_spatial_peak_diagnostics_schakel2011(
         part = diag[(diag["side"] == side) & (diag["include_in_quantitative_summary"])]
         if part.empty:
             continue
-        vals = part["peak_abs"].to_numpy(float)
+        vals = electric_potential_to_millivolts(part["peak_abs"].to_numpy(float))
         ax.plot(
             part["distance_from_interface_mm"],
             vals,
@@ -633,7 +691,7 @@ def save_waveform_spatial_peak_diagnostics_schakel2011(
         )
     ax.axvline(0.0, color="0.35", linestyle=":", linewidth=1.0, label="interface (excluded)")
     ax.set_xlabel("Distance from interface (mm)")
-    ax.set_ylabel("Peak amplitude")
+    ax.set_ylabel("Peak electric potential (mV)")
     ax.set_title("Spatial peak audit of Schakel 2011 waveform gather")
     ax.grid(True, alpha=0.25)
     ax.legend()
@@ -977,20 +1035,20 @@ def plot_fixed_receiver_peak_amplitude_schakel2011(ts: pd.DataFrame, outdir: Pat
     fig, ax = plt.subplots(figsize=(7.6, 4.8))
     ax.plot(
         x[valid],
-        ts.loc[valid, "Amax_waveform_schakel2011_RE"],
+        electric_potential_to_millivolts(ts.loc[valid, "Amax_waveform_schakel2011_RE"]),
         marker="o",
         linewidth=1.6,
         label=r"$R_E$ side nearest electrode",
     )
     ax.plot(
         x[valid],
-        ts.loc[valid, "Amax_waveform_schakel2011_TE"],
+        electric_potential_to_millivolts(ts.loc[valid, "Amax_waveform_schakel2011_TE"]),
         marker="s",
         linewidth=1.6,
         label=r"$T_E$ side nearest electrode",
     )
     ax.set_xlabel("Dissolution time (min)")
-    ax.set_ylabel("Waveform peak amplitude")
+    ax.set_ylabel("Peak electric potential (mV)")
     ax.set_title("Nearest-electrode reflected and transmitted interface EM peaks")
     ax.grid(True, alpha=0.3)
     ax.legend()
@@ -999,8 +1057,14 @@ def plot_fixed_receiver_peak_amplitude_schakel2011(ts: pd.DataFrame, outdir: Pat
     plt.close(fig)
 
     fig, ax = plt.subplots(figsize=(7.6, 4.8))
-    re_y = ts["Amax_waveform_schakel2011_RE"]
-    te_y = ts["Amax_waveform_schakel2011_TE"]
+    re_y = pd.Series(
+        electric_potential_to_millivolts(ts["Amax_waveform_schakel2011_RE"]),
+        index=ts.index,
+    )
+    te_y = pd.Series(
+        electric_potential_to_millivolts(ts["Amax_waveform_schakel2011_TE"]),
+        index=ts.index,
+    )
     re_mask = base.positive_plot_mask(x, re_y, valid)
     te_mask = base.positive_plot_mask(x, te_y, valid)
     ax.plot(
@@ -1019,7 +1083,7 @@ def plot_fixed_receiver_peak_amplitude_schakel2011(ts: pd.DataFrame, outdir: Pat
     )
     ax.set_yscale("log")
     ax.set_xlabel("Dissolution time (min)")
-    ax.set_ylabel("Waveform peak amplitude (log scale)")
+    ax.set_ylabel("Peak electric potential (mV, log scale)")
     ax.set_title("Nearest-electrode reflected and transmitted interface EM peaks (log scale)")
     ax.grid(True, which="both", alpha=0.3)
     ax.legend()
@@ -1071,9 +1135,27 @@ def save_parameter_table(cfg: ZeroOffsetSchakelConfig, outdir: Path) -> None:
             },
             {
                 "parameter": "schakel_source_mode",
-                "meaning": "causal Ricker source spectrum used inside the Schakel 2011 Sommerfeld integral by default",
+                "meaning": "Physical causal Ricker pressure spectrum used inside the Schakel 2011 Sommerfeld integral by default",
                 "value": cfg.schakel_source_mode,
                 "unit": "-",
+            },
+            {
+                "parameter": "source_pressure_amp",
+                "meaning": "Peak pressure p0 of the time-domain causal Ricker pressure pulse used for physical source calibration",
+                "value": cfg.source_pressure_amp,
+                "unit": "Pa",
+            },
+            {
+                "parameter": "source_reference_distance_m",
+                "meaning": "Reference distance R_ref in A(omega)=P(omega)*R_ref; if unset, abs(z_s) is used",
+                "value": cfg.source_reference_distance_m,
+                "unit": "m",
+            },
+            {
+                "parameter": "source_reference_distance_effective_m",
+                "meaning": "Effective R_ref used for the Schakel pressure-source convention",
+                "value": schakel_source_reference_distance_m(cfg),
+                "unit": "m",
             },
             {
                 "parameter": "include_porous_pf_coseismic",
@@ -1112,10 +1194,11 @@ Implemented model:
 - The reactive-transport mapping from porosity, permeability, tortuosity, and H+ concentration to dynamic permeability, electrokinetic coupling, dynamic conductivity, and Schakel interface coefficients is reused from `seismoelectric_offset_liu2018_spectral.py`.
 - Receiver geometry is reused from `seismoelectric_offset_liu2018_spectral.py`, but `offset_D` is forced to `0.0 m`.
 - Waveform synthesis replaces the Liu 2018 frequency-wavenumber integral with a Schakel et al. (2011) Sommerfeld integral. Fluid-side receivers use the reflected electric-potential structure of Schakel/JAP Eq. (5). Porous-side receivers use the front-interface transmitted TM electric-potential term from the JAP Eq. (8) structure, `-alpha_TM*T_TM/(rho_fl*omega**2)`, propagated with its Schakel vertical wavenumber. The Pf coseismic term `-alpha_Pf*T_Pf/(rho_fl*omega**2)` is available as an explicit diagnostic option but is off by default so the waveform emphasizes the interface EM response rather than a porous acoustic-coseismic arrival.
-- The default RT-SE source mode is the existing causal Ricker source spectrum from `seismoelectric_offset_liu2018_spectral.py`, inserted as `A(omega)` in the Schakel 2011 pressure-source integral. Its default frequency band starts near zero and extends to 2.5 times the 500 kHz source frequency to reduce noncausal-looking band-pass side lobes. The optional legacy `fig4_digitized` mode uses a visual approximation to the Schakel 2011 laboratory Fig. 4 source and evaluates it by direct causal Fourier integration with `exp(-i omega tau)`, not by periodic FFT interpolation.
+- The default RT-SE source mode treats the causal Ricker wavelet as a physical pressure history, `p(t)=p0*Ricker(t)`, computes `P(omega)=integral p(t) exp(-i omega t) dt` in `Pa*s`, and inserts `A(omega)=P(omega)*R_ref` into the Schakel 2011 pressure-source integral. The default `p0` is `source_pressure_amp=50000 Pa`; use `--source-pressure-amp 1` for a unit-pressure response. The default `R_ref` is `abs(z_s)` unless `source_reference_distance_m` is explicitly set. The optional legacy `fig4_digitized` mode uses a visual approximation to the Schakel 2011 laboratory Fig. 4 source and evaluates it by direct causal Fourier integration with `exp(-i omega tau)`, not by periodic FFT interpolation.
 - Schakel 2011 Sommerfeld integration is evaluated with a finite piston term `J1(k a sin(theta))`, a real-angle integral over `0..pi/2`, and the evanescent gamma branch.
 - The interface conversion coefficient is computed from the Schakel and Smeulders (2010) Appendix B boundary-value solver and converted to the Schakel 2011 pressure-normalized coefficient as `R_E / (rho_fl * omega**2)`.
 - Time synthesis uses positive frequencies and `exp(i omega t)`, consistent with the Schakel convention.
+- For visualization, waveform peak amplitudes are reported as electric potential in mV under the physical pressure-source calibration above. The saved waveform arrays and timeseries CSV keep electric potential in V; the PNG waveform-peak plots apply a `1e3` display factor.
 - The default waveform output window starts at 0 s and marks T0, the acoustic arrival time at the interface, so the saved interface-EM gather displays the full pre-interface-arrival interval without receiver-side trace gating.
 - The `z=0` receiver row is not a Schakel boundary-condition solution. It is a plot-only linear interpolation between the nearest fluid-side and porous-side receiver rows. Peak amplitudes, peak locations, T0 leakage summaries, and convergence diagnostics exclude this row from quantitative statistics.
 - The snapshot run writes `waveform_convergence_diagnostics.csv` for the requested `Nomega=Ntheta` levels (default `48,96,192`). It reports side-specific peak time, peak amplitude, signed polarity, and changes from the previous resolution level so manuscript figures can document numerical convergence.
@@ -1236,7 +1319,7 @@ def run_simulation(
     outdir: str | Path,
     snapshot_target_phi: float = 0.75,
     n_frequencies: int | None = None,
-    n_theta: int = 48,
+    n_theta: int = 192,
     peak_n_frequencies: int | None = None,
     peak_n_theta: int = 32,
     integration_method: str = "fixed",
@@ -1335,6 +1418,8 @@ def run_simulation(
         "plot_time_min_us": cfg.plot_time_min_us,
         "plot_time_max_us": cfg.plot_time_max_us,
         "source_mode": cfg.schakel_source_mode,
+        "source_pressure_amp_Pa": float(cfg.source_pressure_amp),
+        "source_reference_distance_effective_m": float(schakel_source_reference_distance_m(cfg)),
         "include_porous_pf_coseismic": bool(cfg.include_porous_pf_coseismic),
         "convergence_levels_Nomega_Ntheta": ",".join(str(v) for v in convergence_values),
         "convergence_diagnostics_written": bool(not convergence_diag.empty),
@@ -1365,6 +1450,10 @@ def _apply_common_overrides(args: argparse.Namespace, cfg: ZeroOffsetSchakelConf
         cfg.plot_time_max_us = args.plot_time_max_us
     if args.f0 is not None:
         cfg.f0 = args.f0
+    if getattr(args, "source_pressure_amp", None) is not None:
+        cfg.source_pressure_amp = args.source_pressure_amp
+    if getattr(args, "source_reference_distance_mm", None) is not None:
+        cfg.source_reference_distance_m = args.source_reference_distance_mm * 1.0e-3
     if args.upper_fluid_conductivity_mode is not None:
         cfg.upper_fluid_conductivity_mode = args.upper_fluid_conductivity_mode
     if args.transducer_radius_mm is not None:
@@ -1389,7 +1478,7 @@ def main() -> None:
     parser.add_argument("--outdir", type=str, default="se_results_zerooffset_schakel2011")
     parser.add_argument("--snapshot-target-phi", type=float, default=0.75)
     parser.add_argument("--n-frequencies", type=int, default=None)
-    parser.add_argument("--n-theta", type=int, default=48)
+    parser.add_argument("--n-theta", type=int, default=192)
     parser.add_argument("--peak-n-frequencies", type=int, default=None)
     parser.add_argument("--peak-n-theta", type=int, default=32)
     parser.add_argument("--integration-method", choices=["fixed"], default="fixed")
@@ -1402,6 +1491,8 @@ def main() -> None:
     parser.add_argument("--plot-time-min-us", type=float, default=None, help="Waveform gather x-axis minimum, in microseconds.")
     parser.add_argument("--plot-time-max-us", type=float, default=None, help="Waveform gather x-axis maximum, in microseconds.")
     parser.add_argument("--f0", type=float, default=None)
+    parser.add_argument("--source-pressure-amp", type=float, default=None, help="Peak pressure p0 of the physical causal Ricker source, in Pa.")
+    parser.add_argument("--source-reference-distance-mm", type=float, default=None, help="Reference distance R_ref for A(omega)=P(omega)*R_ref, in mm; default uses z_s.")
     parser.add_argument("--upper-fluid-conductivity-mode", choices=["constant", "dynamic_pore_fluid"], default=None)
     parser.add_argument("--transducer-radius-mm", type=float, default=None)
     parser.add_argument("--schakel-bandpass-low-hz", type=float, default=None)

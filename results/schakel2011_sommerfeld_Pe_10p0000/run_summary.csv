@@ -1,0 +1,36 @@
+,0
+input,C:\Users\imgw\Documents\Codex\RTSPHEM-main\Data\T2single-RI\dissolution_results-Da_0.0369_Pe_10.0000_L_0.0010_lengthXAxis_0.060000_lengthYAxis_0.040000_random\global_evolution.xlsx
+outdir,C:\Users\imgw\Documents\Codex\震电模拟\results\schakel2011_sommerfeld_Pe_10p0000
+snapshot_index,13
+snapshot_Time_s,41.4
+snapshot_Porosity,0.75355
+snapshot_Amax,0.0008477186893619963
+T0_us,67.11560552140244
+waveform_mode,schakel2011_sommerfeld_zerooffset
+offset_D_m,0.0
+pre_T0_max_abs,0.00018944226733746082
+post_T0_max_abs,0.0008477186893619963
+noninterface_pre_to_post_abs_ratio,0.22347303381978925
+noninterface_pre_T0_max_time_before_T0_us,0.5267815013857687
+noninterface_main_peak_after_T0,True
+interface_receiver_value_policy,z=0 row is plot-only linear interpolation between nearest fluid and porous receivers
+quantitative_peak_statistics_exclude_interface,True
+RE_peak_distance_from_interface_mm,0.9999999999999836
+TE_peak_distance_from_interface_mm,1.0000000000000182
+schakel_n_frequencies,192
+schakel_n_theta,48
+peak_schakel_n_frequencies,96
+peak_schakel_n_theta,32
+schakel_bandpass_low_hz,1.0
+schakel_bandpass_high_hz,1250000.0
+schakel_gamma_max,8.0
+plot_time_min_us,0
+plot_time_max_us,160
+source_mode,causal_ricker
+include_porous_pf_coseismic,False
+convergence_levels_Nomega_Ntheta,"48,96,192"
+convergence_diagnostics_written,True
+interface_em_polarity_pairs_checked,4
+interface_em_polarity_pairs_reversed,0
+interface_em_mean_arrival_after_T0_us,4.143777297613391
+porous_side_waveform_policy,front_interface_TM_term_from_JAP_Eq8; Pf coseismic optional; no back-interface slab multiples

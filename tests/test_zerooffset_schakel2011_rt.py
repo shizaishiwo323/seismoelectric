@@ -173,6 +173,13 @@ class ZeroOffsetSchakel2011RTTest(unittest.TestCase):
         self.assertEqual(summary["T_E"]["peak_abs"], 5.0)
         self.assertEqual(summary["T_E"]["receiver_z_m"], 0.002)
 
+    def test_waveform_plot_values_are_millivolts(self):
+        values = np.array([0.001, -0.0025, 0.0])
+
+        values_mv = model.electric_potential_to_millivolts(values)
+
+        np.testing.assert_allclose(values_mv, np.array([1.0, -2.5, 0.0]))
+
     def test_pipeline_writes_same_named_result_types(self):
         with tempfile.TemporaryDirectory() as tmp:
             tmpdir = Path(tmp)

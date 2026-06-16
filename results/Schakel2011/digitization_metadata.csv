@@ -1,0 +1,7 @@
+figure,page_image,crop,axis_calibration,method
+Fig4,source_pages/geophysics_page-4.png,left panel pressure/spectrum read visually from page image,time 0-3.6 us; pressure about -60 to 60 kPa; frequency 0-1 MHz; spectrum 0-1.5 MPa,manual page-image digitization into smooth trace because original pressure record is unavailable
+Fig5,source_pages/fig5_crop_full.png,"source_pages/geophysics_page-4.png pixels x=280:1240, y=2185:3045","plot frame x=46-938 px maps approximately to r=-3.9..3.9 cm; y ticks 641,526,412,298,183,68 px map to 0,10,20,30,40,50 kPa",asterisk centers digitized from page image; dashed curve generated from Eq. (1)-(2) source directivity
+Fig6,source_pages/geophysics_page-5.png,left-column modeled electric waveform and spectrum,time 0.05-0.15 ms; frequency 0-1 MHz; waveform about +/-1 mV in the printed figure,"published Fig. 6 curve digitized from page image and compared with Eq. (5) output for C=1e-3 M NaCl at r=0, z=-0.3 cm; AC is not applied"
+Fig11a,source_pages/geophysics_page-6.png,lower-left upper panel in page image,"z=-4.5..0 cm, Vpp=0..0.40 mV","symbol centers digitized from published figure for 0-1, 18-24, and 40-41 hour series"
+Fig11b,source_pages/geophysics_page-6.png,lower-left lower panel in page image,"r=-2.5..2.5 cm, Vpp=0..0.24 mV",symbol centers digitized from published figure for 0-1 and 18-24 hour series
+Fig11 present model,source_pages/geophysics_page-6.png,lower-left panels in page image,same as Fig11a and Fig11b,published dashed 'Present model' curve digitized separately from recomputed model; not used for fitting

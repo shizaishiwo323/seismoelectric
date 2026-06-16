@@ -1,0 +1,7 @@
+position,r_m,z_m,medium
+1,0.0,-0.023,fluid
+2,0.0,-0.018,fluid
+3,0.0,-0.013,fluid
+4,0.0,-0.008,fluid
+5,0.0,-0.003,fluid
+6,0.0,0.01,porous

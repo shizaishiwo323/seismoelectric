@@ -1,0 +1,2 @@
+figure,source_pdf,rendered_page,source_crop,rendering,time_axis_ms,predicted_axis_ylim_mv,observed_axis_ylim_mv,method
+Schakel_2011_JAP_Fig2,C:\Users\imgw\Documents\Codex\震电模拟\uploaded_files\01_classical_theory_foundational_papers\02_Schakel_2011_JAP_laboratory_theory.pdf,source_pages/jap_page-3.png,jap_fig2_source_crop.png,pdftoppm page 3 at 300 dpi,0.055..0.145,0.5,0.2,"Raster trace extraction after removing long axis/tick lines; weak unresolved columns are set to the zero baseline. The digitized data are used only for visual correspondence checks, not for model tuning."

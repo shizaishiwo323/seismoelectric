@@ -1,0 +1,6 @@
+receiver_z_m,receiver_r_m,n_theta,n_frequencies,model_vpp_mv,note
+-0.013,0.0,90,41,0.23509689544101497,Uses absolute waveform time; Eq. (5) already includes source-to-interface propagation phase.
+-0.013,0.0,90,61,0.23515894478452803,Uses absolute waveform time; Eq. (5) already includes source-to-interface propagation phase.
+-0.013,0.0,90,81,0.2352728212680723,Uses absolute waveform time; Eq. (5) already includes source-to-interface propagation phase.
+-0.013,0.0,90,121,0.2352302656390714,Uses absolute waveform time; Eq. (5) already includes source-to-interface propagation phase.
+-0.013,0.0,90,161,0.23530042874472618,Uses absolute waveform time; Eq. (5) already includes source-to-interface propagation phase.

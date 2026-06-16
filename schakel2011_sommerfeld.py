@@ -27,7 +27,7 @@ import math
 from dataclasses import asdict, dataclass
 from functools import lru_cache
 from pathlib import Path
-from typing import Dict, Iterable, Tuple
+from typing import Callable, Dict, Iterable, Tuple
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -76,7 +76,7 @@ class ZeroOffsetSchakelConfig:
     # Source and receiver geometry used by the waveform gather.
     # z_s is the positive source-interface distance in the upper fluid; the
     # Sommerfeld integral converts it to the signed source coordinate -z_s.
-    z_s: float = 15.0e-3
+    z_s: float = 100.0e-3
 
     # Receiver/electrode line positions relative to the interface.  Negative
     # values are fluid-side receivers, positive values are porous-side receivers.
@@ -165,6 +165,7 @@ class ZeroOffsetSchakelConfig:
     include_porous_pf_coseismic: bool = False
     schakel_gamma_max: float = 8.0
     schakel_include_evanescent: bool = True
+    convergence_levels: Tuple[int, ...] = (48, 96, 192)
 
 
 def _j0(x):
@@ -530,6 +531,172 @@ def synthesize_waveforms_schakel2011(
     return z_receivers, t, traces
 
 
+def interface_receiver_mask(z: np.ndarray) -> np.ndarray:
+    """Return the receiver row used only as the plotted interface interpolation."""
+    return np.isclose(np.asarray(z, dtype=float), 0.0, atol=1.0e-12, rtol=0.0)
+
+
+def quantitative_receiver_mask(z: np.ndarray) -> np.ndarray:
+    """Return receivers that represent physical fluid/porous samples, excluding z=0."""
+    return ~interface_receiver_mask(z)
+
+
+def _masked_peak_record(z: np.ndarray, t: np.ndarray, u: np.ndarray, mask: np.ndarray) -> Dict[str, float]:
+    z = np.asarray(z, dtype=float)
+    t = np.asarray(t, dtype=float)
+    u = np.asarray(u, dtype=float)
+    mask = np.asarray(mask, dtype=bool)
+    if not np.any(mask):
+        return {
+            "peak_abs": np.nan,
+            "peak_signed": np.nan,
+            "peak_signed_polarity": np.nan,
+            "peak_time_s": np.nan,
+            "peak_time_us": np.nan,
+            "peak_z_m": np.nan,
+            "peak_z_mm": np.nan,
+        }
+    sub = u[mask, :]
+    local_idx = np.unravel_index(int(np.nanargmax(np.abs(sub))), sub.shape)
+    z_eval = z[mask]
+    peak_signed = float(sub[local_idx])
+    peak_time = float(t[local_idx[1]])
+    peak_z = float(z_eval[local_idx[0]])
+    return {
+        "peak_abs": abs(peak_signed),
+        "peak_signed": peak_signed,
+        "peak_signed_polarity": float(np.sign(peak_signed)),
+        "peak_time_s": peak_time,
+        "peak_time_us": peak_time * 1.0e6,
+        "peak_z_m": peak_z,
+        "peak_z_mm": peak_z * 1.0e3,
+    }
+
+
+def waveform_peak_summary_schakel2011(z: np.ndarray, t: np.ndarray, u: np.ndarray) -> Dict[str, Dict[str, float]]:
+    """Return peak metrics with the interpolated z=0 row excluded from all quantitative summaries."""
+    z_arr = np.asarray(z, dtype=float)
+    return {
+        "all": _masked_peak_record(z_arr, t, u, quantitative_receiver_mask(z_arr)),
+        "R_E": _masked_peak_record(z_arr, t, u, z_arr < 0.0),
+        "T_E": _masked_peak_record(z_arr, t, u, z_arr > 0.0),
+    }
+
+
+def waveform_spatial_peak_diagnostics_schakel2011(
+    z: np.ndarray,
+    t: np.ndarray,
+    u: np.ndarray,
+    cfg: ZeroOffsetSchakelConfig,
+) -> pd.DataFrame:
+    """Return per-receiver peak diagnostics and mark z=0 as plot-only interpolation."""
+    diag = base.waveform_spatial_peak_diagnostics(z, t, u, cfg.offset_D)
+    include = diag["side"] != "interface"
+    diag["include_in_quantitative_summary"] = include
+    diag["interface_value_policy"] = np.where(
+        include,
+        "physical_receiver_sample",
+        "plot_only_linear_interpolation",
+    )
+    return diag
+
+
+def save_waveform_spatial_peak_diagnostics_schakel2011(
+    z: np.ndarray,
+    t: np.ndarray,
+    u: np.ndarray,
+    cfg: ZeroOffsetSchakelConfig,
+    outdir: Path,
+    name: str = "waveform_spatial_peak_diagnostics",
+) -> pd.DataFrame:
+    """Save Schakel peak diagnostics while excluding z=0 from plotted quantitative trends."""
+    diag = waveform_spatial_peak_diagnostics_schakel2011(z, t, u, cfg)
+    diag.to_csv(outdir / f"{name}.csv", index=False)
+
+    fig, ax = plt.subplots(figsize=(7.6, 4.8))
+    for side, color, label in [("R_E", "tab:blue", r"$R_E$ side"), ("T_E", "tab:red", r"$T_E$ side")]:
+        part = diag[(diag["side"] == side) & (diag["include_in_quantitative_summary"])]
+        if part.empty:
+            continue
+        vals = part["peak_abs"].to_numpy(float)
+        vmax = np.nanmax(vals)
+        vals_norm = vals / vmax if np.isfinite(vmax) and vmax > 0 else vals
+        ax.plot(
+            part["distance_from_interface_mm"],
+            vals_norm,
+            marker=".",
+            linestyle="-",
+            linewidth=1.0,
+            markersize=3.0,
+            color=color,
+            label=label,
+        )
+    ax.axvline(0.0, color="0.35", linestyle=":", linewidth=1.0, label="interface (excluded)")
+    ax.set_xlabel("Distance from interface (mm)")
+    ax.set_ylabel("Side-normalized peak amplitude")
+    ax.set_title("Spatial peak audit of Schakel 2011 waveform gather")
+    ax.grid(True, alpha=0.25)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(outdir / f"{name}.png", dpi=300)
+    plt.close(fig)
+    return diag
+
+
+def waveform_convergence_diagnostics(
+    row: pd.Series,
+    cfg: ZeroOffsetSchakelConfig,
+    levels: Iterable[int] = (48, 96, 192),
+    integration_method: str = "fixed",
+    synthesize_func: Callable[..., Tuple[np.ndarray, np.ndarray, np.ndarray]] = synthesize_waveforms_schakel2011,
+) -> pd.DataFrame:
+    """Check peak-time, peak-amplitude, and polarity stability as Nomega=Ntheta increases."""
+    records = []
+    for level in levels:
+        n_level = int(level)
+        if n_level < 2:
+            raise ValueError("convergence levels must be >= 2")
+        z, t, u = synthesize_func(
+            row,
+            cfg,
+            n_frequencies=n_level,
+            n_theta=n_level,
+            integration_method=integration_method,
+        )
+        summary = waveform_peak_summary_schakel2011(z, t, u)
+        for side, metrics in summary.items():
+            records.append(
+                {
+                    "n_frequencies": n_level,
+                    "n_theta": n_level,
+                    "side": side,
+                    "quantitative_excludes_interface": True,
+                    **metrics,
+                }
+            )
+
+    out = pd.DataFrame(records)
+    if out.empty:
+        return out
+    out = out.sort_values(["side", "n_frequencies", "n_theta"]).reset_index(drop=True)
+    out["peak_abs_relative_change_from_previous"] = np.nan
+    out["peak_time_shift_from_previous_us"] = np.nan
+    out["peak_polarity_changed_from_previous"] = False
+    for side in out["side"].unique():
+        idx = out.index[out["side"] == side].to_numpy()
+        prev_abs = out.loc[idx, "peak_abs"].shift(1)
+        prev_time = out.loc[idx, "peak_time_us"].shift(1)
+        prev_pol = out.loc[idx, "peak_signed_polarity"].shift(1)
+        out.loc[idx, "peak_abs_relative_change_from_previous"] = (
+            (out.loc[idx, "peak_abs"] - prev_abs) / prev_abs.replace(0.0, np.nan)
+        )
+        out.loc[idx, "peak_time_shift_from_previous_us"] = out.loc[idx, "peak_time_us"] - prev_time
+        out.loc[idx, "peak_polarity_changed_from_previous"] = (
+            np.isfinite(prev_pol) & (out.loc[idx, "peak_signed_polarity"] != prev_pol)
+        )
+    return out
+
+
 def compute_peak_amplitude_schakel2011(
     ts: pd.DataFrame,
     df_raw: pd.DataFrame,
@@ -550,18 +717,17 @@ def compute_peak_amplitude_schakel2011(
             vals_te.append(np.nan)
             continue
         try:
-            z, _, u = synthesize_waveforms_schakel2011(
+            z, t_wave, u = synthesize_waveforms_schakel2011(
                 row,
                 cfg,
                 n_frequencies=n_frequencies,
                 n_theta=n_theta,
                 integration_method=integration_method,
             )
-            vals_all.append(float(np.nanmax(np.abs(u))))
-            re_mask = z <= 0.0
-            te_mask = z > 0.0
-            vals_re.append(float(np.nanmax(np.abs(u[re_mask, :]))) if np.any(re_mask) else np.nan)
-            vals_te.append(float(np.nanmax(np.abs(u[te_mask, :]))) if np.any(te_mask) else np.nan)
+            summary = waveform_peak_summary_schakel2011(z, t_wave, u)
+            vals_all.append(float(summary["all"]["peak_abs"]))
+            vals_re.append(float(summary["R_E"]["peak_abs"]))
+            vals_te.append(float(summary["T_E"]["peak_abs"]))
         except Exception:
             vals_all.append(np.nan)
             vals_re.append(np.nan)
@@ -644,6 +810,12 @@ def save_parameter_table(cfg: ZeroOffsetSchakelConfig, outdir: Path) -> None:
                 "value": cfg.schakel_include_evanescent,
                 "unit": "-",
             },
+            {
+                "parameter": "convergence_levels",
+                "meaning": "Default Nomega=Ntheta levels for waveform peak-time/amplitude/polarity convergence diagnostics",
+                "value": ",".join(str(v) for v in cfg.convergence_levels),
+                "unit": "-",
+            },
         ]
     )
     pd.concat([df, extra], ignore_index=True).to_csv(path, index=False)
@@ -662,6 +834,8 @@ Implemented model:
 - The interface conversion coefficient is computed from the Schakel and Smeulders (2010) Appendix B boundary-value solver and converted to the Schakel 2011 pressure-normalized coefficient as `R_E / (rho_fl * omega**2)`.
 - Time synthesis uses positive frequencies and `exp(i omega t)`, consistent with the Schakel convention.
 - The default waveform output window starts at 0 s and marks T0, the acoustic arrival time at the interface, so the saved interface-EM gather displays the full pre-interface-arrival interval without receiver-side trace gating.
+- The `z=0` receiver row is not a Schakel boundary-condition solution. It is a plot-only linear interpolation between the nearest fluid-side and porous-side receiver rows. Peak amplitudes, peak locations, T0 leakage summaries, and convergence diagnostics exclude this row from quantitative statistics.
+- The snapshot run writes `waveform_convergence_diagnostics.csv` for the requested `Nomega=Ntheta` levels (default `48,96,192`). It reports side-specific peak time, peak amplitude, signed polarity, and changes from the previous resolution level so manuscript figures can document numerical convergence.
 
 Important limitation:
 
@@ -783,6 +957,7 @@ def run_simulation(
     peak_n_frequencies: int | None = None,
     peak_n_theta: int = 32,
     integration_method: str = "fixed",
+    convergence_levels: Iterable[int] | None = None,
     cfg: ZeroOffsetSchakelConfig | None = None,
 ) -> Path:
     cfg = ZeroOffsetSchakelConfig() if cfg is None else cfg
@@ -816,15 +991,17 @@ def run_simulation(
     )
     plot_name = "waveform_snapshot_schakel2011"
     base.save_waveform_arrays(z, t, u, outdir, plot_name)
-    diag = base.save_waveform_spatial_peak_diagnostics(z, t, u, cfg, outdir)
+    diag = save_waveform_spatial_peak_diagnostics_schakel2011(z, t, u, cfg, outdir)
     polarity_diag = interface_em_polarity_diagnostics(z, t, u, cfg)
     polarity_diag.to_csv(outdir / "waveform_interface_em_polarity_diagnostics.csv", index=False)
     causality_diag = t0_causality_diagnostics(z, t, u, cfg)
     causality_diag.to_csv(outdir / "waveform_t0_causality_diagnostics.csv", index=False)
-    amax_snapshot = base.plot_waveform_gather(z, t, u, row, cfg, outdir, plot_name)
+    base.plot_waveform_gather(z, t, u, row, cfg, outdir, plot_name)
+    peak_summary = waveform_peak_summary_schakel2011(z, t, u)
+    amax_snapshot = float(peak_summary["all"]["peak_abs"])
 
-    re_diag = diag[diag["side"].isin(["R_E", "interface"])]
-    te_diag = diag[diag["side"] == "T_E"]
+    re_diag = diag[(diag["side"] == "R_E") & (diag["include_in_quantitative_summary"])]
+    te_diag = diag[(diag["side"] == "T_E") & (diag["include_in_quantitative_summary"])]
     re_peak_distance_mm = (
         float(re_diag.loc[re_diag["peak_abs"].idxmax(), "distance_from_interface_mm"]) if not re_diag.empty else np.nan
     )
@@ -832,6 +1009,19 @@ def run_simulation(
         float(te_diag.loc[te_diag["peak_abs"].idxmax(), "distance_from_interface_mm"]) if not te_diag.empty else np.nan
     )
     T0 = cfg.z_s / math.sqrt(cfg.K_fl / cfg.rho_fl)
+    qmask = quantitative_receiver_mask(z)
+    u_quant = u[qmask, :]
+    convergence_values = tuple(cfg.convergence_levels if convergence_levels is None else convergence_levels)
+    if convergence_values:
+        convergence_diag = waveform_convergence_diagnostics(
+            row,
+            cfg,
+            levels=convergence_values,
+            integration_method=integration_method,
+        )
+        convergence_diag.to_csv(outdir / "waveform_convergence_diagnostics.csv", index=False)
+    else:
+        convergence_diag = pd.DataFrame()
     summary = {
         "input": str(input_path),
         "outdir": str(outdir),
@@ -842,11 +1032,13 @@ def run_simulation(
         "T0_us": T0 * 1.0e6,
         "waveform_mode": "schakel2011_sommerfeld_zerooffset",
         "offset_D_m": float(cfg.offset_D),
-        "pre_T0_max_abs": float(np.nanmax(np.abs(u[:, t < T0]))) if np.any(t < T0) else 0.0,
-        "post_T0_max_abs": float(np.nanmax(np.abs(u[:, t >= T0]))) if np.any(t >= T0) else np.nan,
+        "pre_T0_max_abs": float(np.nanmax(np.abs(u_quant[:, t < T0]))) if np.any(qmask) and np.any(t < T0) else 0.0,
+        "post_T0_max_abs": float(np.nanmax(np.abs(u_quant[:, t >= T0]))) if np.any(qmask) and np.any(t >= T0) else np.nan,
         "noninterface_pre_to_post_abs_ratio": float(causality_diag["pre_to_post_abs_ratio"].iloc[0]) if not causality_diag.empty else np.nan,
         "noninterface_pre_T0_max_time_before_T0_us": float(causality_diag["pre_T0_max_time_before_T0_us"].iloc[0]) if not causality_diag.empty else np.nan,
         "noninterface_main_peak_after_T0": bool(causality_diag["main_peak_after_T0"].iloc[0]) if not causality_diag.empty else False,
+        "interface_receiver_value_policy": "z=0 row is plot-only linear interpolation between nearest fluid and porous receivers",
+        "quantitative_peak_statistics_exclude_interface": True,
         "RE_peak_distance_from_interface_mm": re_peak_distance_mm,
         "TE_peak_distance_from_interface_mm": te_peak_distance_mm,
         "schakel_n_frequencies": int(n_frequencies or cfg.spectral_n_omega),
@@ -858,6 +1050,8 @@ def run_simulation(
         "schakel_gamma_max": float(cfg.schakel_gamma_max),
         "source_mode": cfg.schakel_source_mode,
         "include_porous_pf_coseismic": bool(cfg.include_porous_pf_coseismic),
+        "convergence_levels_Nomega_Ntheta": ",".join(str(v) for v in convergence_values),
+        "convergence_diagnostics_written": bool(not convergence_diag.empty),
         "interface_em_polarity_pairs_checked": int(len(polarity_diag)),
         "interface_em_polarity_pairs_reversed": int(polarity_diag["polarity_reversed"].sum()) if not polarity_diag.empty else 0,
         "interface_em_mean_arrival_after_T0_us": float(polarity_diag["time_after_T0_us"].mean()) if not polarity_diag.empty else np.nan,
@@ -893,6 +1087,10 @@ def _apply_common_overrides(args: argparse.Namespace, cfg: ZeroOffsetSchakelConf
         cfg.schakel_gamma_max = args.schakel_gamma_max
     if args.source_mode is not None:
         cfg.schakel_source_mode = args.source_mode
+    if getattr(args, "convergence_levels", None) is not None:
+        cfg.convergence_levels = tuple(
+            int(part.strip()) for part in args.convergence_levels.split(",") if part.strip()
+        )
 
 
 def main() -> None:
@@ -918,6 +1116,17 @@ def main() -> None:
     parser.add_argument("--schakel-bandpass-high-hz", type=float, default=None)
     parser.add_argument("--schakel-gamma-max", type=float, default=None)
     parser.add_argument("--source-mode", choices=["causal_ricker", "fig4_digitized"], default=None)
+    parser.add_argument(
+        "--convergence-levels",
+        type=str,
+        default=None,
+        help="Comma-separated Nomega=Ntheta levels for snapshot convergence diagnostics, e.g. 48,96,192.",
+    )
+    parser.add_argument(
+        "--skip-convergence-diagnostics",
+        action="store_true",
+        help="Skip the snapshot Nomega=Ntheta convergence diagnostic for fast exploratory runs.",
+    )
     args = parser.parse_args()
 
     cfg = ZeroOffsetSchakelConfig()
@@ -934,6 +1143,7 @@ def main() -> None:
         peak_n_frequencies=args.peak_n_frequencies,
         peak_n_theta=args.peak_n_theta,
         integration_method=args.integration_method,
+        convergence_levels=() if args.skip_convergence_diagnostics else cfg.convergence_levels,
         cfg=cfg,
     )
     print("Done. Outputs written to:", outdir)

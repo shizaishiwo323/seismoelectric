@@ -4,15 +4,17 @@ outdir,se_results_zerooffset_schakel2011
 snapshot_index,24
 snapshot_Time_s,5769.2
 snapshot_Porosity,0.75115
-snapshot_Amax,1.6911214354943065
-T0_us,10.067340828210364
+snapshot_Amax,0.661080749175312
+T0_us,67.11560552140244
 waveform_mode,schakel2011_sommerfeld_zerooffset
 offset_D_m,0.0
-pre_T0_max_abs,0.3059286613044156
-post_T0_max_abs,1.6911214354943065
-noninterface_pre_to_post_abs_ratio,0.18090283458265913
-noninterface_pre_T0_max_time_before_T0_us,10.067340828210364
-noninterface_main_peak_after_T0,True
+pre_T0_max_abs,0.661080749175312
+post_T0_max_abs,0.6604326837504103
+noninterface_pre_to_post_abs_ratio,1.0009812740054316
+noninterface_pre_T0_max_time_before_T0_us,33.39591192451657
+noninterface_main_peak_after_T0,False
+interface_receiver_value_policy,z=0 row is plot-only linear interpolation between nearest fluid and porous receivers
+quantitative_peak_statistics_exclude_interface,True
 RE_peak_distance_from_interface_mm,0.9999999999999836
 TE_peak_distance_from_interface_mm,1.0000000000000182
 schakel_n_frequencies,48
@@ -24,7 +26,9 @@ schakel_bandpass_high_hz,1250000.0
 schakel_gamma_max,8.0
 source_mode,causal_ricker
 include_porous_pf_coseismic,False
+convergence_levels_Nomega_Ntheta,"48,96,192"
+convergence_diagnostics_written,True
 interface_em_polarity_pairs_checked,4
 interface_em_polarity_pairs_reversed,4
-interface_em_mean_arrival_after_T0_us,4.299907239607911
+interface_em_mean_arrival_after_T0_us,4.1571784181205365
 porous_side_waveform_policy,front_interface_TM_term_from_JAP_Eq8; Pf coseismic optional; no back-interface slab multiples

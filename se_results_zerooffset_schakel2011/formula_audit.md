@@ -10,6 +10,8 @@ Implemented model:
 - The interface conversion coefficient is computed from the Schakel and Smeulders (2010) Appendix B boundary-value solver and converted to the Schakel 2011 pressure-normalized coefficient as `R_E / (rho_fl * omega**2)`.
 - Time synthesis uses positive frequencies and `exp(i omega t)`, consistent with the Schakel convention.
 - The default waveform output window starts at 0 s and marks T0, the acoustic arrival time at the interface, so the saved interface-EM gather displays the full pre-interface-arrival interval without receiver-side trace gating.
+- The `z=0` receiver row is not a Schakel boundary-condition solution. It is a plot-only linear interpolation between the nearest fluid-side and porous-side receiver rows. Peak amplitudes, peak locations, T0 leakage summaries, and convergence diagnostics exclude this row from quantitative statistics.
+- The snapshot run writes `waveform_convergence_diagnostics.csv` for the requested `Nomega=Ntheta` levels (default `48,96,192`). It reports side-specific peak time, peak amplitude, signed polarity, and changes from the previous resolution level so manuscript figures can document numerical convergence.
 
 Important limitation:
 

@@ -1,0 +1,62 @@
+[
+  {
+    "key": "title",
+    "source_sections": "title, 1",
+    "title": "总览：这段代码在解决什么"
+  },
+  {
+    "key": "two_times",
+    "source_sections": "1, 2, 10",
+    "title": "两条时间轴"
+  },
+  {
+    "key": "rt_inputs",
+    "source_sections": "3",
+    "title": "反应输运参数入口"
+  },
+  {
+    "key": "dynamic_bridge",
+    "source_sections": "4",
+    "title": "动态电动桥梁"
+  },
+  {
+    "key": "elastic_modes",
+    "source_sections": "5",
+    "title": "孔弹波模"
+  },
+  {
+    "key": "interface_matrix",
+    "source_sections": "6",
+    "title": "六个边界条件"
+  },
+  {
+    "key": "coefficients",
+    "source_sections": "6, 7",
+    "title": "从 2010 系数到 2011 系数"
+  },
+  {
+    "key": "source",
+    "source_sections": "8.1, 8.2",
+    "title": "声源谱和圆形活塞方向性"
+  },
+  {
+    "key": "sommerfeld",
+    "source_sections": "8.3",
+    "title": "Sommerfeld 积分"
+  },
+  {
+    "key": "porous_side",
+    "source_sections": "9",
+    "title": "多孔侧为什么是简化模型"
+  },
+  {
+    "key": "time_domain",
+    "source_sections": "10, 11, 12",
+    "title": "回到时间域与诊断"
+  },
+  {
+    "key": "summary",
+    "source_sections": "13, 14, 15",
+    "title": "论文写作中的一句话机制链"
+  }
+]

@@ -1,0 +1,260 @@
+from __future__ import annotations
+
+import json
+import subprocess
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[2]
+WORK = ROOT / "tmp" / "schakel2011_code_video"
+ASSETS = ROOT / "hyperframes" / "schakel2011_code_video" / "assets"
+ASSETS.mkdir(parents=True, exist_ok=True)
+
+VOICE = "zh-CN-XiaoxiaoNeural"
+RATE = "+0%"
+
+
+SEGMENTS = [
+    {
+        "key": "title",
+        "pause": 1.0,
+        "text": "这段视频讲清楚一个看起来有点反直觉的结果。溶蚀让孔隙率和渗透率升高，水力连通性更强，但在这个 Schakel 二零一一年零偏移正演里，interface EM response 的峰值反而显著降低。我们的主线不是背公式，而是看每个公式怎样把反应输运，界面电流不平衡，和最终波形连成一条证据链。",
+        "coverage": ["研究主线", "GRL-style core story", "峰值随溶蚀降低"],
+    },
+    {
+        "key": "story",
+        "pause": 1.0,
+        "text": "按 GRL 的讲故事方式，主角只能有一个。这里的主角是界面电磁响应，也就是声波撞到流体和多孔介质界面时，因为两侧电动耦合和电导结构不同，界面电流不能完全平衡，于是辐射出一个电磁信号。孔隙率、渗透率、曲折度、氢离子浓度、动态耦合系数和 Sommerfeld 积分，都只是帮助解释这个信号为什么变弱的配角。",
+        "coverage": ["main character", "supporting actors", "interface current imbalance"],
+    },
+    {
+        "key": "source_map",
+        "pause": 1.2,
+        "text": "先看代码的来源地图。Schakel 和 Smeulders 二零一零年 JASA 论文提供多孔介质中的动态渗透率、电动耦合、动态电导率、孔弹波模，以及流体到多孔介质界面的六阶边界系统。Schakel 等二零一一年 JAP 和 Geophysics 论文提供实验声源、圆形活塞方向性、Sommerfeld 积分和压力归一化。Liu 二零一八年提供有限偏移 VSEP 的频率波数积分背景，但当前这个脚本强制 offset 等于零，主波形核心已经换成 Schakel 二零一一年的 Sommerfeld 形式。",
+        "coverage": ["paper-source map", "Schakel 2010", "Schakel 2011 JAP/Geophysics", "Liu 2018 contrast"],
+    },
+    {
+        "key": "time_phase",
+        "pause": 1.1,
+        "text": "接下来先统一坐标和时间。溶蚀时间 Time_s 是慢时间，用来逐个更新材料参数；波形时间 t 是微秒级的传播时间，用来做频域到时域的反变换。Schakel 系列采用时间项 exp i omega t，空间项 exp 负 i k 点 x。界面在 z 等于零，上方流体侧是 z 小于零，下方多孔介质侧是 z 大于零。复垂向波数的平方根分支要保证波沿传播方向衰减。",
+        "coverage": ["dissolution time vs waveform time", "phase convention", "z coordinate", "branch decay"],
+    },
+    {
+        "key": "rt_inputs",
+        "pause": 1.2,
+        "text": "第一组公式是反应输运到震电模型的入口。代码读取孔隙率 phi，渗透率 k 零，曲折度 alpha infinity，以及氢离子浓度 c H。渗透率从毫达西换成平方米。氢离子浓度先换成摩尔每升，并用十的负七次方作为 pH 下限。随后用 pH 等于负 log 十 c H，和 Schakel 与 Smeulders 二零一零年 Appendix A 的 zeta 电位公式，把流体化学映射成界面电动耦合的驱动力。",
+        "coverage": ["RT inputs", "permeability unit conversion", "pH", "zeta Eq A5"],
+    },
+    {
+        "key": "dynamic",
+        "pause": 1.3,
+        "text": "第二组公式来自 Schakel 与 Smeulders 二零一零年 Appendix A。动态渗透率 k omega 描述从黏滞控制到惯性控制的过渡，过渡频率 omega t 由 phi、黏度、曲折度、静态渗透率和流体密度控制。Debye 长度 d 来自离子浓度。电动耦合系数 L omega 把 zeta 电位、孔隙几何和频率效应连起来。动态体电导率 sigma omega 再把孔隙流体电导、过量电导和渗透通道尺度综合起来。",
+        "coverage": ["k(omega)", "omega_t", "Lambda", "Debye length", "L(omega)", "sigma(omega)"],
+    },
+    {
+        "key": "epsilon_sigma",
+        "pause": 1.2,
+        "text": "这里有一个容易混淆的点。sigma omega 是多孔介质内部的动态体电导率，它进入有效介电常数 epsilon bar，并控制多孔介质波模。sigma fl 是上覆自由流体的电导率，它进入流体侧电磁慢度和流体侧垂向波数。代码默认让 sigma fl 保持 Schakel 表格式常数，而不是直接等于多孔体里的 sigma omega。",
+        "coverage": ["epsbar Eq 20", "sigma(omega) vs sigma_fl", "upper fluid conductivity"],
+    },
+    {
+        "key": "modes",
+        "pause": 1.2,
+        "text": "有了动态系数以后，代码进入孔弹波模。Schakel 与 Smeulders 二零一零年正文给出 Biot 弹性系数 A、Q、R 和 P。频率相关密度 rho 十一、rho 十二、rho 二十二再加上电动修正 E K，形成有效密度。二次方程给出快 P、慢 P、TM 电磁波和 SV 波的平方慢度。beta 表示流体势和固体势的比值，alpha 表示电势和机械势的比值。后面把 T TM 变成电势项，靠的就是 alpha TM。",
+        "coverage": ["Biot AQR", "rho_ij", "E_K", "slownesses", "alpha/beta"],
+    },
+    {
+        "key": "interface",
+        "pause": 1.3,
+        "text": "第三组核心公式是界面边界条件。Schakel 与 Smeulders 二零一零年 Section III 和 Appendix B 把入射 P 波、反射 P 波、反射电磁波，以及多孔介质中的 Pf、Ps、TM、SV 六个未知幅值放进一个六乘六线性系统。五类边界条件分别是法向体积位移连续、压力连续、界面应力条件、切向磁场连续和切向电场连续。解出来的向量就是 R E、R M、T Pf、T Ps、T TM 和 T SV。",
+        "coverage": ["boundary conditions", "6x6 matrix", "R_E", "T_TM", "T_Pf"],
+    },
+    {
+        "key": "normalization_source",
+        "pause": 1.2,
+        "text": "第四步是从二零一零年的位移归一化系数，转成二零一一年正演需要的压力归一化系数。代码使用 R E press 等于 R E 二零一零除以 rho fl omega 平方。多孔侧前界面 TM 电势项使用负的 alpha TM 乘 T TM，再除以 rho fl omega 平方。声源方面，Schakel 二零一一年论文使用实验压力记录；当前 RT-SE 代码默认使用物理压力 Ricker 子波，先用 exp 负 i omega tau 做因果傅里叶积分，再乘参考距离和带通窗得到 A omega。",
+        "coverage": ["pressure normalization", "TM term", "Ricker source", "A(omega)", "bandpass"],
+    },
+    {
+        "key": "sommerfeld",
+        "pause": 1.4,
+        "text": "第五步就是 Schakel 二零一一年 Geophysics 和 JAP 的 Sommerfeld 积分。圆形活塞方向性来自一阶 Bessel 函数 J 一，接收点横向几何来自 J 零。积分路径分成两支：零到 pi 二分之一的实角分支，代表传播声波贡献；零到 gamma max 的倏逝分支，代表近场和扩散贡献。代码把每个频率、每个角度下的界面转换系数 R E 或 TM 项都放进积分，再得到某个接收深度处的频域电势。",
+        "coverage": ["Schakel 2011 Eq 1-5", "J0/J1", "real-angle branch", "evanescent branch"],
+    },
+    {
+        "key": "porous_policy",
+        "pause": 1.1,
+        "text": "多孔介质侧要特别说明模型取舍。Schakel 二零一一年 JAP 的 Eq 八是有限厚度实验样品，包含前界面 TM 项、Pf 共震项和背界面多次反射。当前脚本是单界面 RT-SE 正演，所以默认只保留前界面 TM interface EM 项。Pf 共震项作为诊断开关可以打开，但默认关闭；背界面和样品厚度多次项没有实现。",
+        "coverage": ["JAP Eq 8", "single-interface policy", "Pf optional", "no slab multiples"],
+    },
+    {
+        "key": "time_domain",
+        "pause": 1.1,
+        "text": "第六步回到时间域。代码只显式积分正频率，所以用二倍实部乘 exp i 二 pi f t 做反变换。T 零等于声源到界面的距离除以上覆流体声速。接收线按 z 小于零、z 大于零分成 R E 侧和 T E 侧。z 等于零这一行不是边界条件直接解出来的物理接收点，只是绘图插值，峰值、极性、收敛和 T 零诊断都会排除它。",
+        "coverage": ["positive-frequency inverse transform", "T0", "receiver split", "z=0 exclusion"],
+    },
+    {
+        "key": "pe_results",
+        "pause": 1.4,
+        "text": "现在把公式链放回你的三个 Pe 结果。三组计算都显示，溶蚀让孔隙率升高，渗透率可以升高几十到两百倍；但电动耦合 L omega 下降，界面系数 R E 和 T TM 下降，最终近界面波形峰值也下降。Pe 等于零点一时，R E 侧峰值约降到初始的百分之十五；Pe 等于一和十时，峰值降到初始的万分之一量级。这就是论文里最有故事性的结果：水力连通性增强，并不必然带来更强的 interface EM。",
+        "coverage": ["Pe=0.1/1/10 results", "peak amplitude decline", "mechanism interpretation"],
+    },
+    {
+        "key": "waveform",
+        "pause": 1.0,
+        "text": "波形快照给出更直观的图像。T 零之后，界面附近出现窄的 EM 脉冲；流体侧和多孔侧的极性相反，符合界面电偶极子的解释。振幅沿离界面距离衰减，说明主要信号来自界面附近的不平衡电流，而不是整个孔隙体积均匀发光。代码中的收敛、极性和 T 零前后能量比，就是用来证明这个解释不是数值假象。",
+        "coverage": ["waveform snapshot", "polarity reversal", "interface localization", "diagnostics"],
+    },
+    {
+        "key": "liu_context",
+        "pause": 1.0,
+        "text": "最后放回 Liu 二零一八年的位置。Liu 论文关心有限偏移 VSEP，核心是频率波数积分和空间方向性，特别适合解释偏移距下的波形分布。当前脚本继承了这个研究问题的接收线视角，但为了做零偏移 Schakel 正演，已经不再使用 Liu 的 k omega 主积分。可以把 Liu 看成有限偏移扩展的下一层，而不是这个零偏移成片里的主公式来源。",
+        "coverage": ["Liu 2018 role", "finite offset vs zero offset"],
+    },
+    {
+        "key": "appendix_material",
+        "pause": 1.4,
+        "text": "下面补一段公式附录，用来保证代码里的材料参数没有被只讲成大类。完整的 L omega 不只有 zeta 前因子，还包括一减二 d 除以 Lambda 的孔道修正，以及含 omega、omega t、M、Debye 长度和流体密度的平方根频率修正。电导率链条也要拆开：sigma f 来自离子迁移率和数密度；C e m 来自电迁移过量电导；P o s 是渗透过量电导的中间量；C o s omega 再把 P o s 做成频率相关项；最后 sigma omega 把孔隙流体电导和两种过量电导一起放进孔隙几何因子。有效介电常数里的 epsilon 也不是常数，而是由孔隙流体和固体介电常数混合得到。",
+        "coverage": [
+            "完整 L(omega) Eq A4",
+            "sigma_f Eq A7",
+            "C_em Eq A8",
+            "P_os Eq A10",
+            "C_os(omega) Eq A9",
+            "sigma(omega) Eq A6",
+            "epsilon mixture Eq 7 text",
+            "epsbar Eq 20",
+        ],
+    },
+    {
+        "key": "appendix_modes_boundary",
+        "pause": 1.5,
+        "text": "第二个附录补孔弹波模和边界矩阵。频率相关密度先由 rho 十二等于 phi rho f 乘一加 i phi eta 除以 omega rho f k omega 得到，再构造 rho 十一和 rho 二十二。电动修正 E K 等于 eta 平方 phi 平方 L 平方，除以 k 平方 epsilon bar 和 omega 平方；它分别以减、加、减的方式进入三项有效密度。纵波慢度用 d 零、d 一、d 二组成二次根；横向 TM 和 SV 慢度也是同一根式，但 d 零到 d 二换成含 mu epsilon bar、rho 和 G 的横向系数。beta 负责流体势和固体势比，alpha 负责电势和机械势比。六阶矩阵的 B 二到 B 七行，分别对应体积位移、压力、两个应力条件、切向磁场和切向电场；代码中的每一行 A 矩阵都按这些 Appendix B 元素填入，并用 N 一、N 二组合项处理 Pf 和 Ps 的应力耦合。",
+        "coverage": [
+            "rho_12 Eq 11-13",
+            "E_K Eq 29 with phi^2",
+            "effective rho Eq 26-28",
+            "longitudinal d0 d1 d2 Eq 24-25",
+            "transverse d0 d1 d2 Eq 30",
+            "beta Eq 36-37",
+            "alpha Eq 38-39",
+            "Appendix B B2-B7 rows",
+            "N1/N2 stress combinations",
+        ],
+    },
+    {
+        "key": "appendix_source_diagnostics",
+        "pause": 1.6,
+        "text": "第三个附录补数值实现和诊断公式。当前默认声源是物理压力 Ricker 子波，它先乘源起始半余弦 ramp，再用 exp 负 i omega tau 的因果傅里叶核得到 P omega，随后乘参考距离和带通窗 W f 形成 A omega。带通窗在低频端和高频端用半余弦平滑，中间为一。可选 fig 四模式只是 Schakel 二零一一年 Fig 四压力记录的视觉近似，不是默认理论输入。若 SciPy 的 Bessel 函数不可用，代码用积分近似 J 零和 J 一。频率响应在 f min 到 f max 的线性频率网格上计算，再用二倍实部的正频率反变换合成时间波形。最后，峰值归一化使用第一个有效孔弹状态；A max 排除 z 等于零；收敛看峰值相对变化和峰值时间漂移；极性检查看对称接收点乘积是否小于零；T 零前后比只用于报告旁瓣强弱，不做物理门控。",
+        "coverage": [
+            "Ricker source",
+            "source ramp",
+            "causal Fourier kernel",
+            "A(omega)=P Rref W",
+            "bandpass taper",
+            "fig4_digitized approximation",
+            "Bessel fallback",
+            "linear frequency grid",
+            "positive-frequency inverse transform",
+            "first valid normalization",
+            "Amax definitions",
+            "convergence diagnostics",
+            "polarity reversal criterion",
+            "pre/post T0 ratio",
+        ],
+    },
+    {
+        "key": "ending",
+        "pause": 1.5,
+        "text": "总结成一句话：反应输运改变孔隙结构和流体化学；这些变化通过 k omega、L omega、sigma omega 和 epsilon bar 改变孔弹电磁波模；界面六阶系统给出 R E 和 T TM；Schakel 二零一一年 Sommerfeld 积分把它们合成波形；三组 Pe 结果显示，溶蚀增强水力连通性的同时，可以削弱界面电流不平衡，因此 interface EM response 跨数量级降低。这就是这段代码最适合讲给 JGR Solid Earth 的研究故事。",
+        "coverage": ["full mechanism chain", "paper-ready take-home"],
+    },
+]
+
+
+def run(cmd: list[str]) -> None:
+    subprocess.run(cmd, check=True)
+
+
+def ffprobe_duration(path: Path) -> float:
+    proc = subprocess.run(
+        [
+            "ffprobe",
+            "-v",
+            "error",
+            "-show_entries",
+            "format=duration",
+            "-of",
+            "default=noprint_wrappers=1:nokey=1",
+            str(path),
+        ],
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+    return float(proc.stdout.strip())
+
+
+def make_silence(path: Path, seconds: float) -> None:
+    run([
+        "ffmpeg",
+        "-y",
+        "-f",
+        "lavfi",
+        "-i",
+        "anullsrc=r=24000:cl=mono",
+        "-t",
+        f"{seconds:.3f}",
+        str(path),
+    ])
+
+
+def main() -> None:
+    parts: list[Path] = []
+    timeline = []
+    current = 0.0
+    coverage = []
+
+    for i, seg in enumerate(SEGMENTS, start=1):
+        audio = ASSETS / f"{i:02d}_{seg['key']}.mp3"
+        pause = ASSETS / f"{i:02d}_{seg['key']}_pause.mp3"
+        run([
+            "edge-tts.cmd",
+            "--voice",
+            VOICE,
+            "--rate",
+            RATE,
+            "--text",
+            seg["text"],
+            "--write-media",
+            str(audio),
+        ])
+        make_silence(pause, float(seg["pause"]))
+        duration = ffprobe_duration(audio) + ffprobe_duration(pause)
+        timeline.append({
+            "key": seg["key"],
+            "start": round(current, 3),
+            "end": round(current + duration, 3),
+            "duration": round(duration, 3),
+        })
+        coverage.append({"key": seg["key"], "coverage": seg["coverage"], "text": seg["text"]})
+        parts.extend([audio, pause])
+        current += duration
+
+    concat = WORK / "concat_audio.txt"
+    concat.write_text("".join(f"file '{p.as_posix()}'\n" for p in parts), encoding="utf-8")
+    voiceover = ASSETS / "voiceover.mp3"
+    run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat), "-c:a", "libmp3lame", str(voiceover)])
+
+    (ASSETS / "timeline.json").write_text(
+        json.dumps({"total_duration": round(current, 3), "segments": timeline}, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    (WORK / "coverage_table.json").write_text(json.dumps(coverage, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"voiceover={voiceover.relative_to(ROOT).as_posix()}")
+    print(f"timeline={(ASSETS / 'timeline.json').relative_to(ROOT).as_posix()}")
+    print(f"duration={current:.3f}")
+
+
+if __name__ == "__main__":
+    main()

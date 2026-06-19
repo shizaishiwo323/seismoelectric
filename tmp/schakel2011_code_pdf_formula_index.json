@@ -1,0 +1,1095 @@
+{
+  "Schakel_Smeulders_2010_JASA": {
+    "path": "C:\\Users\\imgw\\Documents\\Codex\\震电模拟\\uploaded_files\\01_classical_theory_foundational_papers\\01-Seismoelectric reflection and transmission at a fluid_porous-medium interface.pdf",
+    "n_pages": 9,
+    "first_page_title_snippet": "Seismoelectric reﬂection and transmission at a ﬂuid Õporous- medium interface Menne Schakel a/H20850and David Smeulders Department of Geotechnology, Delft University of Technology, 2600 GA Delft, The Netherlands /H20849Received 9 March 2009; revised 14 October 2009; accepted 14 October 2009 /H20850 The dispersion relation for seismoelectric wave propagation in poroelastic media is formulated in terms of",
+    "hit_pages": [
+      {
+        "page": 1,
+        "hits": [
+          {
+            "match": "transmission",
+            "snippet": "Seismoelectric reﬂection and transmission at a ﬂuid Õporous- medium interface Menne Schakel a/H20850and David Smeulders Department of Geotechnology, Delft University of Technology, 2600 GA Delft, The Netherlands /H20849Received 9 March 2009; revised 14 October 2009; accepted 14 October 2009 /H20850 T"
+          },
+          {
+            "match": "interface",
+            "snippet": "Seismoelectric reﬂection and transmission at a ﬂuid Õporous- medium interface Menne Schakel a/H20850and David Smeulders Department of Geotechnology, Delft University of Technology, 2600 GA Delft, The Netherlands /H20849Received 9 March 2009; revised 14 October 2009; accepted 14 October 2009 /H20850 The dispersion relation for seismoele"
+          },
+          {
+            "match": "tm",
+            "snippet": "Seismoelectric reﬂection and transmission at a ﬂuid Õporous- medium interface Menne Schakel a/H20850and David Smeulders Department of Geotechnology, Delft University of Technology, 2600 GA Delft, The Netherlands /H20849Received 9 March 2009; revised 14 October 2009; accepted 14 October 2009 /H20850 The dispersion relation for seismoelectric wave propagation in poroelastic media is for"
+          },
+          {
+            "match": "pe",
+            "snippet": "f Technology, 2600 GA Delft, The Netherlands /H20849Received 9 March 2009; revised 14 October 2009; accepted 14 October 2009 /H20850 The dispersion relation for seismoelectric wave propagation in poroelastic media is formulated in terms of effective densities comprising all viscous and electrokinetic coupling effects. Using Helmholtz decomposition, two seismoelectric conversion coefﬁcients are deriv"
+          },
+          {
+            "match": "electrokinetic",
+            "snippet": "relation for seismoelectric wave propagation in poroelastic media is formulated in terms of effective densities comprising all viscous and electrokinetic coupling effects. Using Helmholtz decomposition, two seismoelectric conversion coefﬁcients are derived, for an incident P-wave upon an interface between a compressible ﬂuid and a poroelastic medium. These coefﬁcients relate the incident P-wave to a reﬂected e"
+          },
+          {
+            "match": "coupling",
+            "snippet": "eismoelectric wave propagation in poroelastic media is formulated in terms of effective densities comprising all viscous and electrokinetic coupling effects. Using Helmholtz decomposition, two seismoelectric conversion coefﬁcients are derived, for an incident P-wave upon an interface between a compressible ﬂuid and a poroelastic medium. These coefﬁcients relate the incident P-wave to a reﬂected electromag"
+          },
+          {
+            "match": "interface",
+            "snippet": "etic coupling effects. Using Helmholtz decomposition, two seismoelectric conversion coefﬁcients are derived, for an incident P-wave upon an interface between a compressible ﬂuid and a poroelastic medium. These coefﬁcients relate the incident P-wave to a reﬂected electromagnetic wave in the ﬂuid, and a transmitted electromagnetic wave in the porous medium. The dependency on angle of incidence and frequency"
+          },
+          {
+            "match": "pe",
+            "snippet": "late the incident P-wave to a reﬂected electromagnetic wave in the ﬂuid, and a transmitted electromagnetic wave in the porous medium. The dependency on angle of incidence and frequency is computed. Using orthodox and interference ﬂuxes, it is shown that energy conservation is satisﬁed. A sensitivity analysis indicates that electrolyte concentration, viscosity, and permeability highly inﬂuence seismo"
+          }
+        ]
+      },
+      {
+        "page": 2,
+        "hits": [
+          {
+            "match": "pe",
+            "snippet": "iven by Pride and Haartsen /H208491996/H20850. We rewrite the equations here in a some- what different form because we aim to derive the dispersion relations in terms of effective densities. We will conﬁrm full consistency with the original Pride equations in the forth- coming. The governing equations read as − /H11612· /H9268ˆ= − /H208491− /H9278/H20850/H11612pˆ =− /H92752/H20851/H926711/H20849/H92"
+          },
+          {
+            "match": "permeability",
+            "snippet": "H9275is the angular frequency, /H9257is the pore ﬂuid viscosity, /H9278is the porosity, /H9267f is the pore ﬂuid density, µ is the magnetic permeability, /H9255is the bulk electrical permittiv- ity given by /H9255= /H92550/H20851/H9278/H20849/H9280f − /H9280s/H20850/ /H9251/H11009+ /H9280s/H20852, with solid and pore ﬂuid relative permittivities /H9280s and /H9280f, and vacuum permittiv- ity /H92550. I= denot"
+          },
+          {
+            "match": "pe",
+            "snippet": "pore ﬂuid viscosity, /H9278is the porosity, /H9267f is the pore ﬂuid density, µ is the magnetic permeability, /H9255is the bulk electrical permittiv- ity given by /H9255= /H92550/H20851/H9278/H20849/H9280f − /H9280s/H20850/ /H9251/H11009+ /H9280s/H20852, with solid and pore ﬂuid relative permittivities /H9280s and /H9280f, and vacuum permittiv- ity /H92550. I= denotes the identity matrix. The ﬁeld"
+          },
+          {
+            "match": "pe",
+            "snippet": "ity given by /H9255= /H92550/H20851/H9278/H20849/H9280f − /H9280s/H20850/ /H9251/H11009+ /H9280s/H20852, with solid and pore ﬂuid relative permittivities /H9280s and /H9280f, and vacuum permittiv- ity /H92550. I= denotes the identity matrix. The ﬁeld variables are solid and /H20849pore/H20850ﬂuid displacements u and U, intergranular stress /H9268=, pore pressure p, electric current density J, and t"
+          },
+          {
+            "match": "pe",
+            "snippet": "49/H9280f − /H9280s/H20850/ /H9251/H11009+ /H9280s/H20852, with solid and pore ﬂuid relative permittivities /H9280s and /H9280f, and vacuum permittiv- ity /H92550. I= denotes the identity matrix. The ﬁeld variables are solid and /H20849pore/H20850ﬂuid displacements u and U, intergranular stress /H9268=, pore pressure p, electric current density J, and the electric and magnetic ﬁelds E and H. A, Q, a"
+          },
+          {
+            "match": "Biot",
+            "snippet": "grains K s, the shear modulus G, the bulk modulus of the pore ﬂuid Kf, and the bulk modulus of the framework of grains Kb as follows /H20849Biot and Willis, 1957/H20850: A = /H208491− /H9278/H208502KsKf − /H208491− /H9278/H20850KbKf + /H9278KsKb Kf/H208731− /H9278− Kb Ks /H20874+ /H9278Ks − 2 3 G, /H208498/H20850 Q = /H9278/H20851Ks/H208491− /H9278/H20850− Kb/H20852Kf Kf/H208731− /H9278− Kb Ks /H20874"
+          },
+          {
+            "match": "permeability",
+            "snippet": "H9278− Kb Ks /H20874+ /H9278Ks , /H208499/H20850 R = /H92782KsKf Kf/H208731− /H9278− Kb Ks /H20874+ /H9278Ks . /H2084910/H20850 The dynamic permeability k/H20849/H9275/H20850describes the transition from viscosity toward inertia-dominated ﬂow. The electrokinetic coupling coefﬁcient L/H20849/H9275/H20850couples mechanical and EM-wave behavior. Note that for L/H20849/H9275/H20850= 0, mechanical and EM-ﬁelds are"
+          },
+          {
+            "match": "electrokinetic",
+            "snippet": ". /H2084910/H20850 The dynamic permeability k/H20849/H9275/H20850describes the transition from viscosity toward inertia-dominated ﬂow. The electrokinetic coupling coefﬁcient L/H20849/H9275/H20850couples mechanical and EM-wave behavior. Note that for L/H20849/H9275/H20850= 0, mechanical and EM-ﬁelds are decoupled in Eqs. /H208491/H20850–/H208497/H20850. Equations /H208491/H20850–/H208494/H20850then trans- form"
+          }
+        ]
+      },
+      {
+        "page": 3,
+        "hits": [
+          {
+            "match": "pe",
+            "snippet": "− uˆ /H20850= /H11612/H11612· Eˆ − /H116122Eˆ , /H2084919/H20850 where /H9255¯/H20849/H9275/H20850is the newly deﬁned effective electrical permit- tivity /H9255¯/H20849/H9275/H20850= /H9255− i /H9268/H20849/H9275/H20850 /H9275+ i /H9257L2/H20849/H9275/H20850 /H9275k/H20849/H9275/H20850. /H2084920/H20850 Equations /H2084915/H20850, /H2084916/H20850, and /H2084919/H20850form a closed set of equations"
+          },
+          {
+            "match": "electrokinetic",
+            "snippet": "50 Equations /H2084915/H20850, /H2084916/H20850, and /H2084919/H20850form a closed set of equations for the ﬁelds u, U, and E. A summary of electrokinetic sym- bols is given in Table I. A. Electrokinetic wave velocities Electrokinetic theory in isotropic, homogeneous media predicts the existence of uncoupled longitudinal and trans- versal modes. There are two longitudinal waves, the fast P-wave and the slow P-w"
+          },
+          {
+            "match": "Electrokinetic",
+            "snippet": "and /H2084919/H20850form a closed set of equations for the ﬁelds u, U, and E. A summary of electrokinetic sym- bols is given in Table I. A. Electrokinetic wave velocities Electrokinetic theory in isotropic, homogeneous media predicts the existence of uncoupled longitudinal and trans- versal modes. There are two longitudinal waves, the fast P-wave and the slow P-wave, and two transversal waves: an electromagneti"
+          },
+          {
+            "match": "Electrokinetic",
+            "snippet": "ed set of equations for the ﬁelds u, U, and E. A summary of electrokinetic sym- bols is given in Table I. A. Electrokinetic wave velocities Electrokinetic theory in isotropic, homogeneous media predicts the existence of uncoupled longitudinal and trans- versal modes. There are two longitudinal waves, the fast P-wave and the slow P-wave, and two transversal waves: an electromagnetic wave and a seismic shear wave"
+          },
+          {
+            "match": "slow",
+            "snippet": "s media predicts the existence of uncoupled longitudinal and trans- versal modes. There are two longitudinal waves, the fast P-wave and the slow P-wave, and two transversal waves: an electromagnetic wave and a seismic shear wave /H20849Pride and Haartsen, 1996 /H20850. We derive complex electrokinetic wave ve- locities in a procedure similar to that of Allard /H208491993/H20850. First, we deﬁne the fo"
+          },
+          {
+            "match": "electrokinetic",
+            "snippet": "ave, and two transversal waves: an electromagnetic wave and a seismic shear wave /H20849Pride and Haartsen, 1996 /H20850. We derive complex electrokinetic wave ve- locities in a procedure similar to that of Allard /H208491993/H20850. First, we deﬁne the following Helmholtz decompositions: uˆ = /H11612 /H9272ˆ s + /H11612/H11003/H9023ˆ s , /H2084921/H20850 Uˆ = /H11612/H9272ˆ f + /H11612/H11003/H9023ˆ f , /H2084"
+          },
+          {
+            "match": "slowness",
+            "snippet": "ongitudinal wave equations a system of equations for /H9272˜s and /H9272˜ f is obtained. The nontrivial solution yields the squared complex slowness /H20849i.e., inverse complex-valued wave velocities /H20850of the longitu- dinal waves s l 2/H20849/H9275/H20850 sl 2/H20849/H9275/H20850= − d1/H20849/H9275/H20850 2d2 /H110071 2 /H20881/H20875 d1/H20849/H9275/H20850 d2 /H20876 2 −4 d0/H20849/H9275/H20850 d2"
+          },
+          {
+            "match": "slow",
+            "snippet": "/H20881/H20875 d1/H20849/H9275/H20850 d2 /H20876 2 −4 d0/H20849/H9275/H20850 d2 , /H2084924/H20850 where l = Pf , Ps refers to the fast and slow longitudinal waves, respectively, and d0/H20849/H9275/H20850= /H9267¯11/H20849/H9275/H20850/H9267¯22/H20849/H9275/H20850− /H20851/H9267¯12/H20849/H9275/H20850/H208522 , d1/H20849/H9275/H20850=− /H20851P/H9267¯22/H20849/H9275/H20850+ R/H9267¯11/H20849/H9275/H2"
+          }
+        ]
+      },
+      {
+        "page": 4,
+        "hits": [
+          {
+            "match": "pe",
+            "snippet": "nsversal waves sl 2/H20849/H9275/H20850according to Eq. /H2084924/H20850, where now l = EM , S refers to the EM and seismic shear waves, respectively, and d0/H20849/H9275/H20850= /H9262/H9255¯/H20849/H9275/H20850/H9267¯11/H20849/H9275/H20850/H9267¯22/H20849/H9275/H20850− /H20851/H9267¯12/H20849/H9275/H20850/H208522 G , d1/H20849/H9275/H20850=− /H9262/H9255¯/H20849/H9275/H20850/H9267¯22/H20849/H9275/"
+          },
+          {
+            "match": "slowness",
+            "snippet": "0851/H926712/H20849/H9275/H20850/H208522 G , d2/H20849/H9275/H20850= /H926722/H20849/H9275/H20850. /H2084930/H20850 From the complex-valued slowness, phase velocities and at- tenuation coefﬁcients are readily obtained. III. REFLECTION AND TRANSMISSION AT A PLANE FLUID/POROUS-MEDIUM INTERFACE A compressible ﬂuid overlays an isotropic, homoge- neous porous medium. The horizontal interface is at x3 =0 /H2084"
+          },
+          {
+            "match": "REFLECTION",
+            "snippet": "/H9275/H20850. /H2084930/H20850 From the complex-valued slowness, phase velocities and at- tenuation coefﬁcients are readily obtained. III. REFLECTION AND TRANSMISSION AT A PLANE FLUID/POROUS-MEDIUM INTERFACE A compressible ﬂuid overlays an isotropic, homoge- neous porous medium. The horizontal interface is at x3 =0 /H20849see Fig. 1/H20850. We adopt a right-hand /H20849x1 , x2 , x3/H20850coordinate system"
+          },
+          {
+            "match": "TRANSMISSION",
+            "snippet": "/H2084930/H20850 From the complex-valued slowness, phase velocities and at- tenuation coefﬁcients are readily obtained. III. REFLECTION AND TRANSMISSION AT A PLANE FLUID/POROUS-MEDIUM INTERFACE A compressible ﬂuid overlays an isotropic, homoge- neous porous medium. The horizontal interface is at x3 =0 /H20849see Fig. 1/H20850. We adopt a right-hand /H20849x1 , x2 , x3/H20850coordinate system with the x3-axis"
+          },
+          {
+            "match": "INTERFACE",
+            "snippet": "wness, phase velocities and at- tenuation coefﬁcients are readily obtained. III. REFLECTION AND TRANSMISSION AT A PLANE FLUID/POROUS-MEDIUM INTERFACE A compressible ﬂuid overlays an isotropic, homoge- neous porous medium. The horizontal interface is at x3 =0 /H20849see Fig. 1/H20850. We adopt a right-hand /H20849x1 , x2 , x3/H20850coordinate system with the x3-axis pointing downward. A plane ﬂuid wave /H20"
+          },
+          {
+            "match": "interface",
+            "snippet": "RANSMISSION AT A PLANE FLUID/POROUS-MEDIUM INTERFACE A compressible ﬂuid overlays an isotropic, homoge- neous porous medium. The horizontal interface is at x3 =0 /H20849see Fig. 1/H20850. We adopt a right-hand /H20849x1 , x2 , x3/H20850coordinate system with the x3-axis pointing downward. A plane ﬂuid wave /H20849scalar potential /H9272ˆ I fl/H20850impinges on the interface where it reﬂects as a P-wave /H2"
+          },
+          {
+            "match": "interface",
+            "snippet": "x3/H20850coordinate system with the x3-axis pointing downward. A plane ﬂuid wave /H20849scalar potential /H9272ˆ I fl/H20850impinges on the interface where it reﬂects as a P-wave /H20849scalar potential /H9272ˆ R fl/H20850and a transverse magnetic /H20849TM/H20850EM-wave /H20849vector potential /H9023ˆ R fl/H20850. It transmits as a TM-wave /H20849vector potential /H9023ˆ s TM/H20850, a fast longitudinal w"
+          },
+          {
+            "match": "TM",
+            "snippet": "fl/H20850impinges on the interface where it reﬂects as a P-wave /H20849scalar potential /H9272ˆ R fl/H20850and a transverse magnetic /H20849TM/H20850EM-wave /H20849vector potential /H9023ˆ R fl/H20850. It transmits as a TM-wave /H20849vector potential /H9023ˆ s TM/H20850, a fast longitudinal wave /H20849scalar potential /H9272ˆ s Pf /H20850, a slow longitudinal wave /H20849scalar potential /H9272ˆ s"
+          }
+        ]
+      },
+      {
+        "page": 5,
+        "hits": [
+          {
+            "match": "boundary",
+            "snippet": "sin /H9258= 0, no reﬂected EM-wave is generated due to the pre- scribed boundary conditions. For the parameters of Table I, /H20841RE/H20841is approximately 3 V / m2, which is equivalent to /H110118 /H1100310−7 V / Pa at 10 Hz. At sin /H9258/H110150.57, /H20841RE/H20841has a local mini- mum associated with critical reﬂection of the fast P"
+          },
+          {
+            "match": "pe",
+            "snippet": "nversion /H20849/H20841RE/H20841=0 /H20850. We associate sin /H9258/H110151.24 with critical reﬂection of the SV- wave and we associate the peak at sin /H9258/H110151.44 with the Stoneley wave. The above mentioned behavior is also visible in the phase behavior of R E, and the behavior of TTM.A t sin /H9258= 0 and sin /H9258=1, RE and TTM are identically zero. We note that generally /H20841TTM/H20841"
+          },
+          {
+            "match": "TM",
+            "snippet": "n /H9258/H110151.44 with the Stoneley wave. The above mentioned behavior is also visible in the phase behavior of R E, and the behavior of TTM.A t sin /H9258= 0 and sin /H9258=1, RE and TTM are identically zero. We note that generally /H20841TTM/H20841is on the order 10 −10. Next we show in Fig. 3 the frequency-dependence of /H20841RE/H20841and /H20841TTM/H20841for 45° angle of incidence. Both seism"
+          },
+          {
+            "match": "TM",
+            "snippet": "above mentioned behavior is also visible in the phase behavior of R E, and the behavior of TTM.A t sin /H9258= 0 and sin /H9258=1, RE and TTM are identically zero. We note that generally /H20841TTM/H20841is on the order 10 −10. Next we show in Fig. 3 the frequency-dependence of /H20841RE/H20841and /H20841TTM/H20841for 45° angle of incidence. Both seismoelec- tric coefﬁcients increase strongly with"
+          },
+          {
+            "match": "TM",
+            "snippet": "ehavior of R E, and the behavior of TTM.A t sin /H9258= 0 and sin /H9258=1, RE and TTM are identically zero. We note that generally /H20841TTM/H20841is on the order 10 −10. Next we show in Fig. 3 the frequency-dependence of /H20841RE/H20841and /H20841TTM/H20841for 45° angle of incidence. Both seismoelec- tric coefﬁcients increase strongly with frequency, which cor- responds to increasing EM-wave vel"
+          },
+          {
+            "match": "pe",
+            "snippet": "=1, RE and TTM are identically zero. We note that generally /H20841TTM/H20841is on the order 10 −10. Next we show in Fig. 3 the frequency-dependence of /H20841RE/H20841and /H20841TTM/H20841for 45° angle of incidence. Both seismoelec- tric coefﬁcients increase strongly with frequency, which cor- responds to increasing EM-wave velocities in the diffusive regime for both the ﬂuid and poroelastic medium"
+          },
+          {
+            "match": "TM",
+            "snippet": "note that generally /H20841TTM/H20841is on the order 10 −10. Next we show in Fig. 3 the frequency-dependence of /H20841RE/H20841and /H20841TTM/H20841for 45° angle of incidence. Both seismoelec- tric coefﬁcients increase strongly with frequency, which cor- responds to increasing EM-wave velocities in the diffusive regime for both the ﬂuid and poroelastic medium. We note that the increase in /H20841T"
+          },
+          {
+            "match": "TM",
+            "snippet": "ds to increasing EM-wave velocities in the diffusive regime for both the ﬂuid and poroelastic medium. We note that the increase in /H20841T TM/H20841sharply diminishes at /H9275= /H9275t, i.e., for the frequency that separates viscosity-dominated ﬂow from inertia-dominated ﬂow. IV. SENSITIVITY ANALYSIS A natural way to perform a sensitivity analysis is to analyze the ratio of reﬂected/transmitted wa"
+          }
+        ]
+      },
+      {
+        "page": 6,
+        "hits": [
+          {
+            "match": "transmission",
+            "snippet": "0/H20856E,E − /H20855Y3 fl/H20849x,t/H20850/H20856Pr,Pr = /H20855Y3 fl/H20849x,t/H20850/H20856Pin,Pin . /H2084950/H20850 Introducing energy transmission coefﬁcients, e.g., TE = /H20855Y3/H20849x , t/H20850/H20856/ /H20855Y3 fl/H20849x , t/H20850/H20856Pin,Pin, we write TE − RE E,E − RE Pr,Pr =1 . /H2084951/H20850 We note, again, that TE consists of four orthodox ﬂux transmission coefﬁcients and six interferen"
+          },
+          {
+            "match": "transmission",
+            "snippet": "0849x , t/H20850/H20856Pin,Pin, we write TE − RE E,E − RE Pr,Pr =1 . /H2084951/H20850 We note, again, that TE consists of four orthodox ﬂux transmission coefﬁcients and six interference ﬂux transmis- sion coefﬁcients. Numerical examples are given in Tables II and III. In Table II, the angle of incidence /H9258is ﬁxed at 30° and frequencies f of 10 Hz /H20849left column/H20850and 500 kHz /H20849right column/H2"
+          },
+          {
+            "match": "slow",
+            "snippet": "0are chosen. Equation /H2084951/H20850is satisﬁed indeed. TE Pf ,Ps and TE Ps,SV are negative, because of the out-of- phase behavior of the slow P-wave. RE Pr,Pr is negative, be- cause the reﬂected acoustic pressure and ﬂuid displacement have opposite phase. T E Pf ,Pf approaches zero for /H9258= 45° be- cause this angle is beyond the critical angle of incidence of the fast P-wave. B. Parameter variat"
+          },
+          {
+            "match": "pe",
+            "snippet": "of incidence of the fast P-wave. B. Parameter variations Seismoelectric conversions are generated at contrasts in /H20849i/H20850elastic properties /H20849e.g., elastic moduli /H20850, /H20849ii/H20850ﬂuid chemistry /H20849pH and electrolyte concentration /H20850, and /H20849iii/H20850transport prop- erties such as permeability /H20849Haartsen and Pride, 1997 /H20850. Elec- trolyte concentration /H2"
+          },
+          {
+            "match": "permeability",
+            "snippet": "H20850, /H20849ii/H20850ﬂuid chemistry /H20849pH and electrolyte concentration /H20850, and /H20849iii/H20850transport prop- erties such as permeability /H20849Haartsen and Pride, 1997 /H20850. Elec- trolyte concentration /H20849C/H20850, pore ﬂuid viscosity /H20849/H9257/H20850, and per- meability /H20849k0/H20850are dominant seismoelectric conversion parameters while pH, pore ﬂuid bulk modulus /H20849Kf/H20"
+          },
+          {
+            "match": "pe",
+            "snippet": "ability /H20849Haartsen and Pride, 1997 /H20850. Elec- trolyte concentration /H20849C/H20850, pore ﬂuid viscosity /H20849/H9257/H20850, and per- meability /H20849k0/H20850are dominant seismoelectric conversion parameters while pH, pore ﬂuid bulk modulus /H20849Kf/H20850, porosity /H20849/H9278/H20850, and tortuosity /H20849/H9251/H11009/H20850inﬂuence the seismoelectric conver- sion to a smaller ext"
+          },
+          {
+            "match": "TM",
+            "snippet": "97 ; Mikhailov et al. , 2000 ; Garambois and Dietrich, 2002 ; Bor- des et al. , 2006 /H20850. We investigate the variation of RE E,E and TE TM,TM as a function of these parameters in Figs. 4–7 at ﬁxed angular frequency and angle of incidence: /H9275=1 06 rad/ s and /H9258= 45°. In Fig. 4, RE E,E decreases with increasing electrolyte con- centration because the absolute value of the zeta-potential de"
+          },
+          {
+            "match": "TM",
+            "snippet": "; Mikhailov et al. , 2000 ; Garambois and Dietrich, 2002 ; Bor- des et al. , 2006 /H20850. We investigate the variation of RE E,E and TE TM,TM as a function of these parameters in Figs. 4–7 at ﬁxed angular frequency and angle of incidence: /H9275=1 06 rad/ s and /H9258= 45°. In Fig. 4, RE E,E decreases with increasing electrolyte con- centration because the absolute value of the zeta-potential decre"
+          }
+        ]
+      },
+      {
+        "page": 7,
+        "hits": [
+          {
+            "match": "pe",
+            "snippet": "In the upper two graphs of Fig. 5 we see that seismo- electric coefﬁcients vary over several orders of magnitude as a function of the permeability k 0. This behavior is attributed to the inﬂuence of k0 on the electrokinetic coupling coefﬁ- cient L/H20849/H9275/H20850. Fr"
+          },
+          {
+            "match": "permeability",
+            "snippet": "In the upper two graphs of Fig. 5 we see that seismo- electric coefﬁcients vary over several orders of magnitude as a function of the permeability k 0. This behavior is attributed to the inﬂuence of k0 on the electrokinetic coupling coefﬁ- cient L/H20849/H9275/H20850. From Eq. /H20849A3/H20850we see that by increasing perme- ability we also increase the pore volume-to-surface ratio /H9011, which has two"
+          },
+          {
+            "match": "electrokinetic",
+            "snippet": "ients vary over several orders of magnitude as a function of the permeability k 0. This behavior is attributed to the inﬂuence of k0 on the electrokinetic coupling coefﬁ- cient L/H20849/H9275/H20850. From Eq. /H20849A3/H20850we see that by increasing perme- ability we also increase the pore volume-to-surface ratio /H9011, which has two competing effects on L/H20849/H9275/H20850. Initially the length scale of /H"
+          },
+          {
+            "match": "coupling",
+            "snippet": "several orders of magnitude as a function of the permeability k 0. This behavior is attributed to the inﬂuence of k0 on the electrokinetic coupling coefﬁ- cient L/H20849/H9275/H20850. From Eq. /H20849A3/H20850we see that by increasing perme- ability we also increase the pore volume-to-surface ratio /H9011, which has two competing effects on L/H20849/H9275/H20850. Initially the length scale of /H9011appro"
+          },
+          {
+            "match": "pe",
+            "snippet": "to the inﬂuence of k0 on the electrokinetic coupling coefﬁ- cient L/H20849/H9275/H20850. From Eq. /H20849A3/H20850we see that by increasing perme- ability we also increase the pore volume-to-surface ratio /H9011, which has two competing effects on L/H20849/H9275/H20850. Initially the length scale of /H9011approaches the characteristic length of the electric double layer d so that L/H20849/H9275/H208"
+          },
+          {
+            "match": "pe",
+            "snippet": "rom Eq. /H20849A3/H20850we see that by increasing perme- ability we also increase the pore volume-to-surface ratio /H9011, which has two competing effects on L/H20849/H9275/H20850. Initially the length scale of /H9011approaches the characteristic length of the electric double layer d so that L/H20849/H9275/H20850increases with increasing /H9011. For permeabilities larger than 10 −14 m2 the inﬂuence"
+          },
+          {
+            "match": "pe",
+            "snippet": "H9011approaches the characteristic length of the electric double layer d so that L/H20849/H9275/H20850increases with increasing /H9011. For permeabilities larger than 10 −14 m2 the inﬂuence of /H90112 in the denominator of L/H20849/H9275/H20850becomes dominant so that the seismo- electric coefﬁcients decrease. The effect of tortuosity on the seismoelectric coefﬁcients is shown in the lower two graph"
+          },
+          {
+            "match": "TM",
+            "snippet": "e combinations, d / /H9011is always negli- gible so that the seismoelectric coefﬁcients decrease with increasing tortuosity. R E E,E and TE TM,TM increase approximately linearly with pH /H20849upper two graphs of Fig. 6/H20850, which is a result of the linear relation used for the zeta-potential /H20851see Eq. /H20849A5/H20850/H20852. Also L/H20849/H9275/H20850is directly proportional to /H9256/H208"
+          }
+        ]
+      },
+      {
+        "page": 8,
+        "hits": [
+          {
+            "match": "electrokinetic",
+            "snippet": "1/H11009k0 /H9278/H90112 , /H20849A3/H20850 where /H9251/H11009is the tortuosity and /H9011is a weighted pore volume- to-surface ratio. The electrokinetic coupling coefﬁcient L/H20849/H9275/H20850 is obtained from Pride’s /H208491994/H20850theory L/H20849/H9275/H20850=− /H9278 /H9251/H11009 /H92550/H9280f/H9256 /H9257/H208731–2 d /H9011/H20874 /H11003/H208751+2 i /H9275 M/H9275t /H208731–2 d /H9011/H20874 2 /H2"
+          },
+          {
+            "match": "coupling",
+            "snippet": "78/H90112 , /H20849A3/H20850 where /H9251/H11009is the tortuosity and /H9011is a weighted pore volume- to-surface ratio. The electrokinetic coupling coefﬁcient L/H20849/H9275/H20850 is obtained from Pride’s /H208491994/H20850theory L/H20849/H9275/H20850=− /H9278 /H9251/H11009 /H92550/H9280f/H9256 /H9257/H208731–2 d /H9011/H20874 /H11003/H208751+2 i /H9275 M/H9275t /H208731–2 d /H9011/H20874 2 /H208731+ d/"
+          },
+          {
+            "match": "zeta",
+            "snippet": "20881i/H9275/H9267f /H9257/H20874 2 /H20876 −1/2 , /H20849A4/H20850 where d is the Debye length /H20849deﬁned below /H20850and /H9256is the zeta-potential. A semi-empirical relationship between the zeta-potential, electrolyte concentration /H20849C/H20850, and pH is used /H20849Pride and Garambois, 2005 /H20850as follows: /H9256= /H208510.010 + 0.025 log10/H20849C/H20850/H20852pH − 2 5 . /H20849A5/H20"
+          },
+          {
+            "match": "zeta",
+            "snippet": "A4/H20850 where d is the Debye length /H20849deﬁned below /H20850and /H9256is the zeta-potential. A semi-empirical relationship between the zeta-potential, electrolyte concentration /H20849C/H20850, and pH is used /H20849Pride and Garambois, 2005 /H20850as follows: /H9256= /H208510.010 + 0.025 log10/H20849C/H20850/H20852pH − 2 5 . /H20849A5/H20850 The dynamic conductivity /H9268/H20849/H9275/H20850is"
+          },
+          {
+            "match": "conductivity",
+            "snippet": "ride and Garambois, 2005 /H20850as follows: /H9256= /H208510.010 + 0.025 log10/H20849C/H20850/H20852pH − 2 5 . /H20849A5/H20850 The dynamic conductivity /H9268/H20849/H9275/H20850is given by /H9268/H20849/H9275/H20850= /H9278/H9268f /H9251/H11009 /H208751+ 2/H20851Cem + Cos/H20849/H9275/H20850/H20852 /H9268f/H9011/H20876, /H20849A6/H20850 where /H9268f is conductivity of the pore ﬂuid, Cem is excess conductan"
+          },
+          {
+            "match": "conductivity",
+            "snippet": "/H9278/H9268f /H9251/H11009 /H208751+ 2/H20851Cem + Cos/H20849/H9275/H20850/H20852 /H9268f/H9011/H20876, /H20849A6/H20850 where /H9268f is conductivity of the pore ﬂuid, Cem is excess conductance associated with electromigration of excess charge, and C os/H20849/H9275/H20850is excess conductance associated with electroosmosis. Expressions for /H9268f, Cem, and Cos/H20849/H9275/H20850are /H9268f = /H20858 l=1"
+          },
+          {
+            "match": "pe",
+            "snippet": "=1 Ni /H20849ezl/H208502Nl /H92550/H9280fkBT /H20876 −1 , /H20849A11/H20850 where kB is Boltzmann’s constant, e is electron charge, T is temperature, and Nl is the amount of species l ions per vol- ume. In this article we consider a binary symmetric electro- lyte /H20849N i =2; z1 =− z2 =1; N1 = N2/H20850with mobilities b1 and b2 /H20849see Table I/H20850. APPENDIX B: ELEMENTS OF A= Applying the bou"
+          },
+          {
+            "match": "pe",
+            "snippet": "H9280fkBT /H20876 −1 , /H20849A11/H20850 where kB is Boltzmann’s constant, e is electron charge, T is temperature, and Nl is the amount of species l ions per vol- ume. In this article we consider a binary symmetric electro- lyte /H20849N i =2; z1 =− z2 =1; N1 = N2/H20850with mobilities b1 and b2 /H20849see Table I/H20850. APPENDIX B: ELEMENTS OF A= Applying the boundary conditions for the seismoelec"
+          }
+        ]
+      },
+      {
+        "page": 9,
+        "hits": [
+          {
+            "match": "TM",
+            "snippet": "=− 1 /H9262fl sE 2 /H20849/H9275/H20850, A/H208495,2 /H20850=0 , A/H208495,3 /H20850=0 , A/H208495,4 /H20850=0 , A/H208495,5 /H20850= /H9251TM/H20849/H9275/H20850 /H9262sTM 2 /H20849/H9275/H20850, A/H208495,6 /H20850= /H9251SV/H20849/H9275/H20850 /H9262sSV 2 /H20849/H9275/H20850, /H20849B6/H20850 A/H208496,1 /H20850=− k3 E , A/H208496,2 /H20850=0 , A/H208496,3 /H20850= k1/H9251Pf /H20849/H9275/H2085"
+          },
+          {
+            "match": "TM",
+            "snippet": "75/H20850, A/H208495,2 /H20850=0 , A/H208495,3 /H20850=0 , A/H208495,4 /H20850=0 , A/H208495,5 /H20850= /H9251TM/H20849/H9275/H20850 /H9262sTM 2 /H20849/H9275/H20850, A/H208495,6 /H20850= /H9251SV/H20849/H9275/H20850 /H9262sSV 2 /H20849/H9275/H20850, /H20849B6/H20850 A/H208496,1 /H20850=− k3 E , A/H208496,2 /H20850=0 , A/H208496,3 /H20850= k1/H9251Pf /H20849/H9275/H20850, A/H208496,4 /H20850= k1/H92"
+          },
+          {
+            "match": "TM",
+            "snippet": "850=0 , A/H208496,3 /H20850= k1/H9251Pf /H20849/H9275/H20850, A/H208496,4 /H20850= k1/H9251Ps/H20849/H9275/H20850, A/H208496,5 /H20850=− k3 TM/H9251TM/H20849/H9275/H20850, A/H208496,6 /H20850=− k3 SV/H9251SV/H20849/H9275/H20850, /H20849B7/H20850 where N1/H20849/H9275/H20850= P − Q/H208491− /H9278/H20850/ /H9278+ /H20851Q − R/H208491− /H9278/H20850/ /H9278/H20850/H20852/H9252Pf /H20849/H9275/H20850,"
+          },
+          {
+            "match": "TM",
+            "snippet": "A/H208496,3 /H20850= k1/H9251Pf /H20849/H9275/H20850, A/H208496,4 /H20850= k1/H9251Ps/H20849/H9275/H20850, A/H208496,5 /H20850=− k3 TM/H9251TM/H20849/H9275/H20850, A/H208496,6 /H20850=− k3 SV/H9251SV/H20849/H9275/H20850, /H20849B7/H20850 where N1/H20849/H9275/H20850= P − Q/H208491− /H9278/H20850/ /H9278+ /H20851Q − R/H208491− /H9278/H20850/ /H9278/H20850/H20852/H9252Pf /H20849/H9275/H20850, N2/H2084"
+          },
+          {
+            "match": "slowness",
+            "snippet": "78/H20850/ /H9278+ /H20851Q − R/H208491− /H9278/H20850/ /H9278/H20850/H20852/H9252Ps/H20849/H9275/H20850, and sE/H20849/H9275/H20850 is the slowness of the electromagnetic wave in the ﬂuid, which can be calculated using sE 2 /H20849/H9275/H20850= /H20849/H92752/H9262fl/H92550/H9280fl − i/H9275/H9262fl/H9268fl/H20850/ /H92752 /H20849Nabighian and Corbett, 1988 /H20850with upper ﬂuid layer permeability, rel"
+          },
+          {
+            "match": "pe",
+            "snippet": "75/H20850= /H20849/H92752/H9262fl/H92550/H9280fl − i/H9275/H9262fl/H9268fl/H20850/ /H92752 /H20849Nabighian and Corbett, 1988 /H20850with upper ﬂuid layer permeability, relative permittivity, and conductiv- ity denoted by /H9262fl, /H9280fl, and /H9268fl, respectively. Allard, J. F. /H208491993/H20850. Propagation of Sound in Porous Media /H20849Elsevier Ap- plied Science, London /H20850. Biot, M. A"
+          },
+          {
+            "match": "permeability",
+            "snippet": "849/H92752/H9262fl/H92550/H9280fl − i/H9275/H9262fl/H9268fl/H20850/ /H92752 /H20849Nabighian and Corbett, 1988 /H20850with upper ﬂuid layer permeability, relative permittivity, and conductiv- ity denoted by /H9262fl, /H9280fl, and /H9268fl, respectively. Allard, J. F. /H208491993/H20850. Propagation of Sound in Porous Media /H20849Elsevier Ap- plied Science, London /H20850. Biot, M. A. /H208491956a/H20850. “T"
+          },
+          {
+            "match": "permittivity",
+            "snippet": "50/H9280fl − i/H9275/H9262fl/H9268fl/H20850/ /H92752 /H20849Nabighian and Corbett, 1988 /H20850with upper ﬂuid layer permeability, relative permittivity, and conductiv- ity denoted by /H9262fl, /H9280fl, and /H9268fl, respectively. Allard, J. F. /H208491993/H20850. Propagation of Sound in Porous Media /H20849Elsevier Ap- plied Science, London /H20850. Biot, M. A. /H208491956a/H20850. “Theory of propagation of"
+          }
+        ]
+      }
+    ]
+  },
+  "Schakel_2011_JAP": {
+    "path": "C:\\Users\\imgw\\Documents\\Codex\\震电模拟\\uploaded_files\\01_classical_theory_foundational_papers\\02_Schakel_2011_JAP_laboratory_theory.pdf",
+    "n_pages": 5,
+    "first_page_title_snippet": "Laboratory measurements and theoretical modeling of seismoelectric interface response and coseismic wave fields M. D. Schakel,1,a) D. M. J. Smeulders,1,2,b) E. C. Slob,1,c) and H. K. J. Heller 1,d) 1Department of Geotechnology, Delft University of Technology, PO Box 5048, 2600 GA, Delft, The Netherlands 2Department of Mechanical Engineering, Eindhoven University of Technology, PO Box 513,",
+    "hit_pages": [
+      {
+        "page": 1,
+        "hits": [
+          {
+            "match": "interface",
+            "snippet": "Laboratory measurements and theoretical modeling of seismoelectric interface response and coseismic wave fields M. D. Schakel,1,a) D. M. J. Smeulders,1,2,b) E. C. Slob,1,c) and H. K. J. Heller 1,d) 1Department of Geotechnology, Delft University of Technology, PO Box 5048, 2600 GA, Delft, The Netherlands 2Department of Mechanical Engin"
+          },
+          {
+            "match": "tm",
+            "snippet": "ic interface response and coseismic wave fields M. D. Schakel,1,a) D. M. J. Smeulders,1,2,b) E. C. Slob,1,c) and H. K. J. Heller 1,d) 1Department of Geotechnology, Delft University of Technology, PO Box 5048, 2600 GA, Delft, The Netherlands 2Department of Mechanical Engineering, Eindhoven University of Technology, PO Box 513, 5600 MB, Eindhoven, The Netherlands (Received 28 October 2010; accepted 18"
+          },
+          {
+            "match": "tm",
+            "snippet": ") and H. K. J. Heller 1,d) 1Department of Geotechnology, Delft University of Technology, PO Box 5048, 2600 GA, Delft, The Netherlands 2Department of Mechanical Engineering, Eindhoven University of Technology, PO Box 513, 5600 MB, Eindhoven, The Netherlands (Received 28 October 2010; accepted 18 February 2011; published online 5 April 2011; publisher error corrected 8 April 2011) A full-waveform seis"
+          },
+          {
+            "match": "pe",
+            "snippet": "corrected 8 April 2011) A full-waveform seismoelectric numerical model incorporating the directivity pattern of a pressure source is developed. This model provides predictions of coseismic electric ﬁelds and the electromagnetic waves that originate from a ﬂuid/porous-medium interface. An experimental setup in which coseismic electric ﬁelds and interface responses are measured is constructed. The se"
+          },
+          {
+            "match": "interface",
+            "snippet": "veloped. This model provides predictions of coseismic electric ﬁelds and the electromagnetic waves that originate from a ﬂuid/porous-medium interface. An experimental setup in which coseismic electric ﬁelds and interface responses are measured is constructed. The seismo- electric origin of the signals is conﬁrmed. The numerically predicted polarity reversal of the interfacial signal and seismoelectric effe"
+          },
+          {
+            "match": "pe",
+            "snippet": "del provides predictions of coseismic electric ﬁelds and the electromagnetic waves that originate from a ﬂuid/porous-medium interface. An experimental setup in which coseismic electric ﬁelds and interface responses are measured is constructed. The seismo- electric origin of the signals is conﬁrmed. The numerically predicted polarity reversal of the interfacial signal and seismoelectric effects due t"
+          },
+          {
+            "match": "interface",
+            "snippet": "d the electromagnetic waves that originate from a ﬂuid/porous-medium interface. An experimental setup in which coseismic electric ﬁelds and interface responses are measured is constructed. The seismo- electric origin of the signals is conﬁrmed. The numerically predicted polarity reversal of the interfacial signal and seismoelectric effects due to multiple scattering are detected in the measurements. Both t"
+          },
+          {
+            "match": "interface",
+            "snippet": "ple scattering are detected in the measurements. Both the simulated coseismic electric ﬁelds and the electromagnetic waves originating from interfaces agree with the measurements in terms of travel times, waveform, polarity, amplitude, and spatial amplitude decay, demonstrating that seismoelectric effects are comprehensively described by theory. VC 2011 American Institute of Physics . [doi:10.1063/1.356794"
+          }
+        ]
+      },
+      {
+        "page": 2,
+        "hits": [
+          {
+            "match": "pe",
+            "snippet": "ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ ﬃ ðr /C0 rsÞ2þðz /C0 zsÞ2 q is the distance to the source, h the angle of incidence, A(x)i s the amplitude spectrum and k is the ﬂuid wavenumber. The directivity function D(h), that characterizes the radiation pat- tern of the source, is given by: D hðÞ¼ J1 ka sin hðÞ ka sin h : (2) Here, J1 is the Bessel function of the ﬁrst kind and ﬁrst order and a is the radius of"
+          },
+          {
+            "match": "J1",
+            "snippet": "and k is the ﬂuid wavenumber. The directivity function D(h), that characterizes the radiation pat- tern of the source, is given by: D hðÞ¼ J1 ka sin hðÞ ka sin h : (2) Here, J1 is the Bessel function of the ﬁrst kind and ﬁrst order and a is the radius of the transducer. The modeled source pressure waveﬁeld is expanded into conical waves by means of the Sommerfeld integral. 23,24 The total reﬂected"
+          },
+          {
+            "match": "J1",
+            "snippet": "directivity function D(h), that characterizes the radiation pat- tern of the source, is given by: D hðÞ¼ J1 ka sin hðÞ ka sin h : (2) Here, J1 is the Bessel function of the ﬁrst kind and ﬁrst order and a is the radius of the transducer. The modeled source pressure waveﬁeld is expanded into conical waves by means of the Sommerfeld integral. 23,24 The total reﬂected electric potential in the ﬂuid ^u ("
+          },
+          {
+            "match": "Bessel",
+            "snippet": "y function D(h), that characterizes the radiation pat- tern of the source, is given by: D hðÞ¼ J1 ka sin hðÞ ka sin h : (2) Here, J1 is the Bessel function of the ﬁrst kind and ﬁrst order and a is the radius of the transducer. The modeled source pressure waveﬁeld is expanded into conical waves by means of the Sommerfeld integral. 23,24 The total reﬂected electric potential in the ﬂuid ^u (x, rr, zr), re"
+          },
+          {
+            "match": "Sommerfeld",
+            "snippet": "d and ﬁrst order and a is the radius of the transducer. The modeled source pressure waveﬁeld is expanded into conical waves by means of the Sommerfeld integral. 23,24 The total reﬂected electric potential in the ﬂuid ^u (x, rr, zr), received at position ( rr, zr), can then be expressed as ( rs ¼ 0; zs, zr < 0): ^ux ; rr ; zrðÞ ¼ /C0 iA xðÞ ð1 0 kr kz Dk rðÞ J0 kr rrðÞ exp ikzzs½/C138 /C2 RE krðÞ exp ikE z z"
+          },
+          {
+            "match": "J0",
+            "snippet": "(x, rr, zr), received at position ( rr, zr), can then be expressed as ( rs ¼ 0; zs, zr < 0): ^ux ; rr ; zrðÞ ¼ /C0 iA xðÞ ð1 0 kr kz Dk rðÞ J0 kr rrðÞ exp ikzzs½/C138 /C2 RE krðÞ exp ikE z zr /C2/C3 dkr ; (3) where kr ¼ k sin h and kz ¼ k cos h are the radial and vertical components of k, respectively, and kz E is the vertical compo- nent of the ﬂuid EM wavenumber. The seismoelectric con- version co"
+          },
+          {
+            "match": "pe",
+            "snippet": "p ikzzs½/C138 /C2 RE krðÞ exp ikE z zr /C2/C3 dkr ; (3) where kr ¼ k sin h and kz ¼ k cos h are the radial and vertical components of k, respectively, and kz E is the vertical compo- nent of the ﬂuid EM wavenumber. The seismoelectric con- version coefﬁcient, RE(kr), relates the incident pressure wavefront to an EM signal in the ﬂuid. This conversion coef- ﬁcient was derived in Ref. 25 adopting full"
+          },
+          {
+            "match": "Eq. (3",
+            "snippet": "ergy into EM energy. Also note that the notation in Ref. 25 is slightly different (see Table I). Expressing k r and kz in terms of k and h, Eq. (3) is written as, ^ux ; rr ; zrðÞ ¼ /C0 iA xðÞ ðp=2þi1 0 D hðÞ k sin hJ0 krr sin hðÞ /C2 exp ikzs cos h½/C138 RE hðÞ exp ikE z hðÞ zr /C2/C3 dh; (4) where kE z ðhÞ¼ x ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ ﬃ 1=c2 E xðÞ /C0 sin2 h=c2 P q and Im kE z ðhÞ < 0"
+          }
+        ]
+      },
+      {
+        "page": 3,
+        "hits": [
+          {
+            "match": "TM",
+            "snippet": "SE ¼ RTM b exp /C0 ikTM z ws /C0 zrðÞ /C2/C3 þ RPf b a exp /C0 ikPf z ws /C0 zrðÞ /C2/C3/C8 þ exp /C0 ikPf z ws /C2/C3 RTM f exp /C0 ikTM z zr /C2/C3 o : (7) The ﬁrst two terms in Eq. (7) describe the upwardly propa- gating second TM and coseismic waves, respectively."
+          },
+          {
+            "match": "TM",
+            "snippet": "SE ¼ RTM b exp /C0 ikTM z ws /C0 zrðÞ /C2/C3 þ RPf b a exp /C0 ikPf z ws /C0 zrðÞ /C2/C3/C8 þ exp /C0 ikPf z ws /C2/C3 RTM f exp /C0 ikTM z zr /C2/C3 o : (7) The ﬁrst two terms in Eq. (7) describe the upwardly propa- gating second TM and coseismic waves, respectively. The last term"
+          },
+          {
+            "match": "TM",
+            "snippet": "SE ¼ RTM b exp /C0 ikTM z ws /C0 zrðÞ /C2/C3 þ RPf b a exp /C0 ikPf z ws /C0 zrðÞ /C2/C3/C8 þ exp /C0 ikPf z ws /C2/C3 RTM f exp /C0 ikTM z zr /C2/C3 o : (7) The ﬁrst two terms in Eq. (7) describe the upwardly propa- gating second TM and coseismic waves, respectively. The last term describes the third interface response that is gener- ated at z ¼ 0 by the incident Pf-wave from be"
+          },
+          {
+            "match": "TM",
+            "snippet": "SE ¼ RTM b exp /C0 ikTM z ws /C0 zrðÞ /C2/C3 þ RPf b a exp /C0 ikPf z ws /C0 zrðÞ /C2/C3/C8 þ exp /C0 ikPf z ws /C2/C3 RTM f exp /C0 ikTM z zr /C2/C3 o : (7) The ﬁrst two terms in Eq. (7) describe the upwardly propa- gating second TM and coseismic waves, respectively. The last term describes the third interface response that is gener- ated at z ¼ 0 by the incident Pf-wave from below and now pro"
+          },
+          {
+            "match": "Eq. (7",
+            "snippet": "2/C3 þ RPf b a exp /C0 ikPf z ws /C0 zrðÞ /C2/C3/C8 þ exp /C0 ikPf z ws /C2/C3 RTM f exp /C0 ikTM z zr /C2/C3 o : (7) The ﬁrst two terms in Eq. (7) describe the upwardly propa- gating second TM and coseismic waves, respectively. The last term describes the third interface response that is gener- ated at z ¼ 0 by the incident Pf-wave from below and now propagates downward as a TM-wave to the receiver. Th"
+          },
+          {
+            "match": "TM",
+            "snippet": "þ exp /C0 ikPf z ws /C2/C3 RTM f exp /C0 ikTM z zr /C2/C3 o : (7) The ﬁrst two terms in Eq. (7) describe the upwardly propa- gating second TM and coseismic waves, respectively. The last term describes the third interface response that is gener- ated at z ¼ 0 by the incident Pf-wave from below and now propagates downward as a TM-wave to the receiver. The seismoelectric conversion coefﬁcients at the"
+          },
+          {
+            "match": "pe",
+            "snippet": "RTM f exp /C0 ikTM z zr /C2/C3 o : (7) The ﬁrst two terms in Eq. (7) describe the upwardly propa- gating second TM and coseismic waves, respectively. The last term describes the third interface response that is gener- ated at z ¼ 0 by the incident Pf-wave from below and now propagates downward as a TM-wave to the receiver. The seismoelectric conversion coefﬁcients at the back and the front of the s"
+          },
+          {
+            "match": "interface",
+            "snippet": "rst two terms in Eq. (7) describe the upwardly propa- gating second TM and coseismic waves, respectively. The last term describes the third interface response that is gener- ated at z ¼ 0 by the incident Pf-wave from below and now propagates downward as a TM-wave to the receiver. The seismoelectric conversion coefﬁcients at the back and the front of the sample are denoted as Rb TM and Rf TM, respec- tively"
+          }
+        ]
+      },
+      {
+        "page": 4,
+        "hits": [
+          {
+            "match": "pe",
+            "snippet": "ds with the Pf-wave travel time to the back of the porous sample, where it generates a reﬂected EM-wave. The fourth and ﬁfth pulses are, respectively, coseismic and inter- face responses of the compressional wave multiple. III. SEISMOELECTRIC EXPERIMENTS A. Seismoelectric experimental setup and measurements The experimental setup consists of a 58 /C2 39 /C2 28 cm water tank in which an acoustic wave"
+          },
+          {
+            "match": "PE",
+            "snippet": "The fourth and ﬁfth pulses are, respectively, coseismic and inter- face responses of the compressional wave multiple. III. SEISMOELECTRIC EXPERIMENTS A. Seismoelectric experimental setup and measurements The experimental setup consists of a 58 /C2 39 /C2 28 cm water tank in which an acoustic wave source transducer (Panametrics V3638), grounded electrodes (A-M Systems, Inc., Ag/AgCl diameter 0.015 in"
+          },
+          {
+            "match": "pe",
+            "snippet": ", respectively, coseismic and inter- face responses of the compressional wave multiple. III. SEISMOELECTRIC EXPERIMENTS A. Seismoelectric experimental setup and measurements The experimental setup consists of a 58 /C2 39 /C2 28 cm water tank in which an acoustic wave source transducer (Panametrics V3638), grounded electrodes (A-M Systems, Inc., Ag/AgCl diameter 0.015 in.), and a porous sample are in"
+          },
+          {
+            "match": "pe",
+            "snippet": "e responses of the compressional wave multiple. III. SEISMOELECTRIC EXPERIMENTS A. Seismoelectric experimental setup and measurements The experimental setup consists of a 58 /C2 39 /C2 28 cm water tank in which an acoustic wave source transducer (Panametrics V3638), grounded electrodes (A-M Systems, Inc., Ag/AgCl diameter 0.015 in.), and a porous sample are installed. The geometry of the experiment"
+          },
+          {
+            "match": "pe",
+            "snippet": "trics V3638), grounded electrodes (A-M Systems, Inc., Ag/AgCl diameter 0.015 in.), and a porous sample are installed. The geometry of the experiment is depicted in Fig. 1. The sample is made of sintered crushed glass (param- eters listed in Table II), carefully saturated, and immersed in tap water. The electrode at position 6 is installed in a 1.4 mm diameter cylindrical hole, which was drilled in t"
+          },
+          {
+            "match": "pe",
+            "snippet": "on 6 is installed in a 1.4 mm diameter cylindrical hole, which was drilled in the porous sample. A 500 kHz single sine pulse (with a 500 mV peak- to-peak amplitude) from a waveform generator (Agilent Technologies 33220A) is fed into an ampliﬁer (ENI 2100L RF Power Ampliﬁer) set at 50 dB gain. The output signal is coupled into a piezoelectric source transducer. A 144–896 kHz band-pass ﬁlter is applie"
+          },
+          {
+            "match": "pe",
+            "snippet": "nstalled in a 1.4 mm diameter cylindrical hole, which was drilled in the porous sample. A 500 kHz single sine pulse (with a 500 mV peak- to-peak amplitude) from a waveform generator (Agilent Technologies 33220A) is fed into an ampliﬁer (ENI 2100L RF Power Ampliﬁer) set at 50 dB gain. The output signal is coupled into a piezoelectric source transducer. A 144–896 kHz band-pass ﬁlter is applied in all"
+          },
+          {
+            "match": "pe",
+            "snippet": "into a piezoelectric source transducer. A 144–896 kHz band-pass ﬁlter is applied in all measurements. Electric potential measurements were performed at positions 1–6. These on-axis measurements are averaged over 8192 source pulses and shown in Fig. 2 (right). Indeed, the measured seismoelectric pulse patterns are predicted by the model. The predicted electric potentials (Fig. 2, left) agree with th"
+          }
+        ]
+      },
+      {
+        "page": 5,
+        "hits": [
+          {
+            "match": "conductivity",
+            "snippet": "attering effects were validated by the measurements. The unresolved scaling issue is probably primarily caused by var- iations in pore ﬂuid conductivity and the zeta-potential that are inaccessible to direct independent measurements. Yet, the overall agreement between the measurements and numerical predictions convincingly validates the existing seismoelectric theory. As both the numerical and experimen- tal"
+          },
+          {
+            "match": "zeta",
+            "snippet": "validated by the measurements. The unresolved scaling issue is probably primarily caused by var- iations in pore ﬂuid conductivity and the zeta-potential that are inaccessible to direct independent measurements. Yet, the overall agreement between the measurements and numerical predictions convincingly validates the existing seismoelectric theory. As both the numerical and experimen- tal techniques ca"
+          },
+          {
+            "match": "pe",
+            "snippet": "ing issue is probably primarily caused by var- iations in pore ﬂuid conductivity and the zeta-potential that are inaccessible to direct independent measurements. Yet, the overall agreement between the measurements and numerical predictions convincingly validates the existing seismoelectric theory. As both the numerical and experimen- tal techniques can be generalized to ﬁeld situations, this work al"
+          },
+          {
+            "match": "pe",
+            "snippet": "t between the measurements and numerical predictions convincingly validates the existing seismoelectric theory. As both the numerical and experimen- tal techniques can be generalized to ﬁeld situations, this work allows us to appreciate the use of seismoelectric effects as exploration techniques that are complementary to conven- tional seismic surveys for exploring the subsurface. ACKNOWLEDGMENTS Th"
+          },
+          {
+            "match": "pe",
+            "snippet": "is, J. Geophys. Res. 114, B10306 (2009). 14S. Garambois and M. Dietrich, Geophysics 66, 1417 (2001). 15S. S. Haines, S. R. Pride, S. L. Klemperer, and B. Biondi, Geophysics 72, G9 (2007). 16L. T. Long, W. K. Rivers, Geophysics 40, 233 (1975). 17O. V. Mikhailov, M. W. Haartsen, and M. N. Tokso ¨z, Geophysics 62,9 7 (1997). 18A. H. Thompson and G. A. Gist, The Leading Edge 12, 1169 (1993). 19Z. Zhu, M"
+          },
+          {
+            "match": "pe",
+            "snippet": "011) Downloaded 12 Jul 2011 to 131.180.130.114. Redistribution subject to AIP license or copyright; see http://jap.aip.org/about/rights_and_permissions"
+          }
+        ]
+      }
+    ]
+  },
+  "Liu_2018_VSEP": {
+    "path": "C:\\Users\\imgw\\Documents\\Codex\\震电模拟\\uploaded_files\\01_classical_theory_foundational_papers\\03_Liu_2018_finite_offset_VSEP.pdf",
+    "n_pages": 7,
+    "first_page_title_snippet": "Seismoelectric interface electromagnetic wave characteristics for the finite offset Vertical Seismoelectric Profiling configuration Citation for published version (APA): Liu, Y., Smeulders, D., Su, Y., & Tang, X. (2018). Seismoelectric interface electromagnetic wave characteristics for the finite offset Vertical Seismoelectric Profiling configuration: Theoretical modeling and experiment verification. Journal of the Acoustical Society of America, 143(1), EL13-EL18.",
+    "hit_pages": [
+      {
+        "page": 1,
+        "hits": [
+          {
+            "match": "interface",
+            "snippet": "Seismoelectric interface electromagnetic wave characteristics for the finite offset Vertical Seismoelectric Profiling configuration Citation for published version (APA): Liu, Y., Smeulders, D., Su, Y., & Tang, X. (2018). Seismoelectric interface electromagnetic wave characteristics f"
+          },
+          {
+            "match": "finite offset",
+            "snippet": "Seismoelectric interface electromagnetic wave characteristics for the finite offset Vertical Seismoelectric Profiling configuration Citation for published version (APA): Liu, Y., Smeulders, D., Su, Y., & Tang, X. (2018). Seismoelectric interface electromagnetic wave characteristics for the finite offset Vertical Seismoelectric Profiling conf"
+          },
+          {
+            "match": "interface",
+            "snippet": "smoelectric Profiling configuration Citation for published version (APA): Liu, Y., Smeulders, D., Su, Y., & Tang, X. (2018). Seismoelectric interface electromagnetic wave characteristics for the finite offset Vertical Seismoelectric Profiling configuration: Theoretical modeling and experiment verification. Journal of the Acoustical Society of America, 143(1), EL13-EL18. https://doi.org/10.1121/1.5020261 DO"
+          },
+          {
+            "match": "finite offset",
+            "snippet": "hed version (APA): Liu, Y., Smeulders, D., Su, Y., & Tang, X. (2018). Seismoelectric interface electromagnetic wave characteristics for the finite offset Vertical Seismoelectric Profiling configuration: Theoretical modeling and experiment verification. Journal of the Acoustical Society of America, 143(1), EL13-EL18. https://doi.org/10.1121/1.5020261 DOI: 10.1121/1.5020261 Document status and date: Published: 0"
+          },
+          {
+            "match": "pe",
+            "snippet": "face electromagnetic wave characteristics for the finite offset Vertical Seismoelectric Profiling configuration: Theoretical modeling and experiment verification. Journal of the Acoustical Society of America, 143(1), EL13-EL18. https://doi.org/10.1121/1.5020261 DOI: 10.1121/1.5020261 Document status and date: Published: 01/01/2018 Document Version: Publisher’s PDF, also known as Version of Record (i"
+          },
+          {
+            "match": "pe",
+            "snippet": "s) Please check the document version of this publication: • A submitted manuscript is the version of the article upon submission and before peer-review. There can be important differences between the submitted version and the official published version of record. People interested in the research are advised to contact the author for the final version of the publication, or visit the DOI to the publ"
+          },
+          {
+            "match": "Pe",
+            "snippet": "sion and before peer-review. There can be important differences between the submitted version and the official published version of record. People interested in the research are advised to contact the author for the final version of the publication, or visit the DOI to the publisher's website. • The final author version and the galley proof are versions of the publication after peer review. • The fi"
+          },
+          {
+            "match": "pe",
+            "snippet": "ication, or visit the DOI to the publisher's website. • The final author version and the galley proof are versions of the publication after peer review. • The final published version features the final layout of the paper including the volume, issue and page numbers. Link to publication General rights Copyright and moral rights for the publications made accessible in the public portal are retained b"
+          }
+        ]
+      },
+      {
+        "page": 2,
+        "hits": [
+          {
+            "match": "interface",
+            "snippet": "Seismoelectric interface electromagnetic wave characteristics for the ﬁnite offset Vertical Seismoelectric Proﬁling conﬁguration: Theoretical modeling and experiment veriﬁcation Yukai Liu School of Geosciences, China University of Petroleum (East China), Qingdao, China liuyukai.1008@"
+          },
+          {
+            "match": "pe",
+            "snippet": "terface electromagnetic wave characteristics for the ﬁnite offset Vertical Seismoelectric Proﬁling conﬁguration: Theoretical modeling and experiment veriﬁcation Yukai Liu School of Geosciences, China University of Petroleum (East China), Qingdao, China liuyukai.1008@163.com David Smeulders Department of Mechanical Engineering, Eindhoven University of Technology, Eindhoven, Netherlands d.m.j.smeulder"
+          },
+          {
+            "match": "Pe",
+            "snippet": "Seismoelectric Proﬁling conﬁguration: Theoretical modeling and experiment veriﬁcation Yukai Liu School of Geosciences, China University of Petroleum (East China), Qingdao, China liuyukai.1008@163.com David Smeulders Department of Mechanical Engineering, Eindhoven University of Technology, Eindhoven, Netherlands d.m.j.smeulders@tue.nl Yuanda Su and Xiaoming Tanga) School of Geosciences, China Univer"
+          },
+          {
+            "match": "tm",
+            "snippet": "tion Yukai Liu School of Geosciences, China University of Petroleum (East China), Qingdao, China liuyukai.1008@163.com David Smeulders Department of Mechanical Engineering, Eindhoven University of Technology, Eindhoven, Netherlands d.m.j.smeulders@tue.nl Yuanda Su and Xiaoming Tanga) School of Geosciences, China University of Petroleum (East China), Qingdao, China syuanda@sina.com, tangxiam@aliyun.c"
+          },
+          {
+            "match": "Pe",
+            "snippet": "rsity of Technology, Eindhoven, Netherlands d.m.j.smeulders@tue.nl Yuanda Su and Xiaoming Tanga) School of Geosciences, China University of Petroleum (East China), Qingdao, China syuanda@sina.com, tangxiam@aliyun.com Abstract: The seismoelectric interface electromagnetic characteristics have been studied for the ﬁnite offset Vertical Seismoelectric Proﬁling (VSEP) conﬁguration. The approach consists"
+          },
+          {
+            "match": "interface",
+            "snippet": "Geosciences, China University of Petroleum (East China), Qingdao, China syuanda@sina.com, tangxiam@aliyun.com Abstract: The seismoelectric interface electromagnetic characteristics have been studied for the ﬁnite offset Vertical Seismoelectric Proﬁling (VSEP) conﬁguration. The approach consists of theoretical modeling and laboratory veriﬁcation. The results show that the wave variation characteristics alo"
+          },
+          {
+            "match": "VSEP",
+            "snippet": "ract: The seismoelectric interface electromagnetic characteristics have been studied for the ﬁnite offset Vertical Seismoelectric Proﬁling (VSEP) conﬁguration. The approach consists of theoretical modeling and laboratory veriﬁcation. The results show that the wave variation characteristics along the ﬁnite offset measurement line are markedly dif- ferent from those along the zero-offset line. More inte"
+          },
+          {
+            "match": "interface",
+            "snippet": "tingly, the wave characteristics for both conﬁgurations can be satisfactorily explained by the electric dipole model for the seismoelectric interface wave radiation. Besides, the experiment conﬁrms the modeling result based on the seismoelectric coupling theory and validates the VSEP technique as an effective method for subsurface interface delineation. VC 2018 Acoustical Society of America [CD] Date Recei"
+          }
+        ]
+      },
+      {
+        "page": 3,
+        "hits": [
+          {
+            "match": "VSEP",
+            "snippet": "the seismic source position relative to the receiving electrodes, the VSEP can be con- ducted in zero offset and ﬁnite offset conﬁgurations. Using the ﬁnite offset VSEP, Dupuis et al. (2009) have conducted the ﬁeld measurement and analyzed the seismo- electric EM wave amplitude characteristics. In their measurement, the source and e"
+          },
+          {
+            "match": "VSEP",
+            "snippet": "ion relative to the receiving electrodes, the VSEP can be con- ducted in zero offset and ﬁnite offset conﬁgurations. Using the ﬁnite offset VSEP, Dupuis et al. (2009) have conducted the ﬁeld measurement and analyzed the seismo- electric EM wave amplitude characteristics. In their measurement, the source and elec- trodes are located at the same side of the interface. For this conﬁguration, however, the"
+          },
+          {
+            "match": "interface",
+            "snippet": "e seismo- electric EM wave amplitude characteristics. In their measurement, the source and elec- trodes are located at the same side of the interface. For this conﬁguration, however, the ﬁrst arrival is the coseismic wave which causes a strong interference with the latter small interface EM wave arrival. The interference would be worse in the VSEP mea- surement where the electrode is close to the interface"
+          },
+          {
+            "match": "interface",
+            "snippet": "interface. For this conﬁguration, however, the ﬁrst arrival is the coseismic wave which causes a strong interference with the latter small interface EM wave arrival. The interference would be worse in the VSEP mea- surement where the electrode is close to the interface. Consequently, for the solid- porous model, we can get measurement results at only one side of the interface. Schakel et al. (2011) and Pe"
+          },
+          {
+            "match": "VSEP",
+            "snippet": "e coseismic wave which causes a strong interference with the latter small interface EM wave arrival. The interference would be worse in the VSEP mea- surement where the electrode is close to the interface. Consequently, for the solid- porous model, we can get measurement results at only one side of the interface. Schakel et al. (2011) and Peng et al. (2017) have measured the response characteristics o"
+          },
+          {
+            "match": "interface",
+            "snippet": "h the latter small interface EM wave arrival. The interference would be worse in the VSEP mea- surement where the electrode is close to the interface. Consequently, for the solid- porous model, we can get measurement results at only one side of the interface. Schakel et al. (2011) and Peng et al. (2017) have measured the response characteristics of the seismoelectric interface EM wave using the ﬂuid-porous"
+          },
+          {
+            "match": "interface",
+            "snippet": "the electrode is close to the interface. Consequently, for the solid- porous model, we can get measurement results at only one side of the interface. Schakel et al. (2011) and Peng et al. (2017) have measured the response characteristics of the seismoelectric interface EM wave using the ﬂuid-porous model in the laboratory. Because there is no seismoelectric coupling in water, the ﬂuid-porous model can avo"
+          },
+          {
+            "match": "Pe",
+            "snippet": "ace. Consequently, for the solid- porous model, we can get measurement results at only one side of the interface. Schakel et al. (2011) and Peng et al. (2017) have measured the response characteristics of the seismoelectric interface EM wave using the ﬂuid-porous model in the laboratory. Because there is no seismoelectric coupling in water, the ﬂuid-porous model can avoid the interference caused by"
+          }
+        ]
+      },
+      {
+        "page": 4,
+        "hits": [
+          {
+            "match": "interface",
+            "snippet": "is to insert a two-dimensional bandpass region into the frequency-wavenumber domain of the seismoelectric response function, such that the interface EM signal that falls into this region will be included, whereas other coseismic signals, because their response spectral distribution is outside this region, will be excluded. 2.2 Modeling results and analysis Using the above-mentioned seismoelectric theory a"
+          },
+          {
+            "match": "pe",
+            "snippet": "n, such that the interface EM signal that falls into this region will be included, whereas other coseismic signals, because their response spectral distribution is outside this region, will be excluded. 2.2 Modeling results and analysis Using the above-mentioned seismoelectric theory and modeling method, we model the characteristics of the seismoelectric interface EM wave for the ﬁnite offset VSEP."
+          },
+          {
+            "match": "interface",
+            "snippet": "esults and analysis Using the above-mentioned seismoelectric theory and modeling method, we model the characteristics of the seismoelectric interface EM wave for the ﬁnite offset VSEP. The elastic and electrical parameters of the ﬂuid and porous sandstone used in the simula- tion can be found in Schakel and Smeulders (2010) . For the VSEP conﬁguration, the source to interface distance z S ¼ 80 mm and the r"
+          },
+          {
+            "match": "VSEP",
+            "snippet": "tioned seismoelectric theory and modeling method, we model the characteristics of the seismoelectric interface EM wave for the ﬁnite offset VSEP. The elastic and electrical parameters of the ﬂuid and porous sandstone used in the simula- tion can be found in Schakel and Smeulders (2010) . For the VSEP conﬁguration, the source to interface distance z S ¼ 80 mm and the receiver line offset D ¼ 45 mm. The"
+          },
+          {
+            "match": "VSEP",
+            "snippet": "and electrical parameters of the ﬂuid and porous sandstone used in the simula- tion can be found in Schakel and Smeulders (2010) . For the VSEP conﬁguration, the source to interface distance z S ¼ 80 mm and the receiver line offset D ¼ 45 mm. The receiving electrodes, as shown in Fig. 1, are evenly spaced along the line from /C0100 mm to 100 mm, with 1 mm spacing. We set the incident angle h ¼ 0/C14"
+          },
+          {
+            "match": "interface",
+            "snippet": "ﬂuid and porous sandstone used in the simula- tion can be found in Schakel and Smeulders (2010) . For the VSEP conﬁguration, the source to interface distance z S ¼ 80 mm and the receiver line offset D ¼ 45 mm. The receiving electrodes, as shown in Fig. 1, are evenly spaced along the line from /C0100 mm to 100 mm, with 1 mm spacing. We set the incident angle h ¼ 0/C14 and the radiation width kb ¼ 80 mm /C0"
+          },
+          {
+            "match": "interface",
+            "snippet": "ows the calculated EM signals along the receiving line. They are colored black, blue, and red when the receiver is above, at, and below the interface, respectively. Three phenomena can be observed from the modeling result. The ﬁrst is that all signals arrive at a constant time of T 0 ¼ 52.5 ls, which is the acoustic travel time from the source to the interface, indicating that they are the seismoelectric i"
+          },
+          {
+            "match": "pe",
+            "snippet": "ated EM signals along the receiving line. They are colored black, blue, and red when the receiver is above, at, and below the interface, respectively. Three phenomena can be observed from the modeling result. The ﬁrst is that all signals arrive at a constant time of T 0 ¼ 52.5 ls, which is the acoustic travel time from the source to the interface, indicating that they are the seismoelectric inter- f"
+          }
+        ]
+      },
+      {
+        "page": 5,
+        "hits": [
+          {
+            "match": "interface",
+            "snippet": "e varies with h and r only, as u / cos hðÞ r2 : (4) The electric dipole model explains the modeling result of Fig. 2(a) quite well. For the interface located at h ¼ 90/C14, the cos ðhÞ function changes signs across the inter- face. This explains the polarity reversal phenomenon of Fig. 2(a). The modeling data amplitude, after normalization to eliminate the f ðP; eÞ parameter, is compared with that of Eq. ("
+          },
+          {
+            "match": "Eq. (4",
+            "snippet": "sal phenomenon of Fig. 2(a). The modeling data amplitude, after normalization to eliminate the f ðP; eÞ parameter, is compared with that of Eq. (4) in Fig. 2(b), where h and r for each electrode position can be easily cal- culated for the conﬁguration in Fig. 1. Figure 2(b) shows that the full modeling result (black) agrees with the dipole model (red) reasonably well. (The slightly fatter pattern of our"
+          },
+          {
+            "match": "Pe",
+            "snippet": "source in the modeling). The electric dipole model can also explain the result of the zero-offset conﬁgu- ration ( Schakel et al. , 2011 ; Peng et al. , 2017 ). For the zero-offset, the source and elec- trodes are along the same line speciﬁed by h ¼ 0 /C14 [cosðhÞ¼ 1], such that u / 1=r2, resulting in a monotonic increase of signal amplitude toward the interface as r ! 0. 3. Experimental verificati"
+          },
+          {
+            "match": "pe",
+            "snippet": "et conﬁgu- ration ( Schakel et al. , 2011 ; Peng et al. , 2017 ). For the zero-offset, the source and elec- trodes are along the same line speciﬁed by h ¼ 0 /C14 [cosðhÞ¼ 1], such that u / 1=r2, resulting in a monotonic increase of signal amplitude toward the interface as r ! 0. 3. Experimental verification 3.1 Experimental apparatus and methods An experiment was conducted to verify the above theore"
+          },
+          {
+            "match": "interface",
+            "snippet": "long the same line speciﬁed by h ¼ 0 /C14 [cosðhÞ¼ 1], such that u / 1=r2, resulting in a monotonic increase of signal amplitude toward the interface as r ! 0. 3. Experimental verification 3.1 Experimental apparatus and methods An experiment was conducted to verify the above theoretical modeling result. The experimental setup is shown in Fig. 3, where a 150 /C2 150 /C2 110 mm sandstone block is immersed in"
+          },
+          {
+            "match": "pe",
+            "snippet": "ed by h ¼ 0 /C14 [cosðhÞ¼ 1], such that u / 1=r2, resulting in a monotonic increase of signal amplitude toward the interface as r ! 0. 3. Experimental verification 3.1 Experimental apparatus and methods An experiment was conducted to verify the above theoretical modeling result. The experimental setup is shown in Fig. 3, where a 150 /C2 150 /C2 110 mm sandstone block is immersed in a 400 /C2 400 /C2"
+          },
+          {
+            "match": "pe",
+            "snippet": "such that u / 1=r2, resulting in a monotonic increase of signal amplitude toward the interface as r ! 0. 3. Experimental verification 3.1 Experimental apparatus and methods An experiment was conducted to verify the above theoretical modeling result. The experimental setup is shown in Fig. 3, where a 150 /C2 150 /C2 110 mm sandstone block is immersed in a 400 /C2 400 /C2 400 mm water tank. The porosi"
+          },
+          {
+            "match": "pe",
+            "snippet": "otonic increase of signal amplitude toward the interface as r ! 0. 3. Experimental verification 3.1 Experimental apparatus and methods An experiment was conducted to verify the above theoretical modeling result. The experimental setup is shown in Fig. 3, where a 150 /C2 150 /C2 110 mm sandstone block is immersed in a 400 /C2 400 /C2 400 mm water tank. The porosity and permeability of the sandstone a"
+          }
+        ]
+      },
+      {
+        "page": 6,
+        "hits": [
+          {
+            "match": "pe",
+            "snippet": "diameter) were used to actuate and receive the seismoelectric signal. The measurement system also includes an Agilent DSO-X-6004A oscilloscope, an Agilent (Santa Clara, CA) 33500B waveform generator, a 50 dB gain Electronic and Innovation (Rochester, NY) 2011L power ampliﬁer, and a 20 dB gain Picotest J2180A preampliﬁer. In the setup of Fig. 3, the distance between the source and ﬂuid-solid interfac"
+          },
+          {
+            "match": "interface",
+            "snippet": "2011L power ampliﬁer, and a 20 dB gain Picotest J2180A preampliﬁer. In the setup of Fig. 3, the distance between the source and ﬂuid-solid interface is ﬁxed at 80 mm. The distance between the receiving line and the source is D ¼ 45 mm. A 500 kHz single cycle sine wave with peak to peak amplitude of 300 V is loaded on the source transducer to actuate the incident acoustic wave. The electrode measurement po"
+          },
+          {
+            "match": "pe",
+            "snippet": "olid interface is ﬁxed at 80 mm. The distance between the receiving line and the source is D ¼ 45 mm. A 500 kHz single cycle sine wave with peak to peak amplitude of 300 V is loaded on the source transducer to actuate the incident acoustic wave. The electrode measurement positions, which are similar to those in Fig. 1,a r e shown in Fig. 3. The ﬁrst electrode position R 1 is placed at 70 mm in front"
+          },
+          {
+            "match": "pe",
+            "snippet": "erface is ﬁxed at 80 mm. The distance between the receiving line and the source is D ¼ 45 mm. A 500 kHz single cycle sine wave with peak to peak amplitude of 300 V is loaded on the source transducer to actuate the incident acoustic wave. The electrode measurement positions, which are similar to those in Fig. 1,a r e shown in Fig. 3. The ﬁrst electrode position R 1 is placed at 70 mm in front of the"
+          },
+          {
+            "match": "interface",
+            "snippet": "t positions, which are similar to those in Fig. 1,a r e shown in Fig. 3. The ﬁrst electrode position R 1 is placed at 70 mm in front of the interface, the last position Rn is placed at 105 mm behind the interface, and Ri is right at the interface position. By varying the measurement position at 1 mm increment, the angle h, as deﬁned in Fig. 3, varies from h < 90/C14 to h > 90/C14,w i t hh ¼ 90/C14 coincidi"
+          },
+          {
+            "match": "interface",
+            "snippet": "n Fig. 3. The ﬁrst electrode position R 1 is placed at 70 mm in front of the interface, the last position Rn is placed at 105 mm behind the interface, and Ri is right at the interface position. By varying the measurement position at 1 mm increment, the angle h, as deﬁned in Fig. 3, varies from h < 90/C14 to h > 90/C14,w i t hh ¼ 90/C14 coinciding with the interface. 3.2 Experimental results and analysis To"
+          },
+          {
+            "match": "interface",
+            "snippet": "ion R 1 is placed at 70 mm in front of the interface, the last position Rn is placed at 105 mm behind the interface, and Ri is right at the interface position. By varying the measurement position at 1 mm increment, the angle h, as deﬁned in Fig. 3, varies from h < 90/C14 to h > 90/C14,w i t hh ¼ 90/C14 coinciding with the interface. 3.2 Experimental results and analysis To verify that the measured electric"
+          },
+          {
+            "match": "interface",
+            "snippet": "nt position at 1 mm increment, the angle h, as deﬁned in Fig. 3, varies from h < 90/C14 to h > 90/C14,w i t hh ¼ 90/C14 coinciding with the interface. 3.2 Experimental results and analysis To verify that the measured electric signal is the seismoelectric EM signal from the inter- face, three measurements were made. The ﬁrst was done by removing the sandstone and placing a Panametrics V391 ultrasonic receiv"
+          }
+        ]
+      },
+      {
+        "page": 7,
+        "hits": [
+          {
+            "match": "interface",
+            "snippet": "positions on right and left of the interface, respectively. For each measurement posi- tion, the angle h and distance r to the origin can be calculated, and the signal ampli- tude [normalized for each side of the interface to remove the f ðP; eÞ parameter of Eq. (3)] is plotted in Fig. 4(c). (Note the d"
+          },
+          {
+            "match": "pe",
+            "snippet": "positions on right and left of the interface, respectively. For each measurement posi- tion, the angle h and distance r to the origin can be calculated, and the signal ampli- tude [normalized for each side of the interface to remove the f ðP; eÞ parameter of Eq. (3)] is plotted in Fig. 4(c). (Note the data poi"
+          },
+          {
+            "match": "interface",
+            "snippet": "urement posi- tion, the angle h and distance r to the origin can be calculated, and the signal ampli- tude [normalized for each side of the interface to remove the f ðP; eÞ parameter of Eq. (3)] is plotted in Fig. 4(c). (Note the data point in this ﬁgure is plotted for every mea- surement position at an increment of 1 mm.) The pattern of Fig. 4(c) resembles its the- oretical counterpart very well. The expe"
+          },
+          {
+            "match": "Eq.\n(3",
+            "snippet": "to the origin can be calculated, and the signal ampli- tude [normalized for each side of the interface to remove the f ðP; eÞ parameter of Eq. (3)] is plotted in Fig. 4(c). (Note the data point in this ﬁgure is plotted for every mea- surement position at an increment of 1 mm.) The pattern of Fig. 4(c) resembles its the- oretical counterpart very well. The experiment result is further discussed below. F"
+          },
+          {
+            "match": "pe",
+            "snippet": "or every mea- surement position at an increment of 1 mm.) The pattern of Fig. 4(c) resembles its the- oretical counterpart very well. The experiment result is further discussed below. First, as shown in Fig. 4(b), all signals occur simultaneously at a constant arrival time of T0 ¼ 52.5 ls. For the same reason used to explain in Fig. 4(a), these are the seismoelectric EM waves radiated from the inter"
+          },
+          {
+            "match": "interface",
+            "snippet": "ant arrival time of T0 ¼ 52.5 ls. For the same reason used to explain in Fig. 4(a), these are the seismoelectric EM waves radiated from the interface. The phase and amplitude variation, especially the polarity reversal phenomenon across the interface, compare very well with the theoretical modeling results in Fig. 2(a). We now analyze the pattern in Fig. 4(c). The peak amplitude position on the left and ri"
+          },
+          {
+            "match": "pe",
+            "snippet": "eason used to explain in Fig. 4(a), these are the seismoelectric EM waves radiated from the interface. The phase and amplitude variation, especially the polarity reversal phenomenon across the interface, compare very well with the theoretical modeling results in Fig. 2(a). We now analyze the pattern in Fig. 4(c). The peak amplitude position on the left and right side of the interface occur at h ¼ 60"
+          },
+          {
+            "match": "interface",
+            "snippet": "smoelectric EM waves radiated from the interface. The phase and amplitude variation, especially the polarity reversal phenomenon across the interface, compare very well with the theoretical modeling results in Fig. 2(a). We now analyze the pattern in Fig. 4(c). The peak amplitude position on the left and right side of the interface occur at h ¼ 60 /C14 and h ¼ 127:5/C14, respectively. In comparison, the th"
+          }
+        ]
+      }
+    ]
+  },
+  "Schakel_2011_Geophysics": {
+    "path": "C:\\Users\\imgw\\Documents\\Codex\\震电模拟\\uploaded_files\\01_classical_theory_foundational_papers\\04_Schakel_2011_Geophysics_interface_forward_model.pdf",
+    "n_pages": 8,
+    "first_page_title_snippet": "Seismoelectric interface response: Experimental results and forward model M. D. Schakel1, D. M. J. Smeulders 2, E. C. Slob 1, and H. K. J. Heller 1 ABSTRACT Understanding the seismoelectric interface response is im- portant for developing seismoelectric ﬁeld methods for oil ex- ploration and environmental/engineering geophysics. The existing seismoelectric theory has never been validated",
+    "hit_pages": [
+      {
+        "page": 1,
+        "hits": [
+          {
+            "match": "interface",
+            "snippet": "Seismoelectric interface response: Experimental results and forward model M. D. Schakel1, D. M. J. Smeulders 2, E. C. Slob 1, and H. K. J. Heller 1 ABSTRACT Understanding the seismoelectric interface response is im- portant for developing seismoelectric ﬁeld methods for oil ex- plora"
+          },
+          {
+            "match": "pe",
+            "snippet": "Seismoelectric interface response: Experimental results and forward model M. D. Schakel1, D. M. J. Smeulders 2, E. C. Slob 1, and H. K. J. Heller 1 ABSTRACT Understanding the seismoelectric interface response is im- portant for developing seismoelectric ﬁeld methods for oil ex- ploration and enviro"
+          },
+          {
+            "match": "interface",
+            "snippet": "sults and forward model M. D. Schakel1, D. M. J. Smeulders 2, E. C. Slob 1, and H. K. J. Heller 1 ABSTRACT Understanding the seismoelectric interface response is im- portant for developing seismoelectric ﬁeld methods for oil ex- ploration and environmental/engineering geophysics. The existing seismoelectric theory has never been validated system- atically by controlled experiments. We have designed and dev"
+          },
+          {
+            "match": "pe",
+            "snippet": "tion and environmental/engineering geophysics. The existing seismoelectric theory has never been validated system- atically by controlled experiments. We have designed and developed an experimental setup in which acoustic-to- electromagnetic wave conversions at interfaces are measured. An acoustic source emits a pressure wave that impinges upon a porous sample. The reﬂected electric-wave potential i"
+          },
+          {
+            "match": "pe",
+            "snippet": "physics. The existing seismoelectric theory has never been validated system- atically by controlled experiments. We have designed and developed an experimental setup in which acoustic-to- electromagnetic wave conversions at interfaces are measured. An acoustic source emits a pressure wave that impinges upon a porous sample. The reﬂected electric-wave potential is recorded by a wire electrode. We hav"
+          },
+          {
+            "match": "pe",
+            "snippet": "The existing seismoelectric theory has never been validated system- atically by controlled experiments. We have designed and developed an experimental setup in which acoustic-to- electromagnetic wave conversions at interfaces are measured. An acoustic source emits a pressure wave that impinges upon a porous sample. The reﬂected electric-wave potential is recorded by a wire electrode. We have also de"
+          },
+          {
+            "match": "interface",
+            "snippet": "y by controlled experiments. We have designed and developed an experimental setup in which acoustic-to- electromagnetic wave conversions at interfaces are measured. An acoustic source emits a pressure wave that impinges upon a porous sample. The reﬂected electric-wave potential is recorded by a wire electrode. We have also developed a full-waveform electrokinetic theoretical model based on the Sommerfeld a"
+          },
+          {
+            "match": "pe",
+            "snippet": "pressure wave that impinges upon a porous sample. The reﬂected electric-wave potential is recorded by a wire electrode. We have also developed a full-waveform electrokinetic theoretical model based on the Sommerfeld approach and have compared it with measurements at positions perpendicular and parallel to the ﬂuid/porous-medium interface. We performed experiments at several salinities. For 10 -3 an"
+          }
+        ]
+      },
+      {
+        "page": 2,
+        "hits": [
+          {
+            "match": "interface",
+            "snippet": "The numerically predicted amplitude-decay pattern of the seis- moelectric conversion at an interface (e.g., Haartsen and Pride, 1997; Garambois and Dietrich, 2002; Haines and Pride, 2006 ) has been observed by several workers (e.g., Butler et al., 1996; Mikhailov et al., 1997; Dupuis et al., 2007 ). Mikhailov et al. (1997) compare ﬁeld measurements of this p"
+          },
+          {
+            "match": "interface",
+            "snippet": "numerical model and ﬁnd reasona- ble agreement, and Charara et al. (2009) model and measure seismoelectric signals at a ﬂuid/porous-medium interface in a laboratory experiment. However, Charara et al. do not consider the spatial variation of reﬂected waveform and amplitude. In this article, we test the predictive power of electrokinetic theory for the seismoelectric interface response. Laboratory meas- ur"
+          },
+          {
+            "match": "pe",
+            "snippet": "sona- ble agreement, and Charara et al. (2009) model and measure seismoelectric signals at a ﬂuid/porous-medium interface in a laboratory experiment. However, Charara et al. do not consider the spatial variation of reﬂected waveform and amplitude. In this article, we test the predictive power of electrokinetic theory for the seismoelectric interface response. Laboratory meas- urements and modeling o"
+          },
+          {
+            "match": "electrokinetic",
+            "snippet": ", Charara et al. do not consider the spatial variation of reﬂected waveform and amplitude. In this article, we test the predictive power of electrokinetic theory for the seismoelectric interface response. Laboratory meas- urements and modeling on the basis of the Sommerfeld approach and Pride’s electrokinetic theory are presented. Measurements are conducted at several positions in a water tank in which a ﬂuid-"
+          },
+          {
+            "match": "interface",
+            "snippet": "variation of reﬂected waveform and amplitude. In this article, we test the predictive power of electrokinetic theory for the seismoelectric interface response. Laboratory meas- urements and modeling on the basis of the Sommerfeld approach and Pride’s electrokinetic theory are presented. Measurements are conducted at several positions in a water tank in which a ﬂuid- saturated porous sample is immersed. Exc"
+          },
+          {
+            "match": "Sommerfeld",
+            "snippet": "ictive power of electrokinetic theory for the seismoelectric interface response. Laboratory meas- urements and modeling on the basis of the Sommerfeld approach and Pride’s electrokinetic theory are presented. Measurements are conducted at several positions in a water tank in which a ﬂuid- saturated porous sample is immersed. Excellent agreement between theory and experiments for waveforms and spatial ampli-"
+          },
+          {
+            "match": "electrokinetic",
+            "snippet": "heory for the seismoelectric interface response. Laboratory meas- urements and modeling on the basis of the Sommerfeld approach and Pride’s electrokinetic theory are presented. Measurements are conducted at several positions in a water tank in which a ﬂuid- saturated porous sample is immersed. Excellent agreement between theory and experiments for waveforms and spatial ampli- tude pattern is found. Measured amp"
+          },
+          {
+            "match": "pe",
+            "snippet": "nducted at several positions in a water tank in which a ﬂuid- saturated porous sample is immersed. Excellent agreement between theory and experiments for waveforms and spatial ampli- tude pattern is found. Measured amplitudes are shown to be de- pendent on salinity. Only a single amplitude ﬁeld scaling factor is necessary to ﬁnd absolute agreement. Our research validates elec- trokinetic theory for"
+          }
+        ]
+      },
+      {
+        "page": 3,
+        "hits": [
+          {
+            "match": "interface",
+            "snippet": "amplitude as the distance from the interface increases. The measured (true) peak-to-peak amplitude at r; zðÞ ¼ 0; /C0 0:3ðÞ cm is approximately 0.25 mV. In a separate experiment, acoustic pressure was measured along the z-axis. In Figure 2b, we show the acoustic waveforms measured with a Specialty Engin"
+          },
+          {
+            "match": "pe",
+            "snippet": "amplitude as the distance from the interface increases. The measured (true) peak-to-peak amplitude at r; zðÞ ¼ 0; /C0 0:3ðÞ cm is approximately 0.25 mV. In a separate experiment, acoustic pressure was measured along the z-axis. In Figure 2b, we show the acoustic waveforms measured with a Specialty Engineering Associates needle hydrophon"
+          },
+          {
+            "match": "pe",
+            "snippet": "amplitude as the distance from the interface increases. The measured (true) peak-to-peak amplitude at r; zðÞ ¼ 0; /C0 0:3ðÞ cm is approximately 0.25 mV. In a separate experiment, acoustic pressure was measured along the z-axis. In Figure 2b, we show the acoustic waveforms measured with a Specialty Engineering Associates needle hydrophone (model"
+          },
+          {
+            "match": "pe",
+            "snippet": "m the interface increases. The measured (true) peak-to-peak amplitude at r; zðÞ ¼ 0; /C0 0:3ðÞ cm is approximately 0.25 mV. In a separate experiment, acoustic pressure was measured along the z-axis. In Figure 2b, we show the acoustic waveforms measured with a Specialty Engineering Associates needle hydrophone (model PZT-Z44-1000-S/N), cali- brated over the frequency range of interest. From these mea"
+          },
+          {
+            "match": "pe",
+            "snippet": "V. In a separate experiment, acoustic pressure was measured along the z-axis. In Figure 2b, we show the acoustic waveforms measured with a Specialty Engineering Associates needle hydrophone (model PZT-Z44-1000-S/N), cali- brated over the frequency range of interest. From these measure- ments, we can extrapolate that the acoustic pulse will indeed arrive at the interface around 0.1 ms. FORWARD MODELI"
+          },
+          {
+            "match": "interface",
+            "snippet": "rated over the frequency range of interest. From these measure- ments, we can extrapolate that the acoustic pulse will indeed arrive at the interface around 0.1 ms. FORWARD MODELING OF THE SEISMOELECTRIC INTERFACE RESPONSE The acoustic source is modeled by (e.g., Hall, 1987 ) ^p x; R; hðÞ ¼ A xðÞ R e/C0 ikRD hðÞ ; (1) where x is the radial frequency, R ¼ ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ ﬃ r /C0 r0ð"
+          },
+          {
+            "match": "INTERFACE",
+            "snippet": "ments, we can extrapolate that the acoustic pulse will indeed arrive at the interface around 0.1 ms. FORWARD MODELING OF THE SEISMOELECTRIC INTERFACE RESPONSE The acoustic source is modeled by (e.g., Hall, 1987 ) ^p x; R; hðÞ ¼ A xðÞ R e/C0 ikRD hðÞ ; (1) where x is the radial frequency, R ¼ ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ ﬃ r /C0 r0ðÞ 2 þ z /C0 z0ðÞ 2 q is the distance to the source, h is the ang"
+          },
+          {
+            "match": "pe",
+            "snippet": "ﬃﬃﬃﬃﬃﬃﬃﬃ ﬃ r /C0 r0ðÞ 2 þ z /C0 z0ðÞ 2 q is the distance to the source, h is the angle of incidence (see Figure 3), A xðÞ is the amplitude spectrum, and k is the ﬂuid wavenumber. The directivity function D hðÞ is given by D hðÞ ¼ J1 ka sin hðÞ ka sin h : (2) Here, J1 is the Bessel function of the ﬁrst kind and ﬁrst order, and a is the radius of the transducer. At r; zðÞ ¼ 0; 0ðÞ , A xðÞ is determine"
+          }
+        ]
+      },
+      {
+        "page": 4,
+        "hits": [
+          {
+            "match": "pe",
+            "snippet": "ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ ﬃ 1=c2 E xðÞðÞ /C0 sin2 h=c2 PðÞ p and Im kE z hðÞ < 0 hi . Fluid EM and pressure wave velocities are given by, respec- tively, cE xðÞ ¼ ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ le0/C15f /C0 ilrfl=x /C0/C1/C0/C1 /C0 1 q and cP ¼ ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ Kf =qf q , where e0 is the vacuum permittivity and rfl is the ﬂuid conduc- tivity. The path of integration is along straight lines"
+          },
+          {
+            "match": "permittivity",
+            "snippet": "ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ le0/C15f /C0 ilrfl=x /C0/C1/C0/C1 /C0 1 q and cP ¼ ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ Kf =qf q , where e0 is the vacuum permittivity and rfl is the ﬂuid conduc- tivity. The path of integration is along straight lines from zero to p=2 and from p=2t o p=2 þ i1 in the complex h plane. The second integral over complex h is simpliﬁed further using the substitution h ¼ p=2 þ i ln ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ ﬃ"
+          },
+          {
+            "match": "J0",
+            "snippet": "er complex h is simpliﬁed further using the substitution h ¼ p=2 þ i ln ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ ﬃ c2 þ 1 p þ c hi : ^uðx; rr ; zr Þ¼/C0 iAðxÞ a ðp=2 0 J0ðkrr sin hÞJ1ðka sin hÞ /C2 eikz0 cosheikE z hðÞ zr RE hðÞ dh þ A xðÞ a ð1 0 J0 krr ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ ﬃ c2 þ 1 p/C16/C17 J1 ka ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ ﬃ c2 þ 1 p/C16/C17 ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ ﬃ c2 þ 1 p /C2 ekz0 ceikE z cðÞ zr RE cðÞ dc; (5) where equation 2 is used for D hðÞ . Equati"
+          },
+          {
+            "match": "J1",
+            "snippet": "is simpliﬁed further using the substitution h ¼ p=2 þ i ln ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ ﬃ c2 þ 1 p þ c hi : ^uðx; rr ; zr Þ¼/C0 iAðxÞ a ðp=2 0 J0ðkrr sin hÞJ1ðka sin hÞ /C2 eikz0 cosheikE z hðÞ zr RE hðÞ dh þ A xðÞ a ð1 0 J0 krr ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ ﬃ c2 þ 1 p/C16/C17 J1 ka ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ ﬃ c2 þ 1 p/C16/C17 ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ ﬃ c2 þ 1 p /C2 ekz0 ceikE z cðÞ zr RE cðÞ dc; (5) where equation 2 is used for D hðÞ . Equation 5 can be r"
+          },
+          {
+            "match": "J0",
+            "snippet": "ﬃﬃﬃﬃﬃ ﬃ c2 þ 1 p þ c hi : ^uðx; rr ; zr Þ¼/C0 iAðxÞ a ðp=2 0 J0ðkrr sin hÞJ1ðka sin hÞ /C2 eikz0 cosheikE z hðÞ zr RE hðÞ dh þ A xðÞ a ð1 0 J0 krr ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ ﬃ c2 þ 1 p/C16/C17 J1 ka ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ ﬃ c2 þ 1 p/C16/C17 ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ ﬃ c2 þ 1 p /C2 ekz0 ceikE z cðÞ zr RE cðÞ dc; (5) where equation 2 is used for D hðÞ . Equation 5 can be readily evaluated numerically and yields the total reﬂected EM wave"
+          },
+          {
+            "match": "J1",
+            "snippet": "Þ¼/C0 iAðxÞ a ðp=2 0 J0ðkrr sin hÞJ1ðka sin hÞ /C2 eikz0 cosheikE z hðÞ zr RE hðÞ dh þ A xðÞ a ð1 0 J0 krr ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ ﬃ c2 þ 1 p/C16/C17 J1 ka ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ ﬃ c2 þ 1 p/C16/C17 ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ ﬃ c2 þ 1 p /C2 ekz0 ceikE z cðÞ zr RE cðÞ dc; (5) where equation 2 is used for D hðÞ . Equation 5 can be readily evaluated numerically and yields the total reﬂected EM wave- ﬁeld through the inverse fast Fourier"
+          },
+          {
+            "match": "pe",
+            "snippet": "d, and the input parameters of Tables 1 and 2 are used. Figure 6 shows the resulting modeled reﬂected electric potential and its frequency spectrum for a 10 /C0 3 M NaCl salinity. COMPARISON BETWEEN EXPERIMENT AND FORWARD MODEL Figure 7 compares measured waveforms (solid lines) at vari- ous positions in the ﬂuid along the negative z-axis (Figure 3) with modeled waveforms (dashed lines). The agreemen"
+          },
+          {
+            "match": "PE",
+            "snippet": "e 6 shows the resulting modeled reﬂected electric potential and its frequency spectrum for a 10 /C0 3 M NaCl salinity. COMPARISON BETWEEN EXPERIMENT AND FORWARD MODEL Figure 7 compares measured waveforms (solid lines) at vari- ous positions in the ﬂuid along the negative z-axis (Figure 3) with modeled waveforms (dashed lines). The agreement between measured and modeled waveforms is excellent. The mo"
+          }
+        ]
+      },
+      {
+        "page": 5,
+        "hits": [
+          {
+            "match": "pe",
+            "snippet": "metry in the measured data. This is most likely caused by a small mis- alignment in the setup. In Figure 10, the corresponding fre- quency spectra are shown. We recall that the A C ¼ 0:19 value is obtained from Fourier spectra of the entire ﬁeld shown in Fig- ures 8 and 10. To compare predicted amplitudes with measurements more directly, peak-to-peak amplitudes V pp /C0/C1 are plotted in Figure 11 a"
+          },
+          {
+            "match": "pe",
+            "snippet": "in the setup. In Figure 10, the corresponding fre- quency spectra are shown. We recall that the A C ¼ 0:19 value is obtained from Fourier spectra of the entire ﬁeld shown in Fig- ures 8 and 10. To compare predicted amplitudes with measurements more directly, peak-to-peak amplitudes V pp /C0/C1 are plotted in Figure 11 and compared with our model (dashed lines). Again, the spatial amplitude pattern"
+          },
+          {
+            "match": "pe",
+            "snippet": "ained from Fourier spectra of the entire ﬁeld shown in Fig- ures 8 and 10. To compare predicted amplitudes with measurements more directly, peak-to-peak amplitudes V pp /C0/C1 are plotted in Figure 11 and compared with our model (dashed lines). Again, the spatial amplitude pattern is excellently predicted by theory for the measurements along the negative z-axis (Figure 11a) and paral- lel to the r-a"
+          },
+          {
+            "match": "pe",
+            "snippet": "om Fourier spectra of the entire ﬁeld shown in Fig- ures 8 and 10. To compare predicted amplitudes with measurements more directly, peak-to-peak amplitudes V pp /C0/C1 are plotted in Figure 11 and compared with our model (dashed lines). Again, the spatial amplitude pattern is excellently predicted by theory for the measurements along the negative z-axis (Figure 11a) and paral- lel to the r-axis at z"
+          },
+          {
+            "match": "pe",
+            "snippet": "for the measurements along the negative z-axis (Figure 11a) and paral- lel to the r-axis at z ¼/C0 1:3 cm (Figure 11b). We also check the repeatability of the experiment. There is a small amplitude decrease over two days. The waveform is preserved on these longer timescales. In Figure 11 (gray lines), we also plot the vertical electric dipole approximation A Dze/C0 ikE d = r2 þ z2ðÞ 3=2 (see also, e"
+          },
+          {
+            "match": "pe",
+            "snippet": "along the negative z-axis (Figure 11a) and paral- lel to the r-axis at z ¼/C0 1:3 cm (Figure 11b). We also check the repeatability of the experiment. There is a small amplitude decrease over two days. The waveform is preserved on these longer timescales. In Figure 11 (gray lines), we also plot the vertical electric dipole approximation A Dze/C0 ikE d = r2 þ z2ðÞ 3=2 (see also, e.g., Dupuis et al. [2"
+          },
+          {
+            "match": "pe",
+            "snippet": "efﬁcient AD is Figure 6. (a) Modeled reﬂected electric potential for an acoustic source at r0; z0ðÞ ¼ 0; /C0 15ðÞ cm and (b) its frequency spectrum. Figure 7. Measured (solid lines) and modeled (dashed lines) elec- tric potential waveforms at various positions in the ﬂuid along the z-axis at r ¼ 0 for C ¼ 10/C0 3 M NaCl. Figure 8. Measured (solid lines) and modeled (dashed lines) elec- tric potentia"
+          },
+          {
+            "match": "pe",
+            "snippet": "he ﬂuid along the z-axis at r ¼ 0 for C ¼ 10/C0 3 M NaCl. Figure 8. Measured (solid lines) and modeled (dashed lines) elec- tric potential spectra at various positions in the ﬂuid along the z-axis at r ¼ 0 for C ¼ 10/C0 3 M NaCl. Figure 9. Measured (solid lines) and modeled (dashed lines) elec- tric potential waveforms at various positions in the ﬂuid parallel to the r-axis at z ¼/C0 1:3 cm for C ¼"
+          }
+        ]
+      },
+      {
+        "page": 6,
+        "hits": [
+          {
+            "match": "pe",
+            "snippet": ". Figures 12 and 13 show measured and full-waveform mod- eled V pp-values where C ¼ 10/C0 4 and C ¼ 10/C0 2 M NaCl solu- tions are used, respectively. We determine the AC-values in the same way as for the 10 /C0 3 M NaCl solution. Resulting values are given in Table 2. The spatial amplitude pattern is also excel- lently predicted for these salt solutions. For higher salinities, the AC values are clo"
+          },
+          {
+            "match": "electrokinetic",
+            "snippet": "lues are closer to (or approach) unity. This observation is in agreement with Block and Harris (2006), who ﬁnd that the discrepancy between electrokinetic theoretical predictions and measurements decreases with increas- ing salinity. Block and Harris (2006) also suggest that when low-salinity electrolytes are used to saturate the pores of sand- stones, surface conductivity effects other than those predicted by"
+          },
+          {
+            "match": "conductivity",
+            "snippet": "salinity. Block and Harris (2006) also suggest that when low-salinity electrolytes are used to saturate the pores of sand- stones, surface conductivity effects other than those predicted by Pride’s electrokinetic theory may become dominant. The Pride theory used here incorporates diffuse-layer excess conduction associated with electromigration and electroosmosis. When the pore width is much larger than the D"
+          },
+          {
+            "match": "electrokinetic",
+            "snippet": "ow-salinity electrolytes are used to saturate the pores of sand- stones, surface conductivity effects other than those predicted by Pride’s electrokinetic theory may become dominant. The Pride theory used here incorporates diffuse-layer excess conduction associated with electromigration and electroosmosis. When the pore width is much larger than the Debye length, which is a measure of the diffuse-layer thicknes"
+          },
+          {
+            "match": "conductivity",
+            "snippet": "on and electroosmosis. When the pore width is much larger than the Debye length, which is a measure of the diffuse-layer thickness, surface conductivity effects become negligible with increasing salinity. Our sample has a 16–40 lm pore width, whereas the Debye length is on the order of 3–30 nm. We also observe that for all salinities, the A C values differ from unity. Several possible reasons can be identiﬁed"
+          },
+          {
+            "match": "zeta",
+            "snippet": "f 3–30 nm. We also observe that for all salinities, the A C values differ from unity. Several possible reasons can be identiﬁed. First, the zeta potentials are obtained from crushed sample material sus- pensions. A Zetasizer is used for this. Probably, the zeta poten- tial measured on ground-up material has a much higher value than that measured on intact (aged) surface material. This obser- vation al"
+          },
+          {
+            "match": "pe",
+            "snippet": "ues differ from unity. Several possible reasons can be identiﬁed. First, the zeta potentials are obtained from crushed sample material sus- pensions. A Zetasizer is used for this. Probably, the zeta poten- tial measured on ground-up material has a much higher value than that measured on intact (aged) surface material. This obser- vation alone could be responsible for A C being different from Figure"
+          },
+          {
+            "match": "Zeta",
+            "snippet": "rom unity. Several possible reasons can be identiﬁed. First, the zeta potentials are obtained from crushed sample material sus- pensions. A Zetasizer is used for this. Probably, the zeta poten- tial measured on ground-up material has a much higher value than that measured on intact (aged) surface material. This obser- vation alone could be responsible for A C being different from Figure 11. Measured ("
+          }
+        ]
+      },
+      {
+        "page": 7,
+        "hits": [
+          {
+            "match": "pe",
+            "snippet": "unity. We also performed zeta potential calibration measure- ments on 99.8% silicon oxide (SiO 2) powder suspensions. The measured values were different by a factor of approximately two to three from streaming potential measurements reported in literature (e.g., Li and de Bruy"
+          },
+          {
+            "match": "zeta",
+            "snippet": "unity. We also performed zeta potential calibration measure- ments on 99.8% silicon oxide (SiO 2) powder suspensions. The measured values were different by a factor of approximately two to three from streaming potential measurements reported in literature (e.g., Li and de Bruyn [1966] and"
+          },
+          {
+            "match": "pe",
+            "snippet": "unity. We also performed zeta potential calibration measure- ments on 99.8% silicon oxide (SiO 2) powder suspensions. The measured values were different by a factor of approximately two to three from streaming potential measurements reported in literature (e.g., Li and de Bruyn [1966] and Pride and Morgan [1991]), which indicates the uncertainty in our zeta potential"
+          },
+          {
+            "match": "zeta",
+            "snippet": "tial measurements reported in literature (e.g., Li and de Bruyn [1966] and Pride and Morgan [1991]), which indicates the uncertainty in our zeta potential determination. Second, the ﬂuid conductivities given in Table 2 are measured in the ﬂuid outside the pores; therefore, the actual pore ﬂuid conductivity may be different. Finally, the seismoelec- tric interface response amplitudes decrease on timesc"
+          },
+          {
+            "match": "conductivity",
+            "snippet": "determination. Second, the ﬂuid conductivities given in Table 2 are measured in the ﬂuid outside the pores; therefore, the actual pore ﬂuid conductivity may be different. Finally, the seismoelec- tric interface response amplitudes decrease on timescales that are longer (approximately 24 hours) than the duration of a sin- gle measurement series (1–4 hours). For example, the measured amplitudes in Figure 13 fro"
+          },
+          {
+            "match": "interface",
+            "snippet": "2 are measured in the ﬂuid outside the pores; therefore, the actual pore ﬂuid conductivity may be different. Finally, the seismoelec- tric interface response amplitudes decrease on timescales that are longer (approximately 24 hours) than the duration of a sin- gle measurement series (1–4 hours). For example, the measured amplitudes in Figure 13 from the last measurement series (143– 144 hours) are, on ave"
+          },
+          {
+            "match": "conductivity",
+            "snippet": "4 hours) are, on average, 1.9 times smaller than those of the ﬁrst series (0–1 hours). This observation could be related to increasing bulk conductivity ( Block and Harris, 2006 ) and/or incomplete equilibration of the electric double layer. For silica, the electric double layer may take several days to become stable (Morgan et al., 1989 ), and it may take hours at soil interfaces (Liu et al., 2008 ). One cou"
+          },
+          {
+            "match": "interface",
+            "snippet": "e layer. For silica, the electric double layer may take several days to become stable (Morgan et al., 1989 ), and it may take hours at soil interfaces (Liu et al., 2008 ). One could also speculate on the electrodes developing a voltage drop at their surface, thus reducing the measured amplitudes over time. However, replacing the electro- des under stable experimental conditions does not change poten- tial"
+          }
+        ]
+      },
+      {
+        "page": 8,
+        "hits": [
+          {
+            "match": "pe",
+            "snippet": ", Seismoelectric numerical modeling on a grid: Geophysics, 71, no. 6, N57–N65, doi:10.1190/1.2357789. Haines, S. S., S. R. Pride, S. L. Klemperer, and B. Biondi, 2007, Seismo- electric imaging of shallow targets: Geophysics, 72, no. 2, G9–G20, doi:10.1190/1.2428267. Hall, D. E., 1987, Basic acoustics: John Wiley & Sons, Inc. Jocker, J., and D. Smeulders, 2009, Ultrasonic measurements on poroelas- ti"
+          },
+          {
+            "match": "transmission",
+            "snippet": "John Wiley & Sons, Inc. Jocker, J., and D. Smeulders, 2009, Ultrasonic measurements on poroelas- tic slabs: Determination of reﬂection and transmission coefﬁcients and processing for Biot input parameters: Ultrasonics, 49, no. 3, 319–330, doi:10.1016/j.ultras.2008.10.006. Johnson, D. L., D. L. Hemmick, and H. Kojima, 1994, Probing porous media with ﬁrst and second sound. I. Dynamic permeability: Journal of A"
+          },
+          {
+            "match": "Biot",
+            "snippet": "Smeulders, 2009, Ultrasonic measurements on poroelas- tic slabs: Determination of reﬂection and transmission coefﬁcients and processing for Biot input parameters: Ultrasonics, 49, no. 3, 319–330, doi:10.1016/j.ultras.2008.10.006. Johnson, D. L., D. L. Hemmick, and H. Kojima, 1994, Probing porous media with ﬁrst and second sound. I. Dynamic permeability: Journal of Applied Physics, 76, no. 1, 104–114,"
+          },
+          {
+            "match": "permeability",
+            "snippet": ".1016/j.ultras.2008.10.006. Johnson, D. L., D. L. Hemmick, and H. Kojima, 1994, Probing porous media with ﬁrst and second sound. I. Dynamic permeability: Journal of Applied Physics, 76, no. 1, 104–114, doi:10.1063/1.357116. Johnson, D. L., and T. J. Plona, 1982, Acoustic slow waves and the consol- idation transition: Journal of the Acoustical Society of America, 72, 556–565, doi:10.1121/1.388036. Li, H. C., a"
+          },
+          {
+            "match": "slow",
+            "snippet": "Dynamic permeability: Journal of Applied Physics, 76, no. 1, 104–114, doi:10.1063/1.357116. Johnson, D. L., and T. J. Plona, 1982, Acoustic slow waves and the consol- idation transition: Journal of the Acoustical Society of America, 72, 556–565, doi:10.1121/1.388036. Li, H. C., and P. L. de Bruyn, 1966, Electrokinetic and adsorption studies on quartz: Surface Science, 5, no. 2, 203–220, doi:10.1016/00"
+          },
+          {
+            "match": "Electrokinetic",
+            "snippet": "- idation transition: Journal of the Acoustical Society of America, 72, 556–565, doi:10.1121/1.388036. Li, H. C., and P. L. de Bruyn, 1966, Electrokinetic and adsorption studies on quartz: Surface Science, 5, no. 2, 203–220, doi:10.1016/0039- 6028(66)90082-3. Lide, D. R., ed., 2010, CRC handbook of chemistry and physics, 90th ed. (Internet): CRC Press/Taylor and Francis. Liu, Z., L. Yuan, X. Zhang, Z. Liu, and"
+          },
+          {
+            "match": "pe",
+            "snippet": "rnet): CRC Press/Taylor and Francis. Liu, Z., L. Yuan, X. Zhang, Z. Liu, and H. Wu, 2008, A laboratory seismo- electric measurement for the permafrost model with a frozen-unfrozen interface: Geophysical Research Letters, 35, L21404, doi:10.1029/ 2008GL035724. Long, L. T., and W. K. Rivers, 1975, Field measurement of the electroseis- mic response: Geophysics, 40, 233–245, doi:10.1190/1.1440521. Mikha"
+          },
+          {
+            "match": "interface",
+            "snippet": ", Z., L. Yuan, X. Zhang, Z. Liu, and H. Wu, 2008, A laboratory seismo- electric measurement for the permafrost model with a frozen-unfrozen interface: Geophysical Research Letters, 35, L21404, doi:10.1029/ 2008GL035724. Long, L. T., and W. K. Rivers, 1975, Field measurement of the electroseis- mic response: Geophysics, 40, 233–245, doi:10.1190/1.1440521. Mikhailov, O. V., M. W. Haartsen, and M. N. Tokso ¨z"
+          }
+        ]
+      }
+    ]
+  }
+}

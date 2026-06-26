@@ -1,1 +1,7 @@
 hyperframes/
+node_modules/
+tmp/
+tmp_pdf_checks/
+*.aux
+*.log
+~$*

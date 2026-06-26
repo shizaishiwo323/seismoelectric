@@ -1,0 +1,776 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{xcolor}
+\usepackage[
+  paperwidth=13.333in,
+  paperheight=7.5in,
+  left=0.58in,
+  right=0.58in,
+  top=0.42in,
+  bottom=0.34in
+]{geometry}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+\setCJKmainfont[Path=C:/Windows/Fonts/]{simhei.ttf}
+\setCJKsansfont[Path=C:/Windows/Fonts/]{simhei.ttf}
+
+\definecolor{Blue}{HTML}{1F5AA6}
+\definecolor{Red}{HTML}{C8372D}
+\definecolor{Ink}{HTML}{111827}
+\definecolor{Grey}{HTML}{6B7280}
+\definecolor{LightGrey}{HTML}{D1D5DB}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\renewcommand{\baselinestretch}{1.08}
+
+\newcounter{slide}
+\newcommand{\TitleFont}{\fontsize{32}{38}\selectfont\bfseries}
+\newcommand{\TagFont}{\fontsize{16}{20}\selectfont}
+\newcommand{\BodyFont}{\fontsize{18}{25}\selectfont}
+\newcommand{\SmallFont}{\fontsize{16}{21}\selectfont}
+\newcommand{\FootFont}{\fontsize{12}{14}\selectfont}
+\newcommand{\FormulaFont}{\fontsize{20}{26}\selectfont}
+\newcommand{\BigFormulaFont}{\fontsize{24}{30}\selectfont}
+\newcommand{\src}[1]{\vfill{\SmallFont\color{Grey}来源：#1}}
+\newcommand{\one}[1]{{\BodyFont\color{Ink}#1}}
+\newcommand{\grey}[1]{{\color{Grey}#1}}
+\newcommand{\blue}[1]{{\color{Blue}#1}}
+\newcommand{\red}[1]{{\color{Red}#1}}
+
+\newenvironment{slide}[2]{%
+  \clearpage
+  \stepcounter{slide}
+  \thispagestyle{empty}
+  {\TitleFont\color{Ink}#1}\par
+  \vspace{0.05in}
+  {\TagFont\color{Blue}#2}\par
+  \vspace{0.11in}
+  {\color{Blue}\rule{\textwidth}{1.6pt}}\par
+  \vspace{0.28in}
+}{%
+  \vfill
+  {\FootFont\color{Grey}Schakel 2011 Sommerfeld formula chain}
+  \hfill
+  {\FootFont\color{Grey}\theslide}
+}
+
+\newcommand{\twocol}[2]{%
+  \begin{minipage}[t]{0.34\textwidth}
+  #1
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.60\textwidth}
+  #2
+  \end{minipage}
+}
+
+\begin{document}
+
+\begin{slide}{串起界面 EM 正演链}{从反应输运参数到接收点波形}
+\vspace{0.20in}
+{\fontsize{30}{36}\selectfont\color{Ink}
+Schakel 2011 Sommerfeld 正演公式链
+}\par
+\vspace{0.18in}
+{\BodyFont\color{Grey}
+把代码中真正参与计算的公式整理成一条可汇报的机制线。
+}\par
+\vspace{0.45in}
+{\BigFormulaFont
+\[
+\{\phi,k_0,\alpha_\infty,c_H\}
+\rightarrow
+\{k,L,\sigma,\bar{\varepsilon}\}
+\rightarrow
+\{R^E,T^{TM}\}
+\rightarrow
+\hat{\phi}(\omega,z)
+\rightarrow
+u(z,t)
+\]
+}
+\src{\texttt{schakel2011\_sommerfeld.py}；Schakel \& Smeulders 2010；Schakel et al. 2011}
+\end{slide}
+
+\begin{slide}{区分两个时间尺度}{先分清模型变量}
+\twocol{
+\one{溶蚀时间 $t_d$ 更新孔隙结构和流体化学。}\par
+\vspace{0.18in}
+\one{波形时间 $t$ 只描述声源激发后的电磁响应。}
+}{
+{\BigFormulaFont
+\[
+\{\phi,k_0,\alpha_\infty,c_H\}(t_d)
+\quad\not\equiv\quad
+u(z,t)
+\]
+}
+\vspace{0.15in}
+{\FormulaFont
+\[
+u(z,t)=2\operatorname{Re}\int\hat{u}(z,f)e^{i2\pi ft}\,df
+\]
+}
+}
+\src{代码时间循环与频域反变换结构}
+\end{slide}
+
+\begin{slide}{固定相位约定}{保证复波数分支正确}
+\twocol{
+\one{所有频域公式采用 $e^{i\omega t}$。}\par
+\vspace{0.18in}
+\one{复波数分支必须让传播方向上的波衰减。}
+}{
+{\BigFormulaFont
+\[
+e^{i\omega t},
+\qquad
+e^{-i\mathbf{k}\cdot\mathbf{x}}
+\]
+}
+\vspace{0.08in}
+{\FormulaFont
+\[
+k_z^E=\sqrt{\omega^2s_E^2-k_x^2},
+\qquad
+\hat{\phi}_R^E\propto e^{ik_z^Ez_r}
+\]
+}
+}
+\src{Schakel \& Smeulders 2010；Schakel et al. 2011 Geophysics Eq. (3)-(5)}
+\end{slide}
+
+\begin{slide}{把 RT 输出转成模型输入}{孔隙结构和化学状态进入震电理论}
+\twocol{
+\one{代码读取 $\phi,k_0,\alpha_\infty,c_H$。}\par
+\vspace{0.18in}
+\one{单位换算和 pH 下限属于项目接口，不是 Schakel 新公式。}
+}{
+{\FormulaFont
+\[
+k_0[\mathrm{m^2}]
+=k_0[\mathrm{mD}]\times9.869233\times10^{-16}
+\]
+\[
+c_H^\ast=\max(c_H,10^{-7}),
+\qquad
+pH=-\log_{10}c_H^\ast
+\]
+}
+}
+\src{代码接口假设；后续接入 Schakel \& Smeulders 2010 Appendix A}
+\end{slide}
+
+\begin{slide}{计算 zeta 电位}{把流体化学转成电动边界条件}
+\twocol{
+\one{$C$ 和 pH 控制 $\zeta$。}\par
+\vspace{0.18in}
+\one{$\zeta$ 后面进入 $L(\omega)$ 与动态电导率。}
+}{
+{\BigFormulaFont
+\[
+\zeta=
+\left[0.010+0.025\log_{10}(C)\right]
+\frac{pH-2}{5}
+\]
+}
+\vspace{0.10in}
+{\FormulaFont
+\[
+C=C_{\mathrm{bg}}+c_H^\ast
+\]
+}
+}
+\src{Schakel \& Smeulders 2010 Eq. (A5)；浓度映射为项目级假设}
+\end{slide}
+
+\begin{slide}{引入动态渗透率}{让流固相对运动具有频率依赖}
+\twocol{
+\one{$k(\omega)$ 是从静态孔隙结构到波动问题的第一道门。}\par
+\vspace{0.18in}
+\one{溶蚀改变 $k_0,\phi,\alpha_\infty$，从而改变 $\omega_t$。}
+}{
+{\FormulaFont
+\[
+k(\omega)=
+k_0
+\left[
+\sqrt{1+i\frac{\omega}{\omega_t}\frac{M}{2}}
++i\frac{\omega}{\omega_t}
+\right]^{-1}
+\]
+\[
+\omega_t=\frac{\phi\eta}{\alpha_\infty k_0\rho_f}
+\]
+}
+}
+\src{Schakel \& Smeulders 2010 Eq. (A1)-(A3)}
+\end{slide}
+
+\begin{slide}{定义电双层尺度}{连接孔喉尺度与电化学尺度}
+\twocol{
+\one{$d$ 表示 Debye 长度。}\par
+\vspace{0.18in}
+\one{它决定电双层厚度与孔喉尺度 $\Lambda$ 的相对关系。}
+}{
+{\BigFormulaFont
+\[
+d=
+\left[
+\sum_l
+\frac{(e z_l)^2N_l}
+{\varepsilon_0\varepsilon_f k_BT}
+\right]^{-1/2}
+\]
+}
+\vspace{0.08in}
+{\FormulaFont
+\[
+N_1=N_2=1000\,C\,N_A
+\]
+}
+}
+\src{Schakel \& Smeulders 2010 Eq. (A11)}
+\end{slide}
+
+\begin{slide}{建立电动耦合系数}{震电转换强度的核心材料参数}
+\twocol{
+\one{$L(\omega)$ 把压力梯度和电流耦合起来。}\par
+\vspace{0.18in}
+\one{\red{这是溶蚀影响界面 EM 幅值的关键通道。}}
+}{
+{\fontsize{18}{23}\selectfont
+\[
+L(\omega)=
+-
+\frac{\phi}{\alpha_\infty}
+\frac{\varepsilon_0\varepsilon_f\zeta}{\eta}
+\left(1-\frac{2d}{\Lambda}\right)
+\mathcal{F}^{-1/2}
+\]
+\[
+\mathcal{F}=
+1+
+2i\frac{\omega}{M\omega_t}
+\left(1-\frac{2d}{\Lambda}\right)^2
+\left(1+d\sqrt{\frac{i\omega\rho_f}{\eta}}\right)^2
+\]
+}
+}
+\src{Schakel \& Smeulders 2010 Eq. (A4)}
+\end{slide}
+
+\begin{slide}{更新动态体电导率}{把导电与表面过量贡献合并}
+\twocol{
+\one{$\sigma_f$ 是孔隙流体导电。}\par
+\vspace{0.18in}
+\one{$\sigma(\omega)$ 是多孔介质整体动态电导率。}
+}{
+{\FormulaFont
+\[
+\sigma_f=\sum_l(ez_l)^2b_lN_l
+\]
+\[
+\sigma(\omega)=
+\frac{\phi\sigma_f}{\alpha_\infty}
+\left[
+1+\frac{2(C_{\mathrm{em}}+C_{\mathrm{os}})}
+{\sigma_f\Lambda}
+\right]
+\]
+}
+}
+\src{Schakel \& Smeulders 2010 Eq. (A6)-(A10)}
+\end{slide}
+
+\begin{slide}{合成有效介电常数}{把介电、导电和电动耦合放到一起}
+\twocol{
+\one{$\bar{\varepsilon}$ 进入 TM/EM 波模。}\par
+\vspace{0.18in}
+\one{它也参与电动修正密度 $E_K$。}
+}{
+{\BigFormulaFont
+\[
+\bar{\varepsilon}(\omega)
+=
+\varepsilon
+-i\frac{\sigma(\omega)}{\omega}
++i\frac{\eta L^2(\omega)}
+{\omega k(\omega)}
+\]
+}
+\vspace{0.08in}
+{\FormulaFont
+\[
+\varepsilon=\varepsilon_0
+\left[
+\frac{\phi(\varepsilon_f-\varepsilon_s)}{\alpha_\infty}
++\varepsilon_s
+\right]
+\]
+}
+}
+\src{Schakel \& Smeulders 2010 Eq. (20) 及 Eq. (7) 后的混合表达}
+\end{slide}
+
+\begin{slide}{区分上覆流体电导率}{不要混淆两个 sigma}
+\twocol{
+\one{$\sigma(\omega)$ 属于多孔介质内部。}\par
+\vspace{0.18in}
+\one{$\sigma_{fl}$ 控制上覆流体中的 EM 传播。}
+}{
+{\BigFormulaFont
+\[
+s_E^2(\omega)
+=
+\mu_0\varepsilon_0\varepsilon_{fl}
+-i\frac{\mu_0\sigma_{fl}}{\omega}
+\]
+}
+\vspace{0.10in}
+{\FormulaFont
+\[
+k_z^E=\sqrt{\omega^2s_E^2-k_x^2}
+\]
+}
+}
+\src{Schakel \& Smeulders 2010 Appendix B；Schakel et al. 2011 Geophysics Eq. (5)}
+\end{slide}
+
+\begin{slide}{计算 Biot 弹性系数}{得到快慢 P 波的弹性骨架}
+\twocol{
+\one{$A,Q,R$ 描述骨架与孔隙流体的弹性耦合。}\par
+\vspace{0.18in}
+\one{代码进一步使用 $P=A+2G$。}
+}{
+{\fontsize{18}{23}\selectfont
+\[
+Q=
+\frac{\phi\left[K_s(1-\phi)-K_b\right]K_f}
+{K_f(1-\phi-K_b/K_s)+\phi K_s}
+\]
+\[
+R=
+\frac{\phi^2K_sK_f}
+{K_f(1-\phi-K_b/K_s)+\phi K_s},
+\qquad
+P=A+2G
+\]
+}
+}
+\src{Schakel \& Smeulders 2010 Eq. (8)-(10)}
+\end{slide}
+
+\begin{slide}{加入频率相关密度}{把渗透耗散写入惯性项}
+\twocol{
+\one{$\rho_{ij}(\omega)$ 由动态渗透率控制。}\par
+\vspace{0.18in}
+\one{$E_K$ 是电动耦合对有效密度的反馈。}
+}{
+{\FormulaFont
+\[
+\rho_{12}=
+\phi\rho_f
+\left[
+1+i\frac{\phi\eta}{\omega\rho_fk(\omega)}
+\right]
+\]
+\[
+E_K=
+\frac{\eta^2\phi^2L^2(\omega)}
+{k^2(\omega)\bar{\varepsilon}(\omega)\omega^2}
+\]
+}
+}
+\src{Schakel \& Smeulders 2010 Eq. (11)-(13), (26)-(29)}
+\end{slide}
+
+\begin{slide}{求解纵波慢度}{把材料参数转成传播模态}
+\twocol{
+\one{二次根给出快 P 波和慢 P 波。}\par
+\vspace{0.18in}
+\one{代码按传播快慢排序为 $Pf$ 与 $Ps$。}
+}{
+{\FormulaFont
+\[
+s_l^2=
+\frac{-d_1}{2d_2}
+\mp
+\frac{1}{2}
+\sqrt{
+\left(\frac{d_1}{d_2}\right)^2
+-4\frac{d_0}{d_2}
+},
+\quad l=Pf,Ps
+\]
+\[
+d_2=PR-Q^2
+\]
+}
+}
+\src{Schakel \& Smeulders 2010 Eq. (24)-(25)}
+\end{slide}
+
+\begin{slide}{连接机械势和电磁势}{用 alpha 与 beta 完成模式转换}
+\twocol{
+\one{$\beta$ 连接固相势与流相势。}\par
+\vspace{0.18in}
+\one{$\alpha$ 连接机械势与电磁势。}
+}{
+{\FormulaFont
+\[
+\beta^m=
+\frac{\bar{\rho}_{11}-Ps_m^2}
+{Qs_m^2-\bar{\rho}_{12}}
+\]
+\[
+\alpha^m=
+\frac{\eta\phi L(\omega)}
+{k(\omega)\bar{\varepsilon}(\omega)}
+\left(1-\beta^m\right)
+\]
+}
+}
+\src{Schakel \& Smeulders 2010 Eq. (36)-(39)}
+\end{slide}
+
+\begin{slide}{列出界面未知量}{反射和透射系数由六个量决定}
+\twocol{
+\one{代码最关心 $R^E$ 与 $T^{TM}$。}\par
+\vspace{0.18in}
+\one{$T^{Pf}$ 只在可选 Pf 共震项中使用。}
+}{
+{\BigFormulaFont
+\[
+x=
+\begin{bmatrix}
+R^E & R^M & T^{Pf} & T^{Ps} & T^{TM} & T^{SV}
+\end{bmatrix}^{T}
+\]
+}
+\vspace{0.10in}
+{\FormulaFont
+\[
+R^E=\frac{\tilde{\psi}_R^{fl}}{\tilde{\phi}_I^{fl}},
+\qquad
+T^{TM}=\frac{\tilde{\psi}_s^{TM}}{\tilde{\phi}_I^{fl}}
+\]
+}
+}
+\src{Schakel \& Smeulders 2010 Eq. (45)}
+\end{slide}
+
+\begin{slide}{施加 open-pore 边界条件}{机械连续性和电磁连续性同时满足}
+\twocol{
+\one{六个边界条件对应六个未知量。}\par
+\vspace{0.18in}
+\one{界面 EM 响应来自这些条件下的电流不平衡。}
+}{
+{\FormulaFont
+\[
+(1-\phi)\hat{u}_3+\phi\hat{U}_3=\hat{U}_3^{fl},
+\qquad
+\hat{p}=\hat{p}^{fl}
+\]
+\[
+\hat{\sigma}_{13}=0,\quad
+\hat{\sigma}_{33}=0,\quad
+\hat{H}_2=\hat{H}_2^{fl},\quad
+\hat{E}_1=\hat{E}_1^{fl}
+\]
+}
+}
+\src{Schakel \& Smeulders 2010 Eq. (31)-(35)}
+\end{slide}
+
+\begin{slide}{求解六阶界面矩阵}{把材料变化变成转换系数}
+\twocol{
+\one{所有动态材料参数最终汇入矩阵 $\mathbf{A}$。}\par
+\vspace{0.18in}
+\one{求解后得到角度和频率相关的界面系数。}
+}{
+{\BigFormulaFont
+\[
+\mathbf{A}x=
+\begin{bmatrix}
+k_3^{fl} & \phi\rho_{fl} & 0 & 0 & 0 & 0
+\end{bmatrix}^{T}
+\]
+}
+\vspace{0.08in}
+{\FormulaFont
+\[
+N_j=P-\frac{Q(1-\phi)}{\phi}
++\left[Q-\frac{R(1-\phi)}{\phi}\right]\beta^j
+\]
+}
+}
+\src{Schakel \& Smeulders 2010 Eq. (46), Appendix B Eq. (B1)-(B7)}
+\end{slide}
+
+\begin{slide}{转换压力归一化系数}{让 2010 界面系数进入 2011 正演}
+\twocol{
+\one{2010 系数是位移归一化。}\par
+\vspace{0.18in}
+\one{2011 Sommerfeld 正演使用压力归一化，单位是 V/Pa。}
+}{
+{\BigFormulaFont
+\[
+R^E_{\mathrm{press}}
+=
+\frac{R^E_{2010}}{\rho_{fl}\omega^2}
+\]
+\[
+T^{TM}_{f,\mathrm{press}}
+=
+\frac{\alpha^{TM}T^{TM}_{2010}}
+{\rho_{fl}\omega^2}
+\]
+}
+}
+\src{Schakel et al. 2011 JAP Table I；Schakel et al. 2011 Geophysics Eq. (3) 说明}
+\end{slide}
+
+\begin{slide}{描述圆形活塞声源}{把换能器方向性放进积分核}
+\twocol{
+\one{$A(\omega)$ 是压力源谱。}\par
+\vspace{0.18in}
+\one{$D(\theta)$ 让有限半径声源产生 Bessel 方向性。}
+}{
+{\BigFormulaFont
+\[
+\hat{p}(\omega,R,\theta)
+=
+\frac{A(\omega)}{R}e^{-ikR}D(\theta)
+\]
+\[
+D(\theta)=
+\frac{J_1(ka\sin\theta)}
+{ka\sin\theta}
+\]
+}
+}
+\src{Schakel et al. 2011 Geophysics Eq. (1)-(2)；Schakel et al. 2011 JAP Eq. (1)-(2)}
+\end{slide}
+
+\begin{slide}{给定代码压力源谱}{没有实验压力记录时使用 Ricker 代替}
+\twocol{
+\one{论文使用实验压力记录。}\par
+\vspace{0.18in}
+\one{代码默认使用因果 Ricker 压力波形。}
+}{
+{\FormulaFont
+\[
+p(t)=p_0
+\left[1-2(\pi f_0\tau)^2\right]
+e^{-(\pi f_0\tau)^2}
+\]
+\[
+P(\omega)=\int_0^T p(\tau)e^{-i\omega\tau}\,d\tau,
+\qquad
+A(\omega)=P(\omega)R_{\mathrm{ref}}W(f)
+\]
+}
+}
+\src{Schakel et al. 2011 的 $A(\omega)$ 框架；Ricker 为代码建模选择}
+\end{slide}
+
+\begin{slide}{叠加水平波数贡献}{流体侧反射 EM 的 Sommerfeld 积分}
+\twocol{
+\one{每个 $k_r$ 对应一束平面波贡献。}\par
+\vspace{0.18in}
+\one{积分后得到接收点处的反射 EM 电势。}
+}{
+{\fontsize{18}{23}\selectfont
+\[
+\hat{\phi}^{E}
+=
+-iA(\omega)
+\int_0^\infty
+\frac{k_r}{k_z}
+D(k_r)J_0(k_rr_r)
+e^{ik_zz_s}
+R^E(k_r)
+e^{ik_z^Ez_r}\,dk_r
+\]
+}
+}
+\src{Schakel et al. 2011 Geophysics Eq. (3)；Schakel et al. 2011 JAP Eq. (3)}
+\end{slide}
+
+\begin{slide}{拆分 Sommerfeld 路径}{传播分支加倏逝分支}
+\twocol{
+\one{令 $k_r=k\sin\theta$。}\par
+\vspace{0.18in}
+\one{复角路径拆成实角传播项和 $\gamma$ 倏逝项。}
+}{
+{\FormulaFont
+\[
+k_r=k\sin\theta,\qquad k_z=k\cos\theta
+\]
+\[
+k_z^E(\theta)
+=\omega
+\sqrt{
+\frac{1}{c_E^2(\omega)}
+-\frac{\sin^2\theta}{c_P^2}
+},
+\quad
+\operatorname{Im}(k_z^E)<0
+\]
+}
+}
+\src{Schakel et al. 2011 Geophysics Eq. (4)-(5)}
+\end{slide}
+
+\begin{slide}{合成流体侧 EM 响应}{实角项和倏逝项共同控制波形}
+{\fontsize{16.5}{21}\selectfont
+\[
+\begin{aligned}
+\hat{\phi}^{E}
+&=
+-\frac{iA}{a}
+\int_0^{\pi/2}
+J_0(kr_r\sin\theta)J_1(ka\sin\theta)
+e^{ikz_s\cos\theta}
+R^E(\theta)e^{ik_z^Ez_r}\,d\theta\\
+&\quad+
+\frac{A}{a}
+\int_0^\infty
+J_0\!\left(kr_r\sqrt{\gamma^2+1}\right)
+\frac{J_1\!\left(ka\sqrt{\gamma^2+1}\right)}
+{\sqrt{\gamma^2+1}}
+e^{kz_s\gamma}
+R^E(\gamma)e^{ik_z^Ez_r}\,d\gamma .
+\end{aligned}
+\]
+}
+\vspace{0.10in}
+\one{因为 $z_s<0$，倏逝分支中的 $e^{kz_s\gamma}$ 随 $\gamma$ 衰减。}
+\src{Schakel et al. 2011 Geophysics Eq. (5)；Schakel et al. 2011 JAP Eq. (5)}
+\end{slide}
+
+\begin{slide}{保留多孔侧前界面 TM 项}{单界面模型不做 slab 多次反射}
+\twocol{
+\one{默认只保留前界面 TM interface EM。}\par
+\vspace{0.18in}
+\one{Pf 共震项作为诊断选项，默认关闭。}
+}{
+{\BigFormulaFont
+\[
+\Phi^{TM}_{\mathrm{term}}
+=
+-
+\frac{\alpha^{TM}T^{TM}}
+{\rho_{fl}\omega^2}
+\]
+\[
+\Phi^{Pf}_{\mathrm{term}}=0
+\quad
+\text{if Pf option is off}
+\]
+}
+}
+\src{Schakel et al. 2011 JAP Table I and Eq. (6)-(8)；代码单界面简化}
+\end{slide}
+
+\begin{slide}{反变换得到时间波形}{正频率积分恢复实值响应}
+\twocol{
+\one{代码只显式计算正频率。}\par
+\vspace{0.18in}
+\one{用 $2\operatorname{Re}$ 恢复时域实信号。}
+}{
+{\BigFormulaFont
+\[
+u(z,t)=
+2\,\operatorname{Re}
+\int_{f_{\min}}^{f_{\max}}
+\hat{u}(z,f)e^{i2\pi ft}\,df
+\]
+}
+\vspace{0.10in}
+{\FormulaFont
+\[
+T_0=\frac{z_s}{v_f},
+\qquad
+v_f=\sqrt{\frac{K_{fl}}{\rho_{fl}}}
+\]
+}
+}
+\src{Schakel 相位约定；代码数值积分实现}
+\end{slide}
+
+\begin{slide}{用诊断指标检查波形}{峰值、极性和 T0 前后比}
+\twocol{
+\one{峰值用于比较溶蚀演化。}\par
+\vspace{0.18in}
+\one{极性反转用于检查界面偶极子特征。}
+}{
+{\FormulaFont
+\[
+A_{\max}=\max_{z\ne0,t}|u(z,t)|
+\]
+\[
+u(-d,t^\ast)u(+d,t^\ast)<0
+\]
+\[
+\mathrm{ratio}_{pre/post}
+=
+\frac{\max_{t<T_0}|u(z,t)|}
+{\max_{t\ge T_0}|u(z,t)|}
+\]
+}
+}
+\src{Schakel et al. 2011 JAP 的极性解释；峰值和 T0 比值为代码诊断}
+\end{slide}
+
+\begin{slide}{明确论文公式和代码取舍}{避免把建模假设写成论文理论}
+\twocol{
+\one{\blue{严格来自论文：}动态系数、Biot 波模、界面矩阵、压力归一化和 Sommerfeld 积分。}\par
+\vspace{0.20in}
+\one{\red{代码取舍：}Ricker 源、单界面 TM 项、Pf 默认关闭、RT 到电化学映射。}
+}{
+{\BodyFont
+\[
+\begin{aligned}
+\text{论文理论}
+&:\quad
+k,L,\sigma,\mathbf{A},R^E,T^{TM},\text{Sommerfeld 积分}\\
+\text{代码取舍}
+&:\quad
+\text{Ricker 源、单界面、Pf 默认关闭}
+\end{aligned}
+\]
+}
+\vspace{0.12in}
+\one{写方法部分时，理论公式和建模假设要分层交代。}
+}
+\src{三篇 Schakel 论文与 \texttt{schakel2011\_sommerfeld.py} 对照}
+\end{slide}
+
+\begin{slide}{回到机制主线}{解释溶蚀为什么改变 interface EM}
+\vspace{0.25in}
+{\BigFormulaFont
+\[
+\text{溶蚀}
+\Rightarrow
+\{\phi,k_0,\alpha_\infty,c_H\}
+\Rightarrow
+\{k,L,\sigma,\bar{\varepsilon}\}
+\Rightarrow
+\{R^E,T^{TM}\}
+\Rightarrow
+u(z,t)
+\]
+}
+\vspace{0.35in}
+\one{核心结论：溶蚀改变孔隙连通性和流体化学；Schakel 界面问题把这种变化转化为 interface EM 的幅值、极性和空间分布。}
+\src{面向论文方法与结果解释的总结}
+\end{slide}
+
+\end{document}

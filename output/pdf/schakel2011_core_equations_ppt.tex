@@ -1,0 +1,519 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{xcolor}
+\usepackage[
+  paperwidth=13.333in,
+  paperheight=7.5in,
+  left=0.58in,
+  right=0.58in,
+  top=0.42in,
+  bottom=0.34in
+]{geometry}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+\setCJKmainfont[Path=C:/Windows/Fonts/]{simhei.ttf}
+\setCJKsansfont[Path=C:/Windows/Fonts/]{simhei.ttf}
+
+\definecolor{Blue}{HTML}{1F5AA6}
+\definecolor{Red}{HTML}{C8372D}
+\definecolor{Ink}{HTML}{111827}
+\definecolor{Grey}{HTML}{6B7280}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+\newcounter{slide}
+\newcommand{\TitleFont}{\fontsize{32}{38}\selectfont\bfseries}
+\newcommand{\TagFont}{\fontsize{16}{20}\selectfont}
+\newcommand{\BodyFont}{\fontsize{18}{24}\selectfont}
+\newcommand{\SmallFont}{\fontsize{16}{21}\selectfont}
+\newcommand{\FootFont}{\fontsize{12}{14}\selectfont}
+\newcommand{\FormulaFont}{\fontsize{18}{23}\selectfont}
+\newcommand{\BigFormulaFont}{\fontsize{23}{29}\selectfont}
+\newcommand{\src}[1]{\vfill{\SmallFont\color{Grey}来源：#1}}
+\newcommand{\one}[1]{{\BodyFont\color{Ink}#1}}
+\newcommand{\explain}[1]{{\SmallFont\color{Grey}#1}}
+\newcommand{\blue}[1]{{\color{Blue}#1}}
+\newcommand{\red}[1]{{\color{Red}#1}}
+
+\newenvironment{slide}[2]{%
+  \clearpage
+  \stepcounter{slide}
+  \thispagestyle{empty}
+  {\TitleFont\color{Ink}#1}\par
+  \vspace{0.05in}
+  {\TagFont\color{Blue}#2}\par
+  \vspace{0.11in}
+  {\color{Blue}\rule{\textwidth}{1.6pt}}\par
+  \vspace{0.22in}
+}{%
+  \vfill
+  {\FootFont\color{Grey}Schakel 2011 core equations}
+  \hfill
+  {\FootFont\color{Grey}\theslide}
+}
+
+\newcommand{\twocol}[2]{%
+  \begin{minipage}[t]{0.32\textwidth}
+  #1
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.63\textwidth}
+  #2
+  \end{minipage}
+}
+
+\begin{document}
+
+\begin{slide}{展示核心控制公式}{控制方程、边界条件、正演积分}
+\vspace{0.20in}
+{\fontsize{34}{40}\selectfont\color{Ink}
+Schakel 2011 核心公式展示版
+}\par
+\vspace{0.20in}
+{\BodyFont\color{Grey}
+模型由材料响应、界面转换、Sommerfeld 合成和时域波形四层组成。
+}\par
+\vspace{0.14in}
+{\SmallFont\color{Grey}
+核心问题是：溶蚀引起的材料变化如何通过界面边界条件转化为可观测的 interface EM 波形。
+}\par
+\vspace{0.45in}
+{\BigFormulaFont
+\[
+\text{材料响应}
+\Rightarrow
+\text{界面转换}
+\Rightarrow
+\text{Sommerfeld 合成}
+\Rightarrow
+\text{时域波形}
+\]
+}
+\src{Schakel 系列理论与代码正演流程的核心公式链}
+\end{slide}
+
+\begin{slide}{保留三层公式主线}{从材料参数到接收点波形}
+\twocol{
+\one{\blue{材料层：}动态渗透率、电动耦合、有效介电常数。}\par
+\vspace{0.22in}
+\one{\blue{界面层：}open-pore 边界条件和六阶线性系统。}\par
+\vspace{0.22in}
+\one{\blue{波形层：}压力归一化、Sommerfeld 积分和时域合成。}\par
+\vspace{0.20in}
+\explain{Debye 长度、过量电导和完整矩阵元素作为支撑公式，不作为主线公式展开。}
+}{
+{\FormulaFont
+\[
+\begin{aligned}
+1.\;& k(\omega),L(\omega),\bar{\varepsilon}(\omega)\\
+2.\;& s_{Pf},s_{Ps},s_{TM},s_{SV}\\
+3.\;& \text{open-pore 边界条件}\\
+4.\;& \mathbf{A}x=b\\
+5.\;& \hat{\phi}^{E}:\ \text{Sommerfeld 积分}
+\end{aligned}
+\]
+}
+}
+\src{由 \texttt{schakel2011\_sommerfeld.py} 的计算主干筛选}
+\end{slide}
+
+\begin{slide}{展示材料响应方程}{溶蚀如何进入震电参数}
+\twocol{
+\one{溶蚀通过 $\phi,k_0,\alpha_\infty,c_H$ 改变动态材料参数。}\par
+\vspace{0.20in}
+\one{这组方程同时描述流动、电化学耦合和电磁传播。}\par
+\vspace{0.20in}
+\explain{$\zeta$ 表征电化学状态，$k(\omega)$ 表征流动阻力，$L(\omega)$ 控制电动耦合强度，$\bar{\varepsilon}$ 合并导电和电磁传播效应。}
+}{
+{\FormulaFont
+\[
+\zeta=
+\left[0.010+0.025\log_{10}(C)\right]\frac{pH-2}{5},
+\qquad
+\omega_t=\frac{\phi\eta}{\alpha_\infty k_0\rho_f}
+\]
+\[
+k(\omega)=
+k_0
+\left[
+\sqrt{1+i\frac{\omega}{\omega_t}\frac{M}{2}}
++i\frac{\omega}{\omega_t}
+\right]^{-1}
+\]
+\[
+L(\omega)=
+-
+\frac{\phi}{\alpha_\infty}
+\frac{\varepsilon_0\varepsilon_f\zeta}{\eta}
+\left(1-\frac{2d}{\Lambda}\right)\mathcal{F}^{-1/2}
+\]
+\[
+\sigma(\omega)=
+\frac{\phi\sigma_f}{\alpha_\infty}
+\left[
+1+\frac{2(C_{\mathrm{em}}+C_{\mathrm{os}})}
+{\sigma_f\Lambda}
+\right]
+\]
+\[
+\bar{\varepsilon}=
+\varepsilon-i\frac{\sigma}{\omega}
++i\frac{\eta L^2}{\omega k}
+\]
+}
+}
+\src{Schakel \& Smeulders 2010 Eq. (A1), (A4)-(A6), (A5), (20)}
+\end{slide}
+
+\begin{slide}{展示波模控制方程}{材料参数如何变成传播速度}
+\twocol{
+\one{先由 $k,L,\bar{\varepsilon}$ 修正密度，再求波模。}\par
+\vspace{0.20in}
+\one{P 波和 TM/SV 都落到二次根问题。}\par
+\vspace{0.20in}
+\explain{材料参数不会直接成为波形，而是先改变有效密度和各类波模慢度，再通过界面条件影响转换系数。}
+}{
+{\FormulaFont
+\[
+\bar{\rho}_{11}=\rho_{11}-E_K,\quad
+\bar{\rho}_{12}=\rho_{12}+E_K,\quad
+\bar{\rho}_{22}=\rho_{22}-E_K
+\]
+\[
+E_K=
+\frac{\eta^2\phi^2L^2(\omega)}
+{k^2(\omega)\bar{\varepsilon}(\omega)\omega^2}
+\]
+\[
+s_l^2=
+\frac{-d_1}{2d_2}
+\mp
+\frac{1}{2}
+\sqrt{
+\left(\frac{d_1}{d_2}\right)^2
+-4\frac{d_0}{d_2}
+},
+\qquad
+l=Pf,Ps
+\]
+\[
+d_0=\bar{\rho}_{11}\bar{\rho}_{22}-\bar{\rho}_{12}^2,
+\quad
+d_1=-(P\bar{\rho}_{22}+R\bar{\rho}_{11}-2Q\bar{\rho}_{12}),
+\quad
+d_2=PR-Q^2
+\]
+}
+}
+\src{Schakel \& Smeulders 2010 Eq. (24)-(30)}
+\end{slide}
+
+\begin{slide}{展示模式耦合关系}{机械势如何连到电磁势}
+\twocol{
+\one{$\beta$ 连接固相势与流相势。}\par
+\vspace{0.20in}
+\one{$\alpha$ 把机械模式转成电磁势，后面用于 $T^{TM}$。}\par
+\vspace{0.20in}
+\explain{$\beta$ 表示流固相对运动比例，$\alpha$ 表示机械场到电磁势的转换权重。}
+}{
+{\FormulaFont
+\[
+\beta^m=
+\frac{\bar{\rho}_{11}-Ps_m^2}
+{Qs_m^2-\bar{\rho}_{12}},
+\qquad
+m=Pf,Ps
+\]
+\[
+\beta^n=
+\frac{Gs_n^2-(1-\phi)\rho_s}{\phi\rho_f},
+\qquad
+n=TM,SV
+\]
+\[
+\alpha^m=
+\frac{\eta\phi L(\omega)}
+{k(\omega)\bar{\varepsilon}(\omega)}
+\left(1-\beta^m\right)
+\]
+\[
+\alpha^n=
+\frac{\mu\eta\phi L(\omega)}
+{k(\omega)\left[\mu\bar{\varepsilon}(\omega)-s_n^2\right]}
+\left(1-\beta^n\right)
+\]
+}
+}
+\src{Schakel \& Smeulders 2010 Eq. (36)-(39)}
+\end{slide}
+
+\begin{slide}{重点展示边界条件}{界面转换的物理来源}
+\twocol{
+\one{这些边界条件是界面转换的物理核心。}\par
+\vspace{0.20in}
+\one{机械连续性、应力条件和电磁连续性共同决定 interface EM。}\par
+\vspace{0.20in}
+\explain{界面响应不是单独由 $L$ 决定，而是由这些边界条件共同约束后产生的转换系数决定。}
+}{
+{\FormulaFont
+\[
+(1-\phi)\hat{u}_3+\phi\hat{U}_3=\hat{U}_3^{fl},
+\qquad
+\hat{p}=\hat{p}^{fl}
+\]
+\[
+\hat{\sigma}_{13}=0,
+\qquad
+\hat{\sigma}_{33}=0
+\]
+\[
+\hat{H}_2=\hat{H}_2^{fl},
+\qquad
+\hat{E}_1=\hat{E}_1^{fl}
+\]
+}
+}
+\src{Schakel \& Smeulders 2010 Eq. (31)-(35)}
+\end{slide}
+
+\begin{slide}{展示六阶界面系统}{把边界条件转成可求解系数}
+\twocol{
+\one{六个未知量对应六个边界条件。}\par
+\vspace{0.20in}
+\one{求解后得到 $R^E$、$T^{TM}$ 和可选的 $T^{Pf}$。}\par
+\vspace{0.20in}
+\explain{$\mathbf{A}$ 中包含前面所有材料和波模信息，所以溶蚀效应最终在这里转化为界面反射/透射系数变化。}
+}{
+{\FormulaFont
+\[
+x=
+\begin{bmatrix}
+R^E & R^M & T^{Pf} & T^{Ps} & T^{TM} & T^{SV}
+\end{bmatrix}^{T}
+\]
+\[
+\mathbf{A}x=
+\begin{bmatrix}
+k_3^{fl} & \phi\rho_{fl} & 0 & 0 & 0 & 0
+\end{bmatrix}^{T}
+\]
+\[
+N_j=
+P-\frac{Q(1-\phi)}{\phi}
++
+\left[
+Q-\frac{R(1-\phi)}{\phi}
+\right]\beta^j,
+\qquad j=Pf,Ps
+\]
+}
+}
+\src{Schakel \& Smeulders 2010 Eq. (45)-(46), Appendix B}
+\end{slide}
+
+\begin{slide}{展示压力归一化}{连接 2010 系数与 2011 正演}
+\twocol{
+\one{2010 界面系数是位移归一化。}\par
+\vspace{0.20in}
+\one{2011 Sommerfeld 正演使用压力归一化系数，并转成电势项。}\par
+\vspace{0.20in}
+\explain{$\rho_{fl}\omega^2$ 完成压力归一化，$\alpha^{TM}$ 将透射 TM 机械势转换为电势项。}
+}{
+{\FormulaFont
+\[
+R^E_{\mathrm{press}}
+=
+\frac{R^E_{2010}}{\rho_{fl}\omega^2}
+\]
+\[
+\Phi^{TM}_{\mathrm{term}}
+=
+-
+\frac{\alpha^{TM}T^{TM}}
+{\rho_{fl}\omega^2}
+\]
+\[
+\Phi^{Pf}_{\mathrm{term}}
+=
+-
+\frac{\alpha^{Pf}T^{Pf}}
+{\rho_{fl}\omega^2},
+\qquad
+\Phi^{Pf}_{\mathrm{term}}=0
+\quad
+\text{默认单界面 TM 模式}
+\]
+}
+}
+\src{Schakel et al. 2011 JAP Table I；代码标量电势符号约定}
+\end{slide}
+
+\begin{slide}{展示声源和方向性}{把换能器写进积分核}
+\twocol{
+\one{圆形活塞声源由压力谱和方向性共同描述。}\par
+\vspace{0.20in}
+\one{同时说明代码默认用 Ricker 压力源代替实验记录。}\par
+\vspace{0.20in}
+\explain{$D(\theta)$ 控制不同入射角的声源权重；$A(\omega)$ 控制频率内容和幅值标定。}
+}{
+{\FormulaFont
+\[
+\hat{p}(\omega,R,\theta)
+=
+\frac{A(\omega)}{R}e^{-ikR}D(\theta)
+\]
+\[
+D(\theta)=
+\frac{J_1(ka\sin\theta)}
+{ka\sin\theta}
+\]
+\[
+p(t)=p_0\left[1-2(\pi f_0\tau)^2\right]e^{-(\pi f_0\tau)^2},
+\qquad
+P(\omega)=\int_0^T p(\tau)e^{-i\omega\tau}\,d\tau
+\]
+\[
+A(\omega)=P(\omega)R_{\mathrm{ref}}W(f)
+\]
+}
+}
+\src{Schakel et al. 2011 Geophysics Eq. (1)-(2)；Ricker 源为代码选择}
+\end{slide}
+
+\begin{slide}{展示 Sommerfeld 主积分}{把角度相关系数合成接收点响应}
+\twocol{
+\one{该积分是 2011 forward model 的核心。}\par
+\vspace{0.20in}
+\one{实角分支给传播贡献，倏逝分支补充近场贡献。}\par
+\vspace{0.20in}
+\explain{积分的作用是把每个角度对应的界面转换系数叠加成某个接收点的频域电势。}
+}{
+{\FormulaFont
+\[
+\hat{\phi}^{E}
+=
+-\frac{iA}{a}I_{\theta}
++\frac{A}{a}I_{\gamma}
+\]
+\[
+I_{\theta}=
+\int_0^{\pi/2}
+J_0(kr_r\sin\theta)J_1(ka\sin\theta)
+e^{ikz_s\cos\theta}
+R^E(\theta)e^{ik_z^Ez_r}\,d\theta
+\]
+\[
+I_{\gamma}=
+\int_0^\infty
+J_0(kr_r\sqrt{\gamma^2+1})
+\frac{J_1(ka\sqrt{\gamma^2+1})}{\sqrt{\gamma^2+1}}
+e^{kz_s\gamma}R^E(\gamma)e^{ik_z^Ez_r}\,d\gamma
+\]
+}
+}
+\src{Schakel et al. 2011 Geophysics Eq. (5)}
+\end{slide}
+
+\begin{slide}{展示多孔侧核心项}{只保留单界面前界面 TM}
+\twocol{
+\one{单界面 interface EM 模型默认保留 TM 前界面项。}\par
+\vspace{0.20in}
+\one{多孔侧响应与流体侧一样分成实角和倏逝两支。}\par
+\vspace{0.20in}
+\explain{当前模型为单界面形式，因此不包含有限厚度样品中的背界面多次反射项。}
+}{
+{\FormulaFont
+\[
+\hat{\phi}_{por}
+=
+-\frac{iA}{a}\hat{\phi}_{por}^{(real)}
++\frac{A}{a}\hat{\phi}_{por}^{(ev)}
+\]
+\[
+\hat{\phi}_{por}^{(real)}
+=
+\int_0^{\pi/2}
+J_0J_1 e^{ikz_s\cos\theta}
+\left[
+\Phi^{TM}_{\mathrm{term}}e^{-ik_z^{TM}z_r}
++
+\Phi^{Pf}_{\mathrm{term}}e^{-ik_z^{Pf}z_r}
+\right]d\theta
+\]
+\[
+\hat{\phi}_{por}^{(ev)}
+=
+\int_0^\infty
+J_0\frac{J_1}{\sqrt{\gamma^2+1}}e^{kz_s\gamma}
+\left[
+\Phi^{TM}_{\mathrm{term}}e^{-ik_z^{TM}z_r}
++
+\Phi^{Pf}_{\mathrm{term}}e^{-ik_z^{Pf}z_r}
+\right]d\gamma
+\]
+}
+}
+\src{Schakel et al. 2011 JAP Eq. (6)-(8)；代码单界面简化}
+\end{slide}
+
+\begin{slide}{展示时间域合成}{从频域响应回到波形}
+\twocol{
+\one{接收点波形来自正频率反变换。}\par
+\vspace{0.20in}
+\one{下方三个指标用于比较趋势、极性和 T0 前后旁瓣。}\par
+\vspace{0.20in}
+\explain{$A_{\max}$ 看幅值演化；上下对称点乘积看极性反转；pre/post 比值看 T0 前旁瓣是否过强。}
+}{
+{\FormulaFont
+\[
+u(z,t)=
+2\,\operatorname{Re}
+\int_{f_{\min}}^{f_{\max}}
+\hat{u}(z,f)e^{i2\pi ft}\,df
+\]
+\[
+A_{\max}=\max_{z\ne0,t}|u(z,t)|,
+\qquad
+u(-d,t^\ast)u(+d,t^\ast)<0
+\]
+\[
+\mathrm{ratio}_{pre/post}
+=
+\frac{\max_{z\ne0,t<T_0}|u(z,t)|}
+{\max_{z\ne0,t\ge T_0}|u(z,t)|},
+\qquad
+T_0=\frac{z_s}{v_f}
+\]
+}
+}
+\src{Schakel 相位约定；Schakel et al. 2011 JAP 极性解释；代码诊断}
+\end{slide}
+
+\begin{slide}{回到机制主线}{少公式但逻辑完整}
+\vspace{0.35in}
+{\BigFormulaFont
+\[
+\{\phi,k_0,\alpha_\infty,c_H\}
+\Rightarrow
+\{k,L,\bar{\varepsilon}\}
+\Rightarrow
+\mathbf{A}x=b
+\Rightarrow
+\hat{\phi}^{E}
+\Rightarrow
+u(z,t)
+\]
+}
+\vspace{0.35in}
+\one{核心机制：材料变化先改变动态参数和波模，再经由界面边界条件改变 EM 转换系数。}\par
+\vspace{0.18in}
+\explain{Sommerfeld 积分进一步把角度和频率相关的转换系数合成为接收点波形。}
+\src{核心展示版总结}
+\end{slide}
+
+\end{document}

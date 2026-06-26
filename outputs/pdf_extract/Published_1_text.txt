@@ -1,0 +1,657 @@
+
+
+--- PAGE 1 ---
+Marine and Petroleum Geology 91 (2018) 586–598
+Contents lists available at ScienceDirect
+Marine and Petroleum Geology
+journal homepage: www.elsevier.com/locate/marpetgeo
+Research paper
+Depositional constraints and diagenetic pathways controlling petrophysics
+T
+of Middle Miocene shallow-water carbonate reservoirs (Leitha limestones),
+Central Paratethys, Austria-Hungary
+Ahmed Alia,b,∗ , Michael Wagreichb, Michael Strasserc
+a Geology Department, Faculty of Science, Minia University, 61519 Menia, Egypt
+b Department of Geodynamics and Sedimentology, University of Vienna, 1090 Vienna, Austria
+c Institute of Geology, University of Innsbruck, 6020 Innsbruck, Austria
+A R T I C L E I N F O A B S T R A C T
+Keywords: Middle Miocene shallow-water limestones, the so-called Leitha limestones, comprise a widespread Middle
+Petrophysics Miocene lithological unit of the Central Paratethys Sea. It includes mainly limestones composed of corallinacean
+Middle Miocene algae and other fossil debris and were deposited in shoals of various basins such as the Vienna, Eisenstadt-Sopron
+Paratethys and Styrian basins of Austria where they form potential hydrocarbon reservoir rocks. Petrophysical parameters
+Leitha limestones
+including porosity, permeability, density, P-wave velocity and magnetic susceptibility measurements were
+Porosity
+performed and evaluated. The sampled sites of Mannersdorf and Wöllersdorf quarries and drill-hole
+Permeability
+Bruckneudorf are located in the Vienna Basin and share the same principal limestones depositional facies that is
+massive, closely-packed rudstone facies. This facies has low porosities below 10%, low permeability lower than
+1.2 mD except one samples at 68.5 mD, high bulk density of dry samples up to 2.64 g/cm3 and high P-wave
+velocity up to 6761 m/s. In Mannersdorf, a second facies type of soft porous coarse-grained rudstone shows
+significantly higher porosity (up to 47%), higher permeability up to 124.3 mD, lower bulk density of dry samples
+less than 1.8 g/cm3 and lower P-wave velocity less than 2798 m/s. This latter facies retains primary porosity and
+secondary porosity enhanced by dissolution. In contrast, the former facies type suffered intensive cementation,
+which destroyed the primary porosity, and in some cases, subsequent later dissolution and karstification en-
+hanced secondary porosity partly.
+Kummer (Austria) and Fertőrákos (Hungary) quarries are located within the Eisenstadt-Sopron Basin. The
+well-sorted grainstone facies has high porosity up to 50%, extremely high permeability up to 31238 mD, low
+bulk density of dry samples less than 1.71 g/cm3 and low P-wave velocity less than 3219 m/s. The poorly-sorted
+massive rudstone facies recorded only in Kummer quarry is less porous (porosities range from 22 to 31%) and
+less permeable. The role of dissolution predominates in these limestones besides compaction and pressure so-
+lution in the massive rudstone facies. Limestones from the Rosenberg quarry of the Styrian Basin show two facies
+types: (1) wackestone to packstone facies with lower porosity (up to 16.4%) and lower permeability ranges from
+0.16 to 0.91 mD, compared to (2) the packstone facies with higher porosity (21%) and higher permeability of
+1.83 mD. The influence of diagenesis on both facies is similar, represented by early marine cementation followed
+by partial dissolution and finally meteoric blocky cementation.
+The depositional influence on petrophysics of Leitha limestones, for instance, packing, sorting and grain size
+represents the basis for the differences in facies types in the same locality and among various localities. This
+depositional influence controls the subsequent stepwise diagenetic evolution the facies. Local depositional en-
+vironments and their spatial evolution play a significant role on reservoir properties such as, at Mannersdorf the
+two facies types are varied due to the primary depositional characteristics and hence, the diagenetic evolution.
+Diagenetic pathways are principally similar in the different localities and basins; however, different stages of
+diagenesis are recorded due to different burial and exhumation histories.
+∗ Corresponding author. Geology Department, Faculty of Science, Minia University, 61519 Menia, Egypt.
+E-mail address: ahmad.ali@mu.edu.eg (A. Ali).
+https://doi.org/10.1016/j.marpetgeo.2018.01.031
+Received 29 November 2017; Received in revised form 23 January 2018; Accepted 24 January 2018
+Available online 03 February 2018
+0264-8172/ © 2018 Elsevier Ltd. All rights reserved.
+
+
+--- PAGE 2 ---
+A. Ali et al. Marine and Petroleum Geology 91 (2018) 586–598
+1. Introduction increasing rates during Badenian where islands and shoals represented
+shallow carbonate platform with extensive Leitha limestones deposition
+Carbonates and sandstones represent the major proportion of hy- during Middle Miocene (Riegl and Piller, 2000; Schmid et al., 2001;
+drocarbon reservoirs worldwide. Carbonate hydrocarbon reservoirs Wagreich and Schmid, 2002; Harzhauser and Piller, 2010; Lee and
+include both dolomites and limestones (Sun, 1995), with a slightly Wagreich, 2017). The Vienna Basin is the first and largest hydrocarbon
+greater percentage of world hydrocarbon reserves have been produced provider in Austria and shows various hydrocarbon fields (3500 wells)
+up to now from dolomites as such rocks often, but not always, have such as Neogene basin-fill sandstones, allochthonous Upper Triassic
+more porosity and permeability than limestones (Halley and Schmoker, dolomites of the Calcareous Alpine Zone, Flysch sandstones and deeper
+1983). Due to the various depositional, diagenetic and tectonic pro- to autochthonous sub-thrust reservoir of Jurassic age (Hamilton et al.,
+cesses, carbonate reservoirs have strongly differing rock fabric elements 1999).
+(Murray, 1960; Dürrast and Siegesmund, 1999; Maliva et al., 2009). The Eisenstadt-Sopron Basin and the Styrian Basin are located at the
+Petrophysics of carbonate rocks is strongly affected by two main in- westernmost part of the Pannonian Basin and represent extensional
+trinsic features: (1) carbonates are mostly autochthonously deposited basins in the Early Miocene during the final stage of Alpine orogeny
+(“grown”) due to organisms, and (2) carbonate minerals are highly (Ebner and Sachsenhofer, 1995; Sachsenhofer, 1996). The Styrian Basin
+reactive (Choquette and Pray, 1970; Moore, 2001). These features build was divided into the Eastern and Western Styrian subbasins by the N-S
+the fundamental differences between carbonates and siliciclastic rocks trending Middle Styrian Hills. Subsidence and eruptive volcanism due
+(Ehrenberg and Nadeau, 2005) and consequently result in significant to extensional tectonics took place during the Badenian (Kröll, 1988;
+differences of petrophysical properties and their evolution in time. Seghedi and Downes, 2011).
+Studying petrophysical features (i.e. porosity (φ), permeability (K),
+density (ρ), natural gamma ray, seismic velocity …) of carbonate rocks 3. Materials and methods
+is important in understanding the nature of reservoirs, both for
+groundwater aquifers as well as for hydrocarbon traps. Origin and The rock samples were collected from limestone outcrops from five
+distribution of porosity and permeability are important parameters quarries (Mannersdorf, Wöllersdorf, Kummer, Fertőrákos and
+controlling the transport phenomena within and through reservoir Rosenberg) and a cored groundwater well at Bruckneudorf. 67 thin
+rocks (Lucia, 1995). Diagenetic and tectonic features such as ce- sections of 5 × 5 cm dimensions were prepared for facies, pore space
+mentation and fracturing in carbonates largely control essential re- and cement investigations. Thin sections were examined using Leica
+servoir porosity and permeability and can create significant reservoir microscope (Leica DM2700P) and photomicrographs were taken with
+anisotropy (Nelson, 1985). Primary permeability in limestones is often Leica camera (Leica MC170 HD) connected to computer software (LAS
+low but the effects of carbonate dissolution (Worthington and Smart, v4.4.0). Scanning Electron FEI Inspect S- SEM at the University of
+2004) enhance secondary permeability. Vienna, Faculty of Geosciences, Geography and Astronomy, was used
+Middle Miocene shallow-water carbonates are widespread in the for SEM photographs. The apparatus is equipped with secondary elec-
+Paratethys Sea and build reservoirs and potential exploration targets in tron detectors for operation at high and low vacuum, as well as a back
+several basins such as the Vienna Basin, the Styrian basin and the scattered electron detector and an energy dispersive X-ray detection
+Pannonian Basin (e.g. Sauer et al., 1992; Strauss et al., 2006; unit (EDAX Apollo XV). Plugs of 3.8 cm diameter and up to 7 cm length
+Schreilechner and Sachsenhofer, 2007). In Austria, Slovakia and Hun- were drilled using Optimum drilling device (OPTi drill B 26Pro) at
+gary, these shallow-water carbonates (Badenian of the regional Central University of Vienna. The edges of the plugs were cut at right angles
+Paratethys stratigraphy, e.g. Hohenegger et al., 2014) are summarized using Remet TR60 device where the plug is horizontally fixed and a
+under the term Leitha limestones (Papp et al., 1978; Riegl and Piller, vertical moving saw cuts the edges of the plugs. Due to the soft nature
+2000). Leitha limestones is a lithostratigraphic unit composed mainly of of some of the limestones, the preparation process and the availability
+corallinacean algae (Riegl and Piller, 2000), deposited in middle to late of material from outcrops the number of the obtained plugs was re-
+Badenian (corresponds to Langhian to early Serravalian) and wide- stricted to 38 representing various facies types of Leitha limestones.
+spread in the Central Paratethys (Reuter et al., 2012; Wiedl et al., 2012, Water porosity was measured by immersing the samples in water
+2013, 2014; Hohenegger and Wagreich, 2012; Hohenegger et al., (triple weight method) until a constant mass is reached. The mass was
+2014). Physical properties of Leitha limestones were studied in detail as measured in time interval of 1, 2, 3 and 6 days and the last measure-
+these rocks were widely used as a building stone in historical buildings ments after a constant weight was obtained. Gas porosity and perme-
+in Austria, especially in Vienna (Rohatsch, 2005, 2007, 2012; Bednarik ability were measured using Coreval 700 (Vinci Technologies) in the
+et al., 2014). However, data on porosities and permeabilities are con- petrophysics laboratory at University of Vienna. The device measures
+siderably sparce (Sauer et al., 1992). the grain and bulk densities (ρ and ρ , respectively), pore and bulk
+g b
+In this paper six localities were selected for petrophysical in- volumes (V and V , respectively), gas porosity (φ) and gas perme-
+p b
+vestigations, namely Mannersdorf, Wöllersdorf, Bruckneudorf, ability (K). These parameters were measured under different values of
+Kummer, Rosenberg (Austria) and Fertőrákos (Hungary). The compi- confining pressure (i.e. 400, 600 and 1000 psi). In low porous and low
+lation of petrophysical parameters (e.g. porosity, permeability, density, permeable samples only one measurement was done under 400 psi
+P-wave velocity and magnetic susceptibility) were used to deduce the confining pressure. P-wave velocity and Magnetic Susceptibility were
+evolution of porosity as a function of depositional and diagenetic pro- measured on the plugs using the Geotech bare-rock p-wave transducers
+cesses. and the Bartington MS2E magnetic susceptibility operated in a manual
+modes using the Geotech Multi-Sensor-Core-Logger (MSCL) System at
+2. Geological settings the University of Innsbruck, Austria.
+The studied Leitha limestones lie within three Central Paratethys 4. Results
+basins (Fig. 1). The Vienna Basin includes Mannersdorf quarry, Wöl-
+lersdorf abanoded quarry and borehole Bruckneudorf, the Eisenstadt- 4.1. Facies types
+Sopron Basin includes Kummer and Fertőrákos abandoned quarries and
+the Styrian Basin includes Rosenberg quarry. Vienna Basin is a rhomb Leitha limestones exhibit different petrographic features among the
+shape structure formed as a pull-apart basin along the junction of the studied localities based mainly on primary depositional features. Three
+Eastern Alps and Western Carpathians (Royden, 1985; Decker and lithologic facies occur in the studied samples from Mannersdorf,
+Peresson, 1996; Hölzel et al., 2010). Subsidence continued with Wöllersdorf and Bruckneudorf limestones: 1) soft rudstone with
+587
+
+
+--- PAGE 3 ---
+A. Ali et al. Marine and Petroleum Geology 91 (2018) 586–598
+Fig. 1. a) Map of Austria with highlight on the studied basins, b) simplified geological map of the southern Vienna Basin and Eisenstadt-Sopron Basin with location of the studied areas
+(after Strauss et al., 2006; Schmid et al., 2001), c) simplified geological map of the Styrian Basin with location of Rosenberg quarry (after Reuter et al., 2012).
+packstone matrix, which is pale yellow to white in colour and soft in 4.2. Pore space classification
+hand specimens occur only in Mannersdorf samples (Fig. 2a); 2) poorly-
+sorted massive rudstone with packstone matrix, which is grey to beige Pore space in carbonates are principally classified into interparticle
+in colour and hard in hand specimens (Fig. 2b) and 3) dolomitic facies and vuggy pores, with the latter subdivided into separate and touching
+represented by one sample from Wöllersdorf. Kummer limestones dis- vuggy pores (Lucia, 1983, 1995). Mannersdorf limestones show various
+play two lithologic facies: 1) well sorted medium grained grainstone types of pore space including interparticle and vuggy pore space de-
+yellow to white coloured and soft in hand specimens (Fig. 2c); 2) poorly pending on the lithology. The soft rudstone samples are highly porous
+sorted coarse grained rudstone brown in colour and hard in hand spe- and the interparticle pores are connected to each other (Fig. 3a). The
+cimens (Fig. 2d), these rocks suffered compaction, which resulted from vuggy pores are of the separate type only and in some cases connected
+pressure solution along the grain contact. In addition, Rosenberg through interparticle pores. Different types are recorded such as moldic
+limestones samples comprise lithologies of bluish grey wackestone- pores, in which fossil shells are totally dissolved (Fig. 3b). Intrafossil
+packstone to white packstone (Fig. 2e). pore spaces are common and are up to 3 mm across. The massive rud-
+stone samples are less porous and close-packed. Pores are not connected
+and show a high degree of cementation (Fig. 3c). Micropores exist be-
+tween cement crystals and are visible only under SEM (Fig. 3d). In
+588
+
+
+--- PAGE 4 ---
+A. Ali et al. Marine and Petroleum Geology 91 (2018) 586–598
+Fig. 2. Representative plugs of limestone lithofacies types; a) soft rudstone pale yellow to white in colour, Mannersdorf; b) grey to beige massive rudstone with karst (left), Mannersdof,
+Wöllersdorf and Bruckneudorf; c) medium grained soft grainstone yellow to white in colour; d) massive coarse grained rudstone brown in colour, Kummer; e) Rosenberg limestones bluish
+grey wackestone-packstone to white packstone. (For interpretation of the references to colour in this figure legend, the reader is referred to the Web version of this article.)
+Wöllersdorf massive rudstone samples both interparticle and intrafossil interparticle and vuggy pore space. In comparison with the former lo-
+pores exist and show variable degree of cementation. calities, the interparticle pore spaces are larger and well connected
+Grainstone facies of Kummer and Fertőrákos limestones exhibit both (Fig. 4 a). Also, vuggy pore spaces are widespread and include moldic
+Fig. 3. a) Soft rudstone with large and well connected pore spaces,
+(crossed polars, XPL), M14/27; b) soft rudstone with moldic porosity
+where foramininfera shell is totally dissolved, XPL, M14/33; c) iso-
+lated interparticle pore space with growing cement in close-packed
+massive rudstone, XPL, M14/3; d) SEM image of massive rudstone
+with small intrafossil pore space in well cemented chamber, M14/9.
+589
+
+
+--- PAGE 5 ---
+A. Ali et al. Marine and Petroleum Geology 91 (2018) 586–598
+Fig. 4. a) Grainstone facies with connected interparticle pores and
+intrafossil pores, XPL, SK/1; b) moldic pores in a dissolved shell,
+XPL, F/3; c) intrafossil pores in foraminifer shells, XPL, SK/12; d)
+interparticle pores in massive rudstone facies and pressure solution
+in red algae (center), XPL, SK/17. (For interpretation of the refer-
+ences to colour in this figure legend, the reader is referred to the Web
+version of this article.)
+pores (Fig. 4b) and intrafossil pores, which occur in all fossil types such dog tooth cement type (Fig. 5a). The massive rudstone facies limestones
+as red algae, bryozoans (Fig. 4a) and foraminifers (Fig. 4c). The massive are well cemented and sparry calcite cement is abundant (Fig. 5b); dog
+rudstone facies in Kummer limestones display less pore spaces in both tooth cements also exist (Fig. 5c). These two types of cement occur also
+size and type. The interparticle pores are small in size and fairly con- in Wöllersdorf limestones. In Kummer and Fertőrákos grainstones ce-
+nected (Fig. 4d). The vuggy pores are subordinate and moldic pores are mentation took place along grain contacts and formed a thin layer of
+absent. Rosenberg limestones’ both facies types are low porous and the cement in the interparticle and intraparticle pores; also dog tooth ce-
+pores are of the intergranular type and intrafossil type. ment occurs (Fig. 5d). Blocky sparite cement is rarely observed. The
+massive rudstones have similar cements besides pressure solution
+4.3. Cement types (Fig. 4d). In Rosenberg limestones blocky sparite cement predominates
+and fills the interparticle pores and intrafossil pores in bryozoans and
+Cement is a common porosity occluding material, which can form in red algae.
+a variety of environments. In soft rudstones from Mannersdorf the ce-
+ment is less abundant and fills partially the interparticle pores such as
+Fig. 5. a) Dog tooth cement in soft rudstone, XPL, M14/25; b) sparry calcite cement filling the primary depositional porosity, XPL, M14/10; c) SEM image of dog tooth cement in massive
+rudstone, M14/41; d) SEM image of dog tooth cement inside a foraminifer chamber, SK/18.
+590
+
+
+--- PAGE 6 ---
+A. Ali et al. Marine and Petroleum Geology 91 (2018) 586–598
+from Kummer have bulk densities ranges from 1.95 to 2.17 g/cm3,
+Rosenberg facies show values ranging from 1.94 to 2.32 g/cm3
+(Table 2). The bulk densities increase with increasing the confining
+pressure (Tables 3 and 4).
+The grain density values in the soft rudstone facies is 2.71 g/cm3
+and ranges from 2.66 to 2.73 g/cm3 in the massive rudstone facies in
+Mannersdorf and Wöllersdorf samples and the highest in the dolomitic
+facies with 2.75 g/cm3 (Table 1). Bruckneudorf, Kummer, Fertőrákos
+and Rosenberg facies have a narrower range of grain densities from
+2.69 to 2.72 g/cm3 (Table 2).
+4.5. Porosity
+Soft rudstone samples from Mannersdorf have water porosity (φ )
+w
+ranging from 24.1 to 29.4% and massive rudstones have values ranging
+from 2.1 to 3.6% (Mannersdorf) and 2.5–10% (Wöllerdorf) while the
+dolomitic sample from Wöllersdorf has a value of 6.3% (Table 1). The
+grainstone samples from Kummer and Fertőrákos have water porosities
+range from 22.9 to 32.5% and the massive rudstone samples range from
+Fig. 6. Ambient bulk density vs. porosity at ambient pressure with a clear reverse rela-
+tion. 11.4 to 22.2%. In Rosenberg samples the wackestone has lower water
+porosity of 12% while the packstone has higher values ranging from
+15.2 to 20.9% (Table 2).
+4.4. Bulk and grain densities
+Gas porosity under 400 psi confining pressure in Mannersdorf soft
+rudstone samples is higher than the massive rudstone samples. It ranges
+The bulk density of the investigated limestones facies measured in
+from 32.4 to 38.2% in the former samples and from 0.9 to 11% in the
+dry samples is, as expected, reversely proportional to the porosity
+later samples (Table 1). The massive rudstone facies from Wöllersdorf
+(Fig. 6). The soft rudstone facies from Mannersdorf limestones exhibit
+low bulk densities at ambient pressure (ρ ) from 1.62 to 1.8 g/cm3, have values ranging from 1.2 to 14.9% and the dolomitic sample has
+b0 10.8%. The grainstone samples from Kummer have gas porosities under
+while the massive rudstone facies have higher bulk densities from 2.36
+to 2.64 g/cm3. Wöllersdorf massive rudstone samples have bulk den- 400 psi confining pressure range from 36 to 42.6% and in massive
+sities similar to that of Mannersdorf from 2.29 to 2.58 g/cm3 and the rudstone range from 20.2 to 28.7%. The grainstone sample from Fer-
+dolomitic sample has a value of 2.46 g/cm3 (Table 1). Bruckneudorf tőrákos has gas porosity of 30.4%. Similar to water porosity in Rosen-
+massive rudstone samples have bulk densities from 2.5 to 2.59 g/cm3. berg the wackestone sample has 13.8% gas porosity, which is lower
+The grainstone facies from Kummer and Fertőrákos have low bulk compared to the packstone samples which range from 16.4 to 20.9%
+densities ranges from 1.56 to 1.74 g/cm3. The massive rudstone facies (Table 2). The gas porosity decreases with increasing the confining
+pressure in all facies (Tables 1 and 2).
+Table 1
+The variation in ρ g, ρ b0, φ w, φ and K with confining pressure in limestones from Mannersdorf, Wöllersdorf and Bruckneudorf.
+Facies Sample ρ g ρ b0 φ w Confining pressure (psi)
+type (g/cm3) (g/cm3) (%)
+400 600 1000
+Φ K [N2] Φ K [N2] Φ K [N2]
+(%) (mD) (%) (mD) (%) (mD)
+Massive rudstone M14/21 2.69 2.63 2.1 0.9 0.005 – – – –
+M14/42 2.66 2.49 3.6 4.5 0.007 – – – –
+M14/41 2.70 2.36 3.6 11 0.05 – – – –
+Soft rudstone M14/34 2.71 1.67 27.5 35.6 108.7 – – – –
+M14/27 2.71 1.80 24.1 32.4 1353 32.1 1329 31.8 1243
+M14/26 2.71 1.75 25.7 34.2 59.7 34.1 58.04
+M14/24 2.71 1.62 29.4 38.2 124.3 – – – –
+M14/25 2.71 1.65 28.4 37.4 107.6 37.1 105.3 – –
+Massive rudstone M14/5 2.70 2.49 2.7 6.9 1.21 6.6 1.12 – –
+M14/12 2.69 2.64 2.1 2.2 0.033 1.8 0.001 – –
+WÖ/1 2.68 2.58 3.1 1.2 0.007 0.99 0.003 – –
+WÖ/2 2.71 2.29 10 14.9 68.5 14.4 68.3 14.3 67.8
+WÖ/3 2.67 2.54 2.5 3.7 0.004 – – – –
+WÖ/4 2.73 2.52 4.0 6.7 0.02 – – – –
+WÖ/6 2.70 2.60 3.1 3.2 0.04 – – – –
+BD/13 m 2.71 2.50 4.9 0.006 – – – –
+BD/29.9 m 2.72 2.52 5.7 0.009 – – – –
+BD/37.15 m 2.71 2.56 3.4 0.004 – – – –
+BD/37.4 m 2.69 2.59 2.7 0.004 – – – –
+Dolomitic WÖ/5 2.75 2.46 6.3 10.8 0.07 10.7 0.06 10.6 0.06
+- Not measured.
+591
+
+
+--- PAGE 7 ---
+A. Ali et al. Marine and Petroleum Geology 91 (2018) 586–598
+Table 2
+The variation in ρ g, ρ b0, φ and K with confining pressure in limestones from Kummer, Fertőrákos and Rosenberg.
+Facies Sample ρ g ρ b0 φ w Confining pressure (psi)
+type (g/cm3) (g/cm3) (%)
+400 600 1000
+Φ K [N2] Φ K [N2] Φ K [N2]
+(%) (mD) (%) (mD) (%) (mD)
+Well sorted grainstone SK/1 2.71 1.70 28.3 37.6 7539 37.4 7472 37.2 7297
+SK/4 2.72 1.63 29.2 40.1 12657 40 12609 39.7 12564
+SK/8 2.70 1.73 25.2 36.6 1569 36.5 1563 36.2 1550
+SK/9 2.72 1.73 28.3 36.2 31238 35.9 30584 35.5 29409
+SK/10 2.70 1.74 27.1 36 10137 35.9 10049 35.7 9935
+SK/14 2.71 1.56 32.5 42.6 3179 42.3 3104 41.5 2873
+Poorly sorted rudstone SK/16 2.71 2.15 13.3 21.2 0.56 21.1 0.54 20.9 0.49
+SK/17 2.71 2.17 11.4 20.2 52.3 20.1 51.9 20 51.6
+SK/18 2.71 1.95 22.2 28.7 7938 28.6 7903 28.5 7906
+Well sorted grainstone SK/20 2.72 1.73 28.5 36.5 15495 36.4 15283 36.2 15164
+SK/23 2.71 1.71 30.7 38.9 26178 38.6 25687 38.1 24843
+SK/24 2.70 1.62 30.6 39.9 1367 39.8 1352 39.5 1327
+SK/27 2.71 1.58 30.9 42.5 6207 42.3 6180 41.9 6000
+F/3 2.69 1.71 22.9 30.4 2891 30.4 2878 30.2 2853
+Packstone-wackestone RR/4 2.71 1.94 20.9 22.9 1.83 22.8 1.76 22.6 1.68
+RR/5 2.71 2.25 15.2 16.4 0.91 16.3 0.85 16.2 0.8
+RR/7 2.72 2.32 12 13.8 0.16 13.7 0.16 13.4 0.15
+- Not measured.
+Table 3
+The variation in Vp, Vb and ρ b with confining pressure in limestones from Mannersdorf, Wöllersdorf and Bruckneudorf.
+Facies Sample Confining pressure (psi)
+type
+400 600 1000
+Vp Vb ρ b Vp Vb ρ b Vp Vb ρ b
+(cm3) (cm3) (g/cm3) (cm3) (cm3) (g/cm3) (cm3) (cm3) (g/cm3)
+Massive rudstone M14/21 0.63 70.7 2.66 – – – – – –
+M14/42 2.66 59.7 2.54 – – – – – –
+M14/41 6.35 57.5 2.40 – – – – – –
+Soft rudstone M14/34 19.3 54.3 1.75 – – – – – –
+M14/27 20.6 63.4 1.83 20.3 63.1 1.84 19.9 62.8 1.85
+M14/26 19.9 58.1 1.78 19.8 58 1.79
+M14/24 18.7 49.1 1.68 – – – – – –
+M14/25 21.9 58.6 1.70 21.7 58.3 1.70 – – –
+Massive rudstone M14/5 2.77 40.5 2.52 2.66 40.3 2.53 – – –
+M14/12 0.62 28.7 2.63 0.51 28.6 2.64 – – –
+WÖ/1 0.78 65.0 2.65 0.64 64.9 2.66 – – –
+WÖ/2 9.09 60.9 2.31 8.74 60.5 2.32 8.62 60.4 2.32
+WÖ/3 1.71 46.1 2.57 – – – – – –
+WÖ/4 5.01 74.7 2.55 – – – – – –
+WÖ/6 2.22 69.5 2.62 – – – – – –
+BD/13 m 3.23 66.0 2.58 – – – – – –
+BD/29.9 m 3.11 54.5 2.56 – – – – – –
+BD/37.15 m 2.33 69.8 2.62 – – – – – –
+BD/37.4 m 1.35 50.5 2.62 – – – – – –
+Dolomitic WÖ/5 7.03 65 2.46 6.97 64.9 2.46 6.87 64.8 2.46
+- Not measured.
+4.6. Gas porosity and confining pressure 4.7. Permeability
+The measured samples under different confining pressures (i.e. 400, The gas permeability in Mannersdorf soft rudstone samples ranges
+600 and 1000 psi) exhibit, as expected, a decrease in porosity and from 59.7 to 1353 mD and is generally lower in massive rudstone
+permeability. For instance, the porosity decrease percentage (e.g. 400 samples (0.01–1.21 mD in Mannersdorf, Wöllersdorf and Bruckneudorf)
+to 600 psi confining pressure) in most samples is less than 1% in all except one sample which has a higher permeability of 68.5 mD while
+facies except in the massive rudstone samples M14/5, M14/12, WÖ/1 the dolomitic sample has also a distinct low permeability value of 0.07
+and WÖ/2 where the difference varies from 4.3 to 18.2%. mD (Table 1). In Kummer and Fertőrákos grainstone samples have very
+592
+
+
+--- PAGE 8 ---
+A. Ali et al. Marine and Petroleum Geology 91 (2018) 586–598
+Table 4
+The variation in Vp, Vb and ρ b with confining pressure in limestones from Kummer, Fertőrákos and Rosenberg.
+Facies Sample Confining pressure (psi)
+type
+400 600 1000
+Vp Vb ρ b Vp Vb ρ b Vp Vb ρ b
+(cm3) (cm3) (g/cm3) (cm3) (cm3) (g/cm3) (cm3) (cm3) (g/cm3)
+Well sorted grainstone SK/1 25.7 68.5 1.69 25.5 68.3 1.69 25.3 68 1.70
+SK/4 21.9 54.6 1.63 21.8 54.5 1.63 21.5 54.2 1.64
+SK/8 19.8 54.1 1.71 19.7 53.9 1.72 19.4 53.7 1.73
+SK/9 22.3 61.6 1.73 22 61.3 1.74 21.6 60.9 1.75
+SK/10 16.5 45.7 1.73 16.4 45.6 1.73 16.2 45.5 1.74
+SK/14 12.8 30.1 1.56 12.7 30 1.56 12.3 29.5 1.59
+Poorly sorted rudstone SK/16 10.2 48.3 2.13 10.2 48.2 2.14 10 48.1 2.14
+SK/17 8.3 41 2.17 8.2 40.9 2.17 8.2 40.9 2.17
+SK/18 17.4 60.6 1.93 17.3 60.5 1.94 17.2 60.4 1.94
+Well sorted grainstone SK/20 27.6 75.8 1.72 27.5 75.6 1.73 27.3 75.4 1.73
+SK/23 25.5 65.6 1.66 25.2 65.3 1.67 24.7 64.8 1.68
+SK/24 21.3 53.3 1.62 21.2 53.2 1.63 21 53 1.63
+SK/27 23.2 54.6 1.56 23.1 54.5 1.56 22.6 54.1 1.58
+F/3 17.4 57.1 1.87 17.3 57.1 1.87 17.2 56.9 1.88
+Packstone-wackestone RR/4 12.2 53.1 2.09 12.1 53 2.09 12 52.9 2.1
+RR/5 9.4 57.2 2.27 9.3 57.1 2.27 9.3 57.1 2.27
+RR/7 9.4 68.4 2.35 9.4 68.3 2.35 9.1 68.1 2.36
+- Not measured.
+high gas permeabilities ranging from 1367 to 31238 mD. The massive average P-wave velocity of 5531 m/s and the dolomitic sample has a
+rudstone samples have lower permeabilities of 0.56, 52.3 and 7938 mD value of 4753 m/s. Bruckneudorf massive rudstone samples record also
+for the three samples under 400 psi confining pressure. From Rosenberg high P-wave velocity (in average 6020 m/s). Grainstone samples from
+quarry, both facies have low permeabilities ranging from 0.16 to 1.83 Kummer and Fertőrákos have an average P-wave velocity of 2706 m/s
+mD (Table 2). The gas permeability reduces as the confining pressure and the massive rudstone have higher velocities (in average 4163 m/s).
+increases (Tables 1 and 2). Rosenberg samples have velocities of 2552 m/s for the packstone
+sample and higher velocities for the two wackestone samples (in
+average 3903 m/s) (Table 5).
+4.8. P-wave velocity (P-wave)
+The P-wave velocity values are highly variable in the sampled 4.9. Magnetic susceptibility
+limestones facies. A clear proportional correlation with bulk densities
+(r = 0.93, Fig. 7) and reverse correlation with porosities at ambient Magnetic susceptibility values of the investigated samples are ne-
+pressure (r = −0.92) is evident in all studied samples. Mannersdorf soft gative in most samples (n = 25) and range from −0.002 to
+rudstone samples have low P-wave velocities (in average 2636 m/s), −1.252 × 10−5 SI units and positive in some samples (n = 7) and
+while massive rudstone samples have higher P-wave velocities (in range from 0.065 to 1.325 × 10−5 SI units (Table 5).
+average 6103 m/s). Massive rudstone samples from Wöllersdorf have an The above-mentioned parameters (i.e water porosity, gas porosities
+at 400 psi and ambient pressures, permeability at 400 psi, P-wave ve-
+locity and magnetic suceptability) are plotted in a stratigraphic order at
+Mannersdorf and Kummer to evaluate petrophysics along reservoir
+profiles. More than 20 m thick highly porous and highly permeable
+limestones occur at Mannersdorf underlain and overlain by low porous
+and low permeable limestones (Fig. 8). At Kummer the situation is re-
+versed, where the highly porous and extremely permeable limestones
+are interlayed by an interval of low porous and low permeable lime-
+stones (Fig. 9).
+5. Discussion
+All petrophysical parameters investigated in this study indicate
+various depositional and diagenetic criteria of Leitha limestones. In
+Mannersdorf, Wöllersdorf and Bruckneudorf the diagenetic alteration is
+highly significant. The soft rudstone facies in Mannersdorf with large
+pores, less cement, dissolution features and high porosity and perme-
+ability is equivalent to the interval with Pinna subfacies described by
+Wiedl et al. (2012) and was interpreted to be deposited in (< 10 m)
+moderately agitated shallow water within seagrass meadows. The pet-
+Fig. 7. P-wave velocity as a function of ambient bulk density with proportional corre- rographic and petrophysic features of these limestones point out to the
+lation. existence of two main diagenetic environments represented by vadose
+593
+
+
+--- PAGE 9 ---
+A. Ali et al. Marine and Petroleum Geology 91 (2018) 586–598
+Table 5 The sedimentation was affected by synsedimentary faulting, i.e. the
+P-wave velocity (m/s), gas porosity at ambient pressure (φ 0 (%)) and magnetic sus- Eisenstadt fault (ESE-WNW extensional deformation, Fodor, 1995;
+ceptibility (Mag Susc x 10−5 SI) of Leitha limestones. Decker, 1996) where deformation bands, compaction and deformation
+Facies type Sample P-wave φ 0 (%) Mag Susc of the massive rudstone facies were formed. Although this rock type has
+excellent reservoir capacity it should be taken into account that later
+Massive M14/21 6197 2 0.065 tectonic features such as deformation bands are recorded in the grain-
+rudstone M14/42 5831 6.1 – stone. Deformation bands reduced initially high porosity locally along
+M14/41 5639 12.4 −0.86
+planes down to 2% (Rath et al., 2011; Lommatzsch et al., 2015a,b) and
+soft M14/34 2798 45.3 −0.462 reduces the quality of the reservoir rocks in compartmentalizing re-
+rudstone M14/26 2695 35.5 −0.527 servoirs. The massive rudstone facies with lower porosity and perme-
+M14/24 2297 47.6 −0.861 ability is a consequence of compaction which resulted in pressure so-
+M14/25 2753 39.1 −0.791
+lution and occlusion of the pores. An important parameter in
+Massive M14/5 6745 7.8 −1.252 permeability measurements is the flow direction where horizontally
+rudstone M14/12 7281* 1.9 −1.253 oriented samples are extremely permeable compared to the vertical
+WÖ/1 6541 4 −1.124 permeability (K = 0.56 mD, SK/16). Similar diagenetic features of
+WÖ/2 4172 15.6 −0.723 Leitha limestones were proposed for the Eisenstadt-Sopron basin (Dullo,
+WÖ/3 6761 4.6 −0.861
+WÖ/4 4858 7.5 −0.73 1983; Boldizsár et al., 1991).
+WÖ/6 5424 3.7 −0.927 Leitha limestones of the Styrian Basin, i.e. from Rosenberg quarry,
+BD/13 m 5354 7.7 −0.332 were deposited during sea level rise (TB 2.4, Haq et al., 1987; Strauss
+BD/29.9 m 6320 7.1 −1.126 et al., 2006) and influenced by both terrigenous siliciclastic input and
+BD/37.15 m 6026 5.4 0.465
+volcaniclastic sedimentation (Friebe, 1990; Reuter et al., 2012). They
+BD/37.4 m 6380 3.9 −0.762
+are characterized by primary cementation, which blocked the inter-
+dolomitic WÖ/5 4753 10.8 −0.526 particle pores, followed by slight leaching and partial dissolution of
+shells and intensive phreatic meteoric blocky cementation. These cri-
+Soft grainstone SK/1 2933 46.5 −0.33 teria point out to the main role of primary depositional imprint on
+S S K K / / 4 8 2 2 5 9 2 4 6 4 5 4 0 5 . . 3 8 − − 0 0 . . 3 0 2 0 7 2 Leitha limestones petrophysics compared to the diagenetic influence.
+SK/9 2563 41.3 −0.065 The effect of diagenesis on these limestones is not such important in
+comparison to the other basins (Bojar et al., 2004; Ali and Wagreich,
+Massive SK/16 4429 23.6 1.325 2017).
+rudstone SK/17 4737 22.3 1.125
+The inverse correlation of P-wave and porosity indicates the great
+SK/18 3324 31.4 1.056
+effect of the latter on the P-wave velocity, which is a function of de-
+Soft grainstone SK/20 3023 44.6 −0.066 posional and diagenetic processes. Moreover, similar values of magnetic
+SK/23 2391 44.4 0.068 susceptibility of the limestones under investigation point to the negli-
+SK/24 2460 47.7 −0.333 gible primary effect of mineral composition on P-wave velocity. The
+SK/27 2293 50.4 –
+soft and porous limestones from the studied localities have low P-wave
+H/3 3219 36.4 0.332
+velocities while the massive and less porous limestones have higher
+Packstone RR/4 2552 28.4 −1.06 velocities. In a reverse manner velocities are proportionally correlated
+to bulk densities. Limestones samples with the same porosities some-
+Wackestone R R R R / / 7 5 4 3 5 2 4 6 4 2 1 1 1 7 .4 − −1 1 . . 0 0 6 6 times display different velocities, which reveal the role of pore types on
+the velocities. Limestones with dominant interparticle pores have lower
+- Not measured *The sample is short (2.5 cm) and excluded in discussion. P-wave velocities compared to limestones with prevailing moldic pores.
+The studied limestones are composed of calcite, which diminish the
+and phreatic metoric environments. The vadose zone is confirmed by effect of mineralogy on P-wave velocities. In carbonate rocks, P-wave
+karst features, cementation confined to grain contact and preservation velocities are a factor of depositional mineralogy and diagenesis that
+of depositional interparticle pores. Processes in the phreatic meteoric modifies porosity and pore types (Anselmetti and Eberli, 1993, 2001;
+zone with less saturated water in respect to carbonate minerals en- Verwer et al., 2008; Weger et al., 2009).
+hanced porosity of the soft rudstone facies with dissolution features The porosity evolution of Leitha limestones exhibit different stages
+such as moldic porosity and enlarged interparticle pores. in the studied localities (Fig. 10). Mannersdorf soft rudstone samples
+The massive rudstone from these localities is related to the mollusc with porosity up to 47.6% possess depositional interparticle porosities
+subfacies (Wiedl et al., 2012) which dominates at Mannersdorf and and less cementation and dissolution producing vuggy pores. As a
+represents a shallow transition zone between shallower to deeper wa- consequence of the coarse grains of the facies, the main diagenetic
+ters of the platform. The facies was affected by diagenesis of the phase that affected the limestones is dissolution of the shells. All these
+phreatic meteoric zone with saturated water in respect to carbonate criteria result in reduced (up to 3000 m/s slower) p-wave velocities
+minerals. This resulted in progressive calcite cementation and reduced (Fig. 10a). On the other hand, the massive rudstone from Mannersdorf,
+primary porosity to nil. Later dissolution and karstification of these Wöllersdorf and Bruckneudorf show higher P-wave velocities from
+limestones are a consequence of subaerial exposure (Tucker, 1993; 4858 to 6761 m/s due to blocky cementation, which blocks most ot the
+Harris et al., 1999; Schlager, 2005; Moore and Wade, 2013). pores and reduces the porosity to less than 2% in some samples
+Kummer and Fertőrákos Leitha limestones paleoenvironments were (Fig. 10a and b). It is apparent that dissolution resulting in the forma-
+interpreted as small depressions surrounded by carbonate sand shoals tion of karst and moldic pores played a role in these types of limestones
+(Schmid et al., 2001). Well sorted grainstones have high porosity and where samples with higher porosities, for example M14/5 (φ 0 = 7.8%),
+permeability and display many phases of cementation and dissolution. have higher P-wave velocities (6745 m/s) compared to lower porosities,
+Firstly, a thin layer of marine cement was precipitated along the grain e.g. M14/42 (φ 0 = 6.1%), which has lower P-wave velocities (5639 m/
+boundaries, followed by fresh water dissolution of metastable carbo- s). In Kummer limestones the porosity evolution path is affected by both
+nate minerals resulting in moldic and intraparticle pore production. depositional and diagenetic processes, where the well sorted grain-
+Phreatic blocky sparite cement is very rare in this facies. stones deposited in high energy environment show early cementation
+and effect of dissolution which produces more moldic pores with higher
+594
+
+
+--- PAGE 10 ---
+A. Ali et al. Marine and Petroleum Geology 91 (2018) 586–598
+Fig. 8. Different petrophysical parameters of Leitha limestones at Mannersdorf in a stratigraphic order, Mag. Susc. = magnetic susceptibility.
+P-wave velocities compared to the same facies type samples with same 4) Blocky cementation due to deeper burial as the last stage of ce-
+porosities. In contrast, the poorly sorted massive rudstone was de- mentation during Pannonian-Pliocene-Pleistocene and the occlusion
+posited in a low energy environment and displays different diagenetic of most pore spaces (resulting in rocks that show the highest P-wave
+features such as pressure solutions and higher degree of cementation velocities). Cementation ages are hard to ascertain for this gradual
+that resulted in lower porosities and higher P-wave velocities (Fig. 10c). process. Maximum burial for the sites was reached during the
+Rosenberg limestones display progressive cementation, which influ- Pannonian (Wagreich and Schmid, 2002), terminated by late Pan-
+enced the porosity and velocity with decreasing the former and in- nonian inversion, but local uplift along faults may have begun ear-
+creasing the later (Fig. 10a). lier or with different timing up to local Pleistocene basin develop-
+Combining all localities together to get a general diagenetic history ment (Lee and Wagreich, 2017).
+of Leitha limestones (Fig. 10d), five principal successive, but over- 5) Further dissolution and karstification of the well-cemented lime-
+lapping stages of diagenesis can be deduced. stones since late Pannonian-Pliocene till recent times due to uplift,
+exhumation and surface exposure, including ground water flow.
+1) Early cementation of the sediments and formation of lithified This latest stage again enhanced the porosity, yet the petrophysic
+limestones with high porosity under the influence of marine pore parameters remain characterized by high P-wave velocities (Likely
+waters (Fig. 11). The age of this phase is constrained by syndepo- due to the fact that elastic properties of the bulk rock retain). Karst
+sitional to early diagenetic features of marine pore waters that are features in some of the areas, e.g. around Mannersdorf are mainly
+restricted to Badenian and partly Sarmation age, so a syn-to early dated from Pliocene to Pleistocene (Wessely, 2006).
+post-depositional age, i.e. a middle to late Badenian age, is most
+probable. Porosity- P-wave velocity paths summarize the diagenetic history of
+2) Dissolution of some shells and moldic pores production probably the carbonate rocks. Diagenetic processes highly affect the P-wave ve-
+due to early subaerial exposure especially in the Eisenstadt-Sopron locity in various ways. Cementation of interparticle pores leads to in-
+Basin, which have higher velocities than interparticle pores in crease in the velocity of the compressional wave and, when the blocky
+limestones with similar porosities. This phase is attributed mainly to cementation occludes nearly all pores, the impedance become max-
+the Sarmatian stage with well-known early erosion and reworking of imum and higher values of velocities are measured. Dissolution and
+Badenian limestones. moldic porosity formation increase the P-wave velocity and explains
+3) Progressive cementation due to burial during late Badenian, the different values of velocities for the same porosity values
+Sarmatian and Pannonian of both interparticle and vuggy pores (Anselmetti and Eberli, 1993, 2001).
+resulting in lower porosities (and thus producing rock with higher P- In comparison to geochemistry of Leitha limestones (Ali and
+Wave velocities). Wagreich, 2017) the degree of cementation is correlated to the loss of
+595
+
+
+--- PAGE 11 ---
+A. Ali et al. Marine and Petroleum Geology 91 (2018) 586–598
+Fig. 9. Different petrophysical parameters of Leitha limestones at Kummer in a stratigraphic order.
+Fig. 10. Porosity-velocity path with different stages of di-
+agenesis, a) Mannersdorf limestones affected by cementa-
+tion and dissolution and Rosenberg limestones affected only
+by cementation; b) blocky cementation and later dissolu-
+tion of Wöllersdorf and Bruckneudorf limestones; c)
+Kummer limestones displaying cementation, dissolution
+and pressure solution diagenesis and d) combined graph of
+all studied limestones show different diagenetic processes
+affected Leitha limestones (after Anselmetti and Eberli,
+1993).
+596
+
+
+--- PAGE 12 ---
+A. Ali et al. Marine and Petroleum Geology 91 (2018) 586–598
+Fig. 11. The diagenetic evolution of Leitha limestones since deposition in the Middle Miocene Badenian stage till recent, there is no sharp contact of the diagenetic phases where many
+phases can take place simultaneously, the numeric ages after Gradstein et al. (2012) and the Central Paratetheys stages are after Piller et al., 2007.
+Sr. Mannersdorf and Wöllerdorf limestones exhibit a high degree of processes produced more than 20 m thick carbonate horizons with ex-
+cementation and the lowest Sr content among the studied limestones. cellent reservoir potential. In the Eisenstadt-Soporon Basin Leitha
+Kummer and Fertőrákos with lesser degree of cementation have higher limestones exhibit only early marine cementation and obvious impact
+Sr contents. Although, Rosenberg limestones have higher degree of of dissolution processes resulted in improving the secondary porosity of
+cementation compared to Kummer and Fertőrákos they have higher Sr these rocks. Synsedimentary tectonics affected the limestones in this
+content, but these limestones were affected by the synsedimentary area and locally reduced the reservoir quality. The Styrian Basin lo-
+volcanic activity and thus Sr enrichment (Ali and Wagreich, 2017). cality was affected mainly by early marine cementation and to a lesser
+extent by blocky cementation and dissolution.
+Leitha limestones cover a wide range of petrophysical properties in
+6. Conclusions
+the outcrop due to depositional facies and diagenetic pathways. The
+depositional textures and limestones fabrics played the great role in the
+Leitha limestones from different basins are the result of locally modification of the petrophysics of Leitha limestones. Results may help
+varying depositional environments, and suffered different diagenesis.
+in deciphering potential and quality of carbonate reservoirs in the
+The Vienna Basin Leitha limestones occurrences have undergone sev-
+subground recognized by seismic data and predicted due to analogue
+eral stages of diagenesis that started with early marine precipitation of
+studies.
+marine cement. Following this early stage, dissolution took place fol-
+lowed by phreatic meteoric cementation and finally karstification due
+to subaerial exposure. These phases of diagenesis reduce the capacity of Acknowledgements
+limestones as reservoirs for fluids, i.e. aquifers and hydrocarbon re-
+servoirs. We appreciate the facilities offered by quarry companies especially
+In spite of this long-term diagenetic phases some facies were not Lafarge Zementwerke GmbH (former Lafarge-Perlmoser) for sampling.
+affected by the phreatic meteoric environment and had the opportunity Stjepan Ćorić, Geological Survey of Austria is thanked for his help with
+to retain the primary porosity which was enhanced due to the ag- sampling water line of Bruckneudorf well. Peter Krois (OMV) is thanked
+gressive nature of the water through dissolution. The result of such for reading the manuscript and giving advices for enhancing the work.
+597
+
+
+--- PAGE 13 ---
+A. Ali et al. Marine and Petroleum Geology 91 (2018) 586–598
+The Egyptian Cultural Affairs and Missions Sector, UNESCO-IUGS IGCP controls of deformation bands on fluid flow: interplay between cataclasis and di-
+609 and the Austrian Academy of Sciences are thanked for financial agenetic alteration. AAPG Bull. 99, 689–710.
+Lucia, F.J., 1983. Petrophysical parameters estimated from visual descriptions of carbo-
+support. Thanks to Peter Krois for reading the manuscript and his nate rocks: a field classification of carbonate pore space. JPT J. Pet. Techn. 35,
+suggestions which improved the paper. 629–637.
+Lucia, F.J., 1995. Rock-fabric/petrophysical classification of carbonate pore space for
+reservoir characterization. AAPG Bull. 79, 1275–1300.
+References Maliva, R.G., Missimer, T.M., Clayton, E.A., Dickson, J.A.D., 2009. Diagenesis and por-
+osity preservation in Eocene microporous limestones, South Florida, USA. Sed. Geol.
+217, 85–94.
+Ali, A., Wagreich, M., 2017. Geochemistry, environmental and provenance study of the Moore, C.H., 2001. Carbonate Reservoirs: Porosity Evolution and Diagenesis in a
+Middle Miocene Leitha limestones (Central Paratethys). Geol. Carp. 68, 248–268. Sequence Stratigraphic Framework. Elsevier, Amsterdam, pp. 444.
+Anselmetti, F.S., Eberli, G.P., 1993. Controls on sonic velocity in carbonates. Pure Appl. Moore, C.H., Wade, W.J., 2013. Carbonate reservoirs rorosity and diagenesis in a se-
+Geophys. 141, 287–323. quence Stratigraphic Framework. Devel. in Sed. 67, 1–374.
+Anselmetti, F.S., Eberli, G.P., 2001. Sonic velocity in carbonates- acombined product of Murray, R.C., 1960. Origin of porosity in carbonate rocks. J. Sed. Pet. 30, 59–84.
+deposional lithology and diagenetic alterations. SEPM Sp. Publ. 70, 193–216. Nelson, R.A., 1985. Geologic Analysis of Naturally Fractured Reservoirs. Gulf Publishing,
+Bednarik, M., Moshammer, B., Heinrich, M., Holzer, R., Laho, M., Rabeder, J., Uhlir, C., Houston 1-320.
+Unterwurzacher, M., 2014. Engineering geological properties of Leitha limestone Papp, A., Cicha, I., Senes, J., Steiniger, F., 1978. M4 -Badenien,Chronostratigraphie und
+from historical quarries in Burgenland and Styria, Austria. Eng. Geol. 176, 66–78. Neostratotypen, Miozän der Zentralen Paratethys. Slowakische Akademie der
+Bojar, A-V., Hiden, H., Fenninger, A., Neubauer, F., 2004. Middle Miocene seasonal Wissenschaften, Bratislava, pp. 594.
+temperature changes in the Styrian basin, Austria, as recorded by the isotopic com- Piller, W.E., Harzhauser, M., Mandic, O., 2007. Miocene Central Paratethys stratigraphy –
+position of pectinid and brachiopod shells. Palaeogeogr. Palaeoclimatol. Palaeoecol. current status and future directions. Stratigraphy 4, 151–168.
+203, 95–105. Rath, A., Exner, U., Tschegg, C., Grasemann, B., Laner, R., Draganits, E., 2011. Diagenetic
+Boldizsár, I., Kollmann, W., Surenian, R., 1991. Hydrogeologische Untersuchungen der control of deformation mechanisms in deformation bands in a carbonate grainstone.
+Leithakalk-Formation im Neusiedlerseegebiet (Österreich/Ungarn). Jubiläumsschrift AAPG Bull. 95, 1369–1381.
+20 Jahre Geol. Zusammenarbeit Österreich-Ungarn 1, 351–368. Reuter, M., Piller, W.E., Erhart, C., 2012. A Middle Miocene carbonate platform under
+Choquette, P.W., Pray, L.C., 1970. Geological nomenclature and classification of porosity silici-volcaniclastic sedimentation stress (Leitha Limestone, Styrian Basin, Austria) -
+in sedimentary carbonates. AAPG Bull. 54, 207–250. depositional environments, sedimentary evolution and palaeoecology. Paleogeogr.
+Decker, K., 1996. Miocene tectonics at the Alpine-Carpathian junction and the evolution Paleoclimatol. Paleoecol. 350 (352), 198–211.
+of the Vienna Basin. Mitteilungen der Gesellschaft der Geol. Bergbaustudenten in Riegl, B., Piller, W.E., 2000. Biostromal coral facies -a Miocene example from the Leitha
+Öesterreich 41, 33–44. limestone (Austria) and its actualistic interpretation. Palaios 15, 399–413.
+Decker, K., Peresson, H., 1996. Tertiary Kinematics in the Alpine–Carpathian–Pannonian Rohatsch, A., 2005. Neogene Bau- und Dekorgesteine Niederösterreichs und des
+system: links between thrusting, transform faulting and crustal extension. In: In: Burgenlandes. In: Schwaighofer, B., Eppensteiner, W. (Eds.), “Junge” Kalke,
+Wessely, G., Liebl, W. (Eds.), Oil and Gas in Alpidic Thrustbelts and Basins of Central Sandsteine und Konglomerate - Neogen, Mitteilungen IAG BOKU 9–56.
+and Eastern Europe, vol. 5. EAGE Sp. Publ., pp. 67–77. Rohatsch, A., 2007. In: Hofmann, T. (Ed.), Kaisersteinbruch: Leithakalk in Bester Qualität.
+Dullo, W.C., 1983. Fossildiagenese im miozänen Leitha-Kalk der Paratethys von Verlag Dr. F. Pfeil, München, pp. 172–173.
+Österreich: Ein Beispiel für Faunenverschiebung durch Diageneseunterschiede. Facies Rohatsch, A., 2012. Verwendung und gesteinsphysikalische Eigenschaften
+8, 1–112. burgenländischer Leithakalke. In: In: Hoprich, M., Tschach, M. (Eds.), Als das
+Dürrast, H., Siegesmund, S., 1999. Correlation between rock fabrics and physical prop- Burgenland noch am Meer lag, vol. 142. Wissenschaftliche Arbeiten aus dem
+erties of carbonate reservoir rocks. Int. J. Earth Sci. 88, 392–408. Burgenland, pp. 38–50.
+Ebner, F., Sachsenhofer, R.F., 1995. Palaeogeography, subsidence and thermal history of Royden, L.H., 1985. The Vienna Basin: a thin-skinned pull-apart basin. In: In: Biddle, K.T.,
+the Neogene Styrian basin (Pannonian basin system, Austria). Tectonophysics 242, Christie-Blick, N. (Eds.), Strike-slip Deformation, Basin Formation, and
+133–150. Sedimentation, vol. 37. SEPM Sp. Publ., pp. 319–338.
+Ehrenberg, S.N., Nadeau, P.H., 2005. Sandstone vs. carbonate petroleum reservoirs: a Sachsenhofer, R.F., 1996. The Neogene Styrian Basin: an overview. Mitt. Ges. Geol.
+global perspective on porosity-depth and porosity-permeability relationships. AAPG Bergbaustud. Österr. 41, 19–32.
+Bull. 89, 435–445. Sauer, R., Seifert, P., Wessely, G., 1992. Guidebook to excursions in the Vienna Basin and
+Fodor, L., 1995. From transpression to transtension: oligocene-Miocene structural evo- the Adjacent Alpine-Carpathian Thrustbelt in Austria. Excursion I. Mitt. Österr. Geol.
+lution of the Vienna Basin and the east Alpine-western Carpathian junction. Gesel. 85, 100–137.
+Tectonophysics 242, 151–182. Schlager, W., 2005. Carbonate sedimentology and sequence stratigraphy. SEPM Concepts
+Friebe, J.G., 1990. Lithostratigraphische Neugliederung und Sedimentologie der Sedimentol. Paleontol. 8, 200.
+Ablagerungen des Badenium (Miozän) um die Mittelsteirische Schwelle. Jb Geol. B-A Schmid, H.P., Harzhauser, M., Kroh, A., 2001. Hypoxic Events on a Middle Miocene
+133, 223–257. Carbonate Platform of the Central Paratethys (Austria, Badenian, 14 Ma). Ann.
+Gradstein, F.M., Ogg, J.G., Schmitz, M.D., Ogg, G.M., 2012. The Geologic Time Scale Naturhist. Mus, Wien 102, pp. 1–50.
+2012. Elsevier B.V. 1-1144. Schreilechner, M.G., Sachsenhofer, R.F., 2007. High resolution sequence stratigraphy in
+Halley, R.B., Schmoker, J.W., 1983. High porosity Cenozoic carbonate rocks of south the eastern Styrian Basin (Miocene, Austria). Austrian J. Earth Sci. 100, 164–184.
+Florida: progressive loss of porosity with depth. AAPG Bull. 67, 191–200. Seghedi, I., Downes, H., 2011. Geochemistry and tectonic development of Cenozoic
+Hamilton, W., Wagner, L., Wessely, G., 1999. Oil and gas in Austria. Mittl. magmatism in the Carpathian-Pannonian region. Gond. Res. 20, 655–672.
+Osterreichischen Geol. Ges. 92, 235–262. Strauss, P., Harzhauser, M., Hinsch, R., Wagreich, M., 2006. Sequence stratigraphy in a
+Haq, B.U., Hardenbol, J., Vail, P.R., 1987. Chronology of fluctuating sea levels since the classic pull-apart basin (Neogene, Vienna Basin). A 3D seismic based integrated ap-
+Triassic. Science 235, 1156–1166. proach. Geol. Carp. 57, 185–197.
+Harris, P.M., Saller, A.H., Simo, J.A., 1999. Introduction. In: In: Harris, P.M., Saller, A.H., Sun, S.Q., 1995. Dolomite reservoirs: porosity evolution and reservoir characterization.
+Simo, J.A. (Eds.), Advances in Carbonate Sequence Stratigraphy: Applications to AAPG Bull. 79, 186–204.
+Reservoirs, Outcrops and Models, vol. 63. SEPM Sp. Publ., pp. 1–10. Tucker, M.E., 1993. Carbonate diagenesis and sequence stratigraphy. Sed. Rev. 1, 51–72.
+Harzhauser, M., Piller, W.E., 2010. Molluscs as a major part of subtropical shallow-water Verwer, K., Braaksma, H., Kenter, J.A., 2008. Acoustic properties of carbonates: effects of
+carbonate production-an example from a Middle Miocene oolite shoal (Upper rock texture and implications for fluid substitution. Geophysics 73, B51–B65.
+Serravallian, Austria). Sp. Publ. Int. Ass. Sed. 42, 185–200. Wagreich, M., Schmid, H.P., 2002. Backstripping dip-slip fault histories: apparent slip
+Hohenegger, J., Ćorić, S., Wagreich, M., 2014. Timing of the Middle Miocene Badenian rates for the Miocene of the Vienna Basin. Terra Nova 14,163–14,168.
+stage of the Central Paratethys. Geol. Carp. 65, 55–66. Weger, R.J., Eberli, G.P., Baechle, G.T., Massaferro, J.L., Sun, Y.-F., 2009. Quantification
+Hohenegger, J., Wagreich, M., 2012. Time calibration of sedimentary sections based on of pore structure and its effect on sonic velocity and permeability in carbonates.
+isolation cycles using combined cross-correlation: dating the gone Badenian strato- AAPG Bull. 93, 1297–1317.
+type (Middle Miocene, Paratethys, Vienna Basin, Austria) as an example. Int. J. Earth Wessely, G., 2006. Geologie der österreichischen Bundesländer – Niederösterreich.
+Sci. (Geol Rundsch) 101, 339–349. Geologische Bundesanstalt, pp. 416.
+Hölzel, M., Decker, K., Zámolyi, A., Strauss, P., Wagreich, M., 2010. Lower Miocene Wiedl, T., Harzhauser, M., Piller, W.E., 2012. Facies and synsedimentary tectonics on a
+structural evolution of the central Vienna Basin (Austria). Mar. Pet. Geol. 27, Badenian carbonate platform in the southern Vienna Basin (Austria, Central
+666–681. Paratethys). Facies 58, 523–548.
+Kröll, A., 1988. Reliefkarte des prätertiären/Untergrundes. In: Kröll, A., Flügel, H.W., Wiedl, T., Harzhauser, M., Kroh, A., Ćorić, S., Piller, W.E., 2013. Ecospace variability
+Seiberl, W., Weber, F., Walach, G., Zych, D. (Eds.), Erläuterungen zu den Karten über along a carbonate platform at the northern boundary of the Miocene reef belt (Upper
+den prätertiären Untergrund des Steirischen Beckens und der Südburgenländischen Langhian, Austria). Palaeogeogr. Palaeoclimatol. Palaeoecol. 370, 232–246.
+Schwelle. Geol. Bund., Vienna, pp. 16–20. Wiedl, T., Harzhauser, M., Kroh, A., Ćorić, S., Piller, W.E., 2014. From biologically to
+Lee, E.Y., Wagreich, M., 2017. Polyphase tectonic subsidence evolution of the Vienna hydrodynamically controlled carbonate production by tectonically induced paleo-
+Basin inferred from quantitative subsidence analysis of the northern and central geographic rearrangement (Middle Miocene, Pannonian Basin). Facies 60, 865–881.
+parts. Inter. J. Earth Sci. 106, 687–705. Worthington, S.R.H., Smart, C.C., 2004. Groundwater in karst: conceptual models. In:
+Lommatzsch, M., Exner, U., Gier, S., Grasemann, B., 2015a. Dilatant shear band formation Gunn, J. (Ed.), Encyclopedia of Caves and Karst Science. Fitzroy Dearborn, London &
+and diagenesis in calcareous, arkosic sandstones, Vienna Basin (Austria). Mar. Pet. New York, pp. 399–401.
+Geol. 62, 144–160.
+Lommatzsch, M., Exner, U., Gier, S., Grasemann, B., 2015b. Structural and chemical
+598
